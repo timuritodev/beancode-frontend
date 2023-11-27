@@ -9,7 +9,7 @@ export const App: FC = () => {
         <h1 className="main__text">
           До открытия интернет магазина вкусного кофе свежей обжарки осталось
         </h1>
-        <Countdown date="2024-01-30" className="countdown-timer" />
+        <Countdown date="2024-01-30" className="countdown-timer" /> 
       </div>
     </section>
   );
