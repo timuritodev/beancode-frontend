@@ -1,15 +1,11 @@
-/* .main {
+.main {
   position: relative;
   color: #000;
   width: 100vw;
-  height: 280vh; 
+  height: 200vh; 
   background: url(./assets/img.png) no-repeat;
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
 }
 
@@ -25,7 +21,7 @@
 
 .main__container {
   position: relative;
-  padding: 200px 0 0 0;
+  padding: 100px 0 0 0;
   z-index: 1; 
 }
 
@@ -39,7 +35,7 @@
 }
 
 .countdown-timer {
-  font-size: 160px;
+  font-size: 220px;
   color: #fff; 
   font-family: Arial;
 }
@@ -51,61 +47,47 @@
 
 @media screen and (max-width: 1100px) {
   .main__container {
-    padding: 100px 0 0 0;
+    padding: 70px 0 0 0;
   }
   .main__text {
-    font-size: 100px;
-    line-height: 80px;
+    font-size: 115px;
+    line-height: 100px;
+  }
+
+  .countdown-timer {
+    font-size: 160px;
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 1000px) {
+  .main__container {
+    padding: 50px 0 0 0;
+  }
+  .main__text {
+    font-size: 85px;
+    line-height: 60px;
+  }
+
+  .countdown-timer {
+    font-size: 120px;
+  }
+}
+
+@media screen and (max-width: 744px) {
+  .main__container {
+    padding: 50px 0 0 0;
+  }
+  .main__text {
+    font-size: 50px;
+    line-height: 30px;
+  }
+
+  .countdown-timer {
+    font-size: 55px;
+  }
+
   .main {
-    background-size: contain;
+    height: 100vh;
   }
-} */
 
- #root {
-  max-width: 1280px;
-  text-align: center;
 }
-
-.main {
-  color: #000;
-  width: 100vw;
-  height: 100vh; 
-  background: url(./assets/img.png) no-repeat;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.countdown-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.main__text {
-  margin: 0;
-  color: #000;
-  font-family: 'Shadows_Into_Light';
-  font-size: 35px;
-  font-weight: 400;
-  line-height: 43.5px;
-}
-
-.countdown-timer {
-  font-size: 3em;
-  color: #333;
-}
-
-@media screen and (max-width: 450px) {
-  .main {
-    background-size: contain;
-  }
-} 
