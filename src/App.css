@@ -1,0 +1,29 @@
+#root {
+  max-width: 1280px;
+  text-align: center;
+}
+
+.main {
+  color: 000;
+  width: 100%;
+  height: 280vh;
+  /* background: url(./assets/img.png) center; */
+  background: url(./assets/img.png);
+  background-size: cover;
+}
+
+.main__container {
+  padding: 200px 0 0 0;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.countdown-timer {
+  font-size: 4em;
+  color: #333;
+}
