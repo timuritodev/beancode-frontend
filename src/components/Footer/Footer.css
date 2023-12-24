@@ -3,9 +3,6 @@
   margin: 0 auto;
   padding: 80px 0 120px 0;
   background: #e3e5e4;
-  z-index: 3;
-  position: sticky;
-  top: 0;
 }
 
 .footer__container {

@@ -43,7 +43,7 @@ const Header: FC = () => {
             />
           </form>
           <Link to="/">
-            <img className="header__logo" alt="icon" src={icon} />
+            <img className="" alt="icon" src={icon} />
           </Link>
         </div>
       </div>

@@ -11,13 +11,14 @@ import "./index.css";
 import SignInPage from "./pages/AuthPage/SignInPage";
 import SignUpPage from "./pages/AuthPage/SignUpPage";
 import { Layout } from "./components/Layout/Layout";
+import MainPage from "./pages/MainPage/MainPage";
 
 const Root: FC = () => {
   return (
     <div className="page">
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<MainPage />} /> */}
+          <Route index element={<MainPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           {/* <Route
