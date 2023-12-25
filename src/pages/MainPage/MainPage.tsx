@@ -6,7 +6,6 @@ import arrow_closed from "../../images/arrow.svg";
 import arrow_opened from "../../images/arrow__opend.svg";
 import schema_2 from "../../images/schema_2.svg";
 
-
 const MainPage = () => {
   //   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -84,7 +83,27 @@ const MainPage = () => {
             <img className="info__image" src={schema_2} alt="Control schema" />
           )}
         </div>
-      </div>
+        <div className="roast__block">
+            <div className="roast__background"></div>
+          <div className="roast__block__container"></div>
+            <p className="roast__digit">02</p>
+            <div className="roast__container">
+              <h2 className="roast__title">Процесс обжарки и сортировки</h2>
+              <p className="roast__text">
+                Мы обжариваем наши зёрна на оборудовании Giesen. Это
+                оборудование, которое отличается высоким качеством и удобством
+                использования. Единовременная загрузка зеленого зёрна у этого
+                ростера составляет от 15 кг до 30 кг. Максимально за час работы
+                нам удаётся обжарить 120 кг кофе.
+              </p>
+              <button className="button__roast">
+                <span className="button__roast__text">
+                  Требования к технологическому процессу
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
     </section>
   );
 };
