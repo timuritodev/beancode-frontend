@@ -1,23 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./MainPage.css";
+import arrow_closed from "../../images/arrow.svg";
+import arrow_opened from "../../images/arrow__opend.svg";
+import schema_2 from "../../images/schema_2.svg";
+
 
 const MainPage = () => {
-//   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  //   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-//   useEffect(() => {
-//     const handleMouseMove = (e:any) => {
-//       setMousePosition({ x: e.clientX, y: e.clientY });
-//     };
+  //   useEffect(() => {
+  //     const handleMouseMove = (e:any) => {
+  //       setMousePosition({ x: e.clientX, y: e.clientY });
+  //     };
 
-//     document.addEventListener("mousemove", handleMouseMove);
+  //     document.addEventListener("mousemove", handleMouseMove);
 
-//     return () => {
-//       document.removeEventListener("mousemove", handleMouseMove);
-//     };
-//   }, []);
+  //     return () => {
+  //       document.removeEventListener("mousemove", handleMouseMove);
+  //     };
+  //   }, []);
+  const [isImageVisible, setIsImageVisible] = useState(false);
 
+  const handleButtonClick = () => {
+    setIsImageVisible(!isImageVisible);
+  };
   return (
     <section className="main">
       <div className="main__container">
@@ -35,7 +43,46 @@ const MainPage = () => {
             <p className="intro__text">
               кофе из лучших зёрен для бизнеса и людей по всей России
             </p>
+            <button className="intro__button">Выбрать кофе</button>
           </div>
+        </div>
+        <div className="text__block">
+          <h2 className="text__title">СТАБИЛЬНЫЙ ВКУС В КАЖДОЙ ЧАШКЕ</h2>
+          <p className="text__text">
+            ВЫСТРОЕННЫЕ ПРОЦЕССЫ В КОМПАНИИ ПОЗВОЛЯЮТ ДОСТИЧЬ ПОВТОРЯЕМЫХ
+            РЕЗУЛЬТАТОВ
+          </p>
+        </div>
+        <div className="info__block">
+          <div className="info__block__container">
+            <p className="info__digit">01</p>
+            <div className="info__container">
+              <h2 className="info__container__title">
+                Поставки зеленого кофе и входной контроль
+              </h2>
+              <p className="info__container__text">
+                Мы соблюдаем при входном контроле Российские и международные
+                стандарты
+              </p>
+              <div className="button__container">
+                <button className="button__info" onClick={handleButtonClick}>
+                  <span className="button__info__text">Схема контроля</span>
+                  {isImageVisible ? (
+                    <img className="button__info__img" src={arrow_closed} />
+                  ) : (
+                    <img className="button__info__img" src={arrow_opened} />
+                  )}
+                </button>
+                <button className="button__info">
+                  <span className="button__info__text">Документация</span>
+                </button>
+              </div>
+            </div>
+            <p className="info__sort">40+ сортов</p>
+          </div>
+          {isImageVisible && (
+            <img className="info__image" src={schema_2} alt="Control schema" />
+          )}
         </div>
       </div>
     </section>
