@@ -5,6 +5,7 @@ import "./MainPage.css";
 import arrow_closed from "../../images/arrow.svg";
 import arrow_opened from "../../images/arrow__opend.svg";
 import schema_2 from "../../images/schema_2.svg";
+import coffee_machine from "../../images/coffe_machine.jpg";
 
 const MainPage = () => {
   //   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -84,17 +85,22 @@ const MainPage = () => {
           )}
         </div>
         <div className="roast__block">
-            <div className="roast__background"></div>
-          <div className="roast__block__container"></div>
+          <img
+            className="roast__img"
+            src={coffee_machine}
+            alt="roast machine"
+          />
+          <div className="roast__overlay"></div>
+          <div className="roast__block__container">
             <p className="roast__digit">02</p>
             <div className="roast__container">
-              <h2 className="roast__title">Процесс обжарки и сортировки</h2>
+              <h2 className="roast__title">Процесс обжарки<br/> и сортировки</h2>
               <p className="roast__text">
-                Мы обжариваем наши зёрна на оборудовании Giesen. Это
-                оборудование, которое отличается высоким качеством и удобством
-                использования. Единовременная загрузка зеленого зёрна у этого
-                ростера составляет от 15 кг до 30 кг. Максимально за час работы
-                нам удаётся обжарить 120 кг кофе.
+                Мы обжариваем наши зёрна на оборудовании Giesen.<br/>Это
+                оборудование, которое отличается высоким качеством и удобством<br/>
+                использования.<br/> Единовременная загрузка зеленого зёрна у этого
+                ростера составляет<br/> от 15 кг до 30 кг. Максимально за час работы
+                нам удаётся обжарить<br/> 120 кг кофе.
               </p>
               <button className="button__roast">
                 <span className="button__roast__text">
@@ -104,6 +110,7 @@ const MainPage = () => {
             </div>
           </div>
         </div>
+      </div>
     </section>
   );
 };
