@@ -13,7 +13,6 @@ const SignUpPage = () => {
     email: "",
     address: "",
     password: "",
-    token: "",
   });
 
   const handleChange = (e: any) => {
@@ -29,6 +28,7 @@ const SignUpPage = () => {
     dispatch(signUpUser(formData));
     dispatch(setUser(formData));
   };
+
   return (
     <section className="signup">
       <div className="signup__container">
@@ -55,51 +55,47 @@ const SignUpPage = () => {
             placeholder="Иванов"
             required
           />
-          {/*
-          <label>
-            Телефон:
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </label>
 
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Адрес:
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Пароль:
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </label> */}
-
+          <label className="signup__label">Телефон</label>
+          <input
+            type="text"
+            name="phone"
+            className="signup__input"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="+7-999-000-11-22"
+            required
+          />
+          <label className="signup__label">Email</label>
+          <input
+            type="email"
+            name="email"
+            className="signup__input"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="adress@gmail.com"
+            required
+          />
+          <label className="signup__label">Адрес</label>
+          <input
+            type="text"
+            name="address"
+            className="signup__input"
+            value={formData.address}
+            onChange={handleChange}
+            placeholder="ул. Пушкина, д. 9, подъезд 3, кв. 21"
+            required
+          />
+          <label className="signup__label">Пароль</label>
+          <input
+            type="password"
+            name="password"
+            className="signup__input"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="не менее 6 символов"
+            required
+          />
           <button
             type="submit"
             className="signup__button"

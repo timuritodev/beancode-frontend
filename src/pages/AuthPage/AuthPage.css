@@ -54,6 +54,11 @@
   padding: 0 0 12px 0;
 }
 
+.signup__input::placeholder {
+  color: var(--placeholder-color, #a0a0a0); /* Замените на желаемый цвет */
+  text-indent: 12px; /* Замените на желаемое значение сдвига */
+}
+
 .signup__button {
   border-radius: 64px;
   background: var(--Accent, #465244);
@@ -66,4 +71,19 @@
   width: 574px;
   height: 64px;
   margin: 16px 0 0 0;
+}
+
+.signin__link {
+  color: var(--Black_text, #0f100f);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  margin: 24px 0 64px 0;
+}
+
+.signin__link_add {
+  text-align: center;
+  margin: 24px 0 0 0;
 }

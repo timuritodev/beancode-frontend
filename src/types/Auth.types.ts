@@ -43,7 +43,7 @@ export interface IUser {
   email: string;
   address: string;
   password: string;
-  token: string;
+  token?: string;
 }
 
 // export interface IResetPasswordData {
