@@ -41,8 +41,7 @@
 }
 
 .subscribe__input {
-  /* color: var(--grey_light, #c8cac8); */
-  /* font-family: Poppins; */
+  color: var(--grey_light, #c8cac8);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
