@@ -55,8 +55,8 @@
 }
 
 .signup__input::placeholder {
-  color: var(--placeholder-color, #a0a0a0); /* Замените на желаемый цвет */
-  text-indent: 12px; /* Замените на желаемое значение сдвига */
+  color: var(--placeholder-color, #a0a0a0);
+  text-indent: 12px; 
 }
 
 .signup__button {

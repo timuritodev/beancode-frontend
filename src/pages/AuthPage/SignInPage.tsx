@@ -22,8 +22,15 @@ const SignInPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    dispatch(signInUser(formData));
-    dispatch(setUser(formData));
+    // dispatch(signInUser(formData));
+    // dispatch(setUser(formData));
+    dispatch(signInUser(formData))
+			.unwrap()
+			.then((res) => {
+                console.log(res, 111)
+				dispatch(setUser({ email: formData.email, token: res }));
+				return res;
+			})
   };
 
   return (

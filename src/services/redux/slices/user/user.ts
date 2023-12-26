@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSignUp,fetchSignIn } from "./userApi";
 import { IUser,ISignInData } from "../../../../types/Auth.types";
@@ -9,12 +10,15 @@ export interface IUserState {
 }
 
 export const signInUser = createAsyncThunk(
-	'@@usera/signIn',
+	'@@user/signIn',
 	async (data: ISignInData, { fulfillWithValue, rejectWithValue }) => {
 		try {
 			const response = await fetchSignIn(data);
 			const json = await response.json();
-			return fulfillWithValue(json.access);
+			// console.log(fulfillWithValue(json))
+			// console.log(fulfillWithValue(json.acess))
+			return fulfillWithValue(json);
+
 		} catch (error: unknown) {
 			return rejectWithValue(error);
 		}
@@ -22,7 +26,7 @@ export const signInUser = createAsyncThunk(
 );
 
 export const signUpUser = createAsyncThunk(
-  "@@usera/signUp",
+  "@@user/signUp",
   async (data: IUser, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchSignUp(data);
@@ -49,7 +53,7 @@ const initialState: IUserState = {
 };
 
 const userSlice = createSlice({
-  name: "@@usera",
+  name: "@@user",
   initialState,
   reducers: {
     setUser: (state, action) => {
