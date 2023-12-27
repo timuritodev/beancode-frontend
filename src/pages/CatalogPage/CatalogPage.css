@@ -1,0 +1,12 @@
+.catalog {
+  width: 100%;
+  margin: 0 auto;
+  background: var(--White_bg, #f8f8f8);
+}
+
+.catalog__container {
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}

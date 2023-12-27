@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./IntroBlock.css";
 
 const IntroBlock = () => {
@@ -29,7 +30,9 @@ const IntroBlock = () => {
         <p className="intro__text">
           кофе из лучших зёрен для бизнеса и людей по всей России
         </p>
-        <button className="intro__button">Выбрать кофе</button>
+        <Link to="catalog" className="intro__button">
+          Выбрать кофе
+        </Link>
       </div>
     </div>
   );

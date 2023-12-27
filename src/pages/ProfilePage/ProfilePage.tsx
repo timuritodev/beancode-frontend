@@ -13,6 +13,7 @@ import {
 } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { useEffect, useState } from "react";
+import { getProductsApi } from "../../services/redux/slices/product/product";
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ const ProfilePage = () => {
     setIsAccountVisible(!isAccountVisible);
   };
 
+  dispatch(getProductsApi());
   useEffect(() => {
     if (user.token) {
     //   console.log(user.token, 444);

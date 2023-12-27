@@ -13,6 +13,7 @@ import SignUpPage from "./pages/AuthPage/SignUpPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 
 const Root: FC = () => {
   return (
@@ -23,6 +24,7 @@ const Root: FC = () => {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
           {/* <Route
 						path="/recover-password"
 						element={
