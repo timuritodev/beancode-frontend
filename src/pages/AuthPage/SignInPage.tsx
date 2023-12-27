@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useAppDispatch } from "../../../src/services/typeHooks";
-import { signInUser, setUser } from "../../services/redux/slices/user/user";
+import {
+  signInUser,
+  setUser,
+  getUserInfo,
+} from "../../services/redux/slices/user/user";
 import "./AuthPage.css";
 import { Link } from "react-router-dom";
 
@@ -25,12 +29,17 @@ const SignInPage = () => {
     // dispatch(signInUser(formData));
     // dispatch(setUser(formData));
     dispatch(signInUser(formData))
-			.unwrap()
-			.then((res) => {
-                console.log(res, 111)
-				dispatch(setUser({ email: formData.email, token: res }));
-				return res;
-			})
+      .unwrap()
+      .then((res) => {
+        console.log(res, 111);
+        dispatch(setUser({ email: formData.email, token: res }));
+        console.log(res)
+        return res;
+      })
+      .then((res) => dispatch(getUserInfo(res)))
+      .catch((err) => {
+        console.log("dispatch signInUser err:", err);
+      });
   };
 
   return (
@@ -58,7 +67,9 @@ const SignInPage = () => {
             placeholder="не менее 6 символов"
             required
           />
-          <Link to="/" className="signin__link">Напомнить пароль</Link>
+          <Link to="/" className="signin__link">
+            Напомнить пароль
+          </Link>
 
           <button
             type="submit"
@@ -67,7 +78,9 @@ const SignInPage = () => {
           >
             Войти
           </button>
-          <Link to="/sign-up" className="signin__link signin__link_add">Зарегистрироваться</Link>
+          <Link to="/sign-up" className="signin__link signin__link_add">
+            Зарегистрироваться
+          </Link>
         </form>
       </div>
     </section>

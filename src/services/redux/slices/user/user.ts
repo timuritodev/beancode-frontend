@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchSignUp,fetchSignIn } from "./userApi";
-import { IUser,ISignInData } from "../../../../types/Auth.types";
+import { fetchSignUp, fetchSignIn, fetchGetUserInfo } from "./userApi";
+import { IUser, ISignInData } from "../../../../types/Auth.types";
 
 export interface IUserState {
   status: "idle" | "success" | "loading" | "failed";
@@ -10,19 +10,18 @@ export interface IUserState {
 }
 
 export const signInUser = createAsyncThunk(
-	'@@user/signIn',
-	async (data: ISignInData, { fulfillWithValue, rejectWithValue }) => {
-		try {
-			const response = await fetchSignIn(data);
-			const json = await response.json();
-			// console.log(fulfillWithValue(json))
-			// console.log(fulfillWithValue(json.acess))
-			return fulfillWithValue(json);
-
-		} catch (error: unknown) {
-			return rejectWithValue(error);
-		}
-	}
+  "@@user/signIn",
+  async (data: ISignInData, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchSignIn(data);
+      const json = await response.json();
+      // console.log(fulfillWithValue(json))
+      // console.log(fulfillWithValue(json.acess))
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 export const signUpUser = createAsyncThunk(
@@ -32,6 +31,43 @@ export const signUpUser = createAsyncThunk(
       const response = await fetchSignUp(data);
       const responseData = { status: response.status, ok: response.ok };
       return fulfillWithValue(responseData);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+// export const getUserInfo = createAsyncThunk(
+//   "@@user/getUserInfo",
+//   async (token: string, { fulfillWithValue, rejectWithValue }) => {
+//     // console.log(token, 999);
+//     try {
+//       const response = await fetchGetUserInfo(token);
+//       const json = await response.json();
+//       //   console.log(json, 'data');
+//       const userData = {
+//         name: json.name,
+//         surname: json.surname,
+//         phone: json.phone,
+//         email: json.email,
+//         address: json.address,
+//       };
+
+//       return fulfillWithValue(userData);
+//       //   return fulfillWithValue(json);
+//     } catch (error: unknown) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
+export const getUserInfo = createAsyncThunk(
+  "@@user/getUserInfo",
+  async (token: string, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchGetUserInfo(token);
+      const json = await response.json();
+      return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -48,7 +84,7 @@ const initialState: IUserState = {
     email: "",
     address: "",
     password: "",
-	token: "",
+    token: "",
   },
 };
 
@@ -60,15 +96,26 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     signOut: () => initialState,
+    // signOut: (state, action) => {
+    //   state.user = initialState.user;
+    // },
   },
   extraReducers: (builder) => {
     builder
-	.addCase(signInUser.fulfilled, (state, action: PayloadAction<string>) => {
-		state.status = 'success';
-		state.user.token = action.payload;
-	})
+      .addCase(signInUser.fulfilled, (state, action: PayloadAction<string>) => {
+        state.status = "success";
+        state.user.token = action.payload;
+      })
       .addCase(signUpUser.fulfilled, (state) => {
         state.status = "success";
+      })
+      .addCase(getUserInfo.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user.name = action.payload.name;
+        state.user.surname = action.payload.surname;
+        state.user.phone = action.payload.phone;
+        state.user.email = action.payload.email;
+        state.user.address = action.payload.address;
       })
       //   .addCase(editUserInfo.fulfilled, (state, action) => {
       //     state.status = "success";

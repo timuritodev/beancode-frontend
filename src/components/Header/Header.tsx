@@ -42,7 +42,7 @@ const Header: FC = () => {
               autoComplete="off"
             />
           </form>
-          <Link to="/">
+          <Link to="/profile">
             <img className="" alt="icon" src={icon} />
           </Link>
         </div>

@@ -10,8 +10,6 @@ import TextBlock from "../../components/TextBlock/TextBlock";
 import IntroBlock from "../../components/IntroBlock/IntroBlock";
 
 const MainPage = () => {
-
-
   return (
     <section className="main">
       <div className="main__container">

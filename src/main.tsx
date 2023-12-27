@@ -12,6 +12,7 @@ import SignInPage from "./pages/AuthPage/SignInPage";
 import SignUpPage from "./pages/AuthPage/SignUpPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 const Root: FC = () => {
   return (
@@ -21,6 +22,7 @@ const Root: FC = () => {
           <Route index element={<MainPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           {/* <Route
 						path="/recover-password"
 						element={
