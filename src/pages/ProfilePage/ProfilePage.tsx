@@ -19,7 +19,7 @@ const ProfilePage = () => {
   const user = useAppSelector(selectUser);
 
   const [isOrderVisible, setIsOrderVisible] = useState(false);
-  const [isAccountVisible, setIsAccountVisible] = useState(false);
+  const [isAccountVisible, setIsAccountVisible] = useState(true);
 
   const handleOrderButtonClick = () => {
     setIsOrderVisible(!isOrderVisible);

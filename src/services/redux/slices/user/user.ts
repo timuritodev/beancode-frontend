@@ -67,6 +67,7 @@ export const getUserInfo = createAsyncThunk(
     try {
       const response = await fetchGetUserInfo(token);
       const json = await response.json();
+      console.log(json);
       return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -111,11 +112,11 @@ const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = "success";
-        state.user.name = action.payload.name;
-        state.user.surname = action.payload.surname;
-        state.user.phone = action.payload.phone;
-        state.user.email = action.payload.email;
-        state.user.address = action.payload.address;
+        state.user.name = action.payload.user.name;
+        state.user.surname = action.payload.user.surname;
+        state.user.phone = action.payload.user.phone;
+        state.user.email = action.payload.user.email;
+        state.user.address = action.payload.user.address;
       })
       //   .addCase(editUserInfo.fulfilled, (state, action) => {
       //     state.status = "success";

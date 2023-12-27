@@ -41,37 +41,6 @@ export const fetchSignIn = (data: ISignInData): Promise<Response> => {
   );
 };
 
-// export const fetchGetUserInfo = (token: string): Promise<Response> => {
-//   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, token)
-//     .then((res) => {
-//       if (!res.ok) {
-//         console.error("Fetch error:", res.status, res.statusText);
-//         throw new Error("Failed to fetch user information");
-//       }
-//       console.log(token, 'asd');
-//       return res.json();
-//     })
-//     .then((userData) => {
-//       console.log("User data received:", userData);
-//       return userData;
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching user information:", error.message);
-//       throw error;
-//     });
-// };
-
-// export const fetchGetUserInfo = (token: string): Promise<IUser> => {
-//   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, token).then(
-//     (res) => {
-//       if (!res.ok) {
-//         throw new Error("Failed to fetch user information");
-//       }
-//       return res.json() as Promise<IUser>;
-//     }
-//   );
-// };
-
 export const fetchGetUserInfo = (
   token: string | { token: string }
 ): Promise<Response> => {
@@ -82,13 +51,6 @@ export const fetchGetUserInfo = (
     (res) => checkRes(res)
   );
 };
-
-// export const fetchGetUserInfo = (token: string): Promise<Response> => {
-//   console.log("Authorization Token:", token); // Log the token before making the request
-//   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, token).then(
-//     (res) => checkRes(res)
-//   );
-// };
 
 // export const fetchGetUserInfo = (token: string): Promise<Response> => {
 //   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, token).then(
