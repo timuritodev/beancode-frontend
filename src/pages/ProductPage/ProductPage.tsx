@@ -6,28 +6,48 @@ export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
 
   return (
-    <div className="product">
-      <div className="product__container">
-        <img
-          className="product__image"
-          src={img}
-          alt={product.h_picture}
-        />
-        <h2 className="product__title">{product.title}</h2>
-        <p className="product__description">{product.description}</p>
-        <div className="product__wrapper">
-          <p className="product__info">Кислотность</p>
-          <p className="product__info">Плотность</p>
-        </div>
-        <div className="product__wrapper">
-          <div className="product__price__container">
-            <p className="product__price">{product.price} ₽/</p>
-            <p className="product__weight"> {product.weight}</p>
+    <div className="products">
+      <div className="products__container">
+        <div className="products__info__container">
+          <h2 className="products__title">{product.title}</h2>
+          <p className="products__description">{product.description}</p>
+          <div className="products__wrapper">
+            <div className="grains__container">
+              <div className="products__grains">
+                {[...Array(5)].map((_, index) => (
+                  <span
+                    key={index}
+                    className={`grain ${
+                      index < product.acidity ? "filled" : "empty"
+                    }`}
+                  ></span>
+                ))}
+              </div>
+              <p className="products__info">Кислотность</p>
+            </div>
+            <div className="grains__container">
+              <div className="products__grains">
+                {[...Array(5)].map((_, index) => (
+                  <span
+                    key={index}
+                    className={`grain ${
+                      index < product.density ? "filled" : "empty"
+                    }`}
+                  ></span>
+                ))}
+              </div>
+              <p className="products__info">Плотность</p>
+            </div>
           </div>
-
-          <button type="submit" className="product__button">
-            В корзину
-          </button>
+        </div>
+        <div className="products__info__container">
+          <img className="products__image" src={img} alt={product.h_picture} />
+          <div className="products__wrapper">
+            <div className="products__price__container">
+              <p className="products__price">{product.price} ₽&nbsp;</p>
+              <p className="products__weight"> {product.weight}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

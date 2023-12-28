@@ -6,7 +6,7 @@ import { IProduct } from "../../types/Product.types";
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
-  const allProducts = useAppSelector((state) => state.products.products);
+  const products = useAppSelector((state) => state.products.products);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [filters, setFilters] = useState({
     title: "",
@@ -25,7 +25,7 @@ export const CatalogPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = allProducts.filter((product) => {
+    const filtered = products.filter((product) => {
       const price = parseFloat(product.price);
       const weight = parseFloat(product.weight);
 
@@ -44,7 +44,7 @@ export const CatalogPage = () => {
     })
 
     setFilteredProducts(filtered);
-  }, [allProducts, filters]);
+  }, [products, filters]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
