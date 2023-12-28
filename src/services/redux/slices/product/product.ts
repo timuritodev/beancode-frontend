@@ -41,10 +41,18 @@ export const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProductsApi.fulfilled, (state, action) => {
-      state.status = "success";
-      state.products = action.payload;
-    });
+    builder
+      .addCase(getProductsApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.products = action.payload;
+      })
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.payload.statusText;
+        }
+      );
   },
 });
 

@@ -14,6 +14,7 @@ import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
+import { ProductPage } from "./pages/ProductPage/ProductPage";
 
 const Root: FC = () => {
   return (
@@ -25,6 +26,7 @@ const Root: FC = () => {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/product-page" element={<ProductPage />} />
           {/* <Route
 						path="/recover-password"
 						element={

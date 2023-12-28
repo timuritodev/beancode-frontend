@@ -1,18 +1,17 @@
 import { IProduct } from "../../types/Product.types";
 import "./Product.css";
 import img from "../../images/product.jpg";
-// import { useAppDispatch } from '../../services/typeHooks';
-// import { useNavigate } from 'react-router';
+import { useAppDispatch } from "../../services/typeHooks";
+import { useNavigate } from "react-router";
+import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 
 export const Product = ({ data }: { data: IProduct }) => {
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-
-  // const id = data.id;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleClickImage = () => {
-    // navigate('/product-page');
-    // dispatch(getCardbyidApi(id))
+    navigate("/product-page");
+    dispatch(getProductbyidApi(data.id));
   };
 
   return (

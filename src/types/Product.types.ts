@@ -16,13 +16,12 @@ export interface IProductState {
   products: Array<IProduct>;
 }
 
-// export interface ICompilationsTwo {
-// 	id?: number;
-// 	title: string;
-// 	description?: string;
-// 	movies: IMovieCard[];
-// }
+export interface IProductbyIdState {
+  status: "idle" | "success" | "loading" | "failed";
+  error: string | undefined;
+  product: IProduct;
+}
 
 export interface IProductProp {
-	data: IProduct[];
+  data: IProduct[];
 }

@@ -47,7 +47,7 @@ const ProfilePage = () => {
       // })
       // .catch((err: unknown) => console.log('getUserInfo err', err));
     }
-  }, [dispatch, user.token]);
+  }, [dispatch, user]);
 
 //   console.log(user);
 //   console.log(user.token);
