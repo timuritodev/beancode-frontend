@@ -15,6 +15,7 @@ export const CatalogPage = () => {
   return (
     <section className="catalog">
       <div className="catalog__container">
+        <h1 className="catalog__title">Интернет-магазин</h1>
         <ProductList data={products} />
       </div>
     </section>

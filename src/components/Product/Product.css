@@ -34,9 +34,9 @@
 }
 
 .product__wrapper {
-    display: flex;
-    align-items: center;
-    margin: 32px 0 0 0;
+  display: flex;
+  align-items: center;
+  margin: 32px 0 0 0;
 }
 .product__info {
   color: var(--Black_text, #0f100f);
@@ -48,8 +48,8 @@
 }
 
 .product__price__container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .product__price {
   color: var(--Black_text, #0f100f);
@@ -81,4 +81,24 @@
   width: 180px;
   height: 52px;
   margin: 0 0 0 54px;
+}
+
+.grains__container {
+  margin: 0 40px 0 0;
+}
+.grain {
+  display: inline-block;
+  width: 16px;
+  height: 17px;
+  /* background-image: url('path/to/combined-grain.png');  */
+  background-size: cover;
+  margin: 0 8px 0 0;
+}
+
+.filled {
+  background-image: url(../../images/bean_full.svg);
+}
+
+.empty {
+  background-image: url(../../images/bean_empy.svg);
 }

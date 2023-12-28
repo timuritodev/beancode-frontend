@@ -14,6 +14,15 @@ export const Product = ({ data }: { data: IProduct }) => {
     dispatch(getProductbyidApi(data.id));
   };
 
+  // Функция для создания массива элементов-зерен в зависимости от значения
+  //   const renderGrains = (count: number) => {
+  //     const grains = [];
+  //     for (let i = 0; i < count; i++) {
+  //       grains.push(<span className="grain" key={i}></span>);
+  //     }
+  //     return grains;
+  //   };
+
   return (
     <div className="product">
       <div className="product__container">
@@ -25,9 +34,34 @@ export const Product = ({ data }: { data: IProduct }) => {
         />
         <h2 className="product__title">{data.title}</h2>
         <p className="product__description">{data.description}</p>
+
         <div className="product__wrapper">
-          <p className="product__info">Кислотность</p>
-          <p className="product__info">Плотность</p>
+          <div className="grains__container">
+            <div className="product__grains">
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`grain ${
+                    index < data.acidity ? "filled" : "empty"
+                  }`}
+                ></span>
+              ))}
+            </div>
+            <p className="product__info">Кислотность</p>
+          </div>
+          <div className="grains__container">
+            <div className="product__grains">
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`grain ${
+                    index < data.density ? "filled" : "empty"
+                  }`}
+                ></span>
+              ))}
+            </div>
+            <p className="product__info">Плотность</p>
+          </div>
         </div>
         <div className="product__wrapper">
           <div className="product__price__container">

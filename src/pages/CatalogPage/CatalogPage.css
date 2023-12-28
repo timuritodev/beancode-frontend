@@ -2,6 +2,7 @@
   width: 100%;
   margin: 0 auto;
   background: var(--White_bg, #f8f8f8);
+  padding: 48px 0 120px 0;
 }
 
 .catalog__container {
@@ -9,4 +10,15 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+
+.catalog__title {
+  color: var(--Black_text, #0f100f);
+  text-align: center;
+  font-family: Spectral;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px; /* 134.615% */
+  margin: 64px;
 }

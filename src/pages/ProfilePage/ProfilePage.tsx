@@ -3,9 +3,9 @@
 import "./ProfilePage.css";
 import exit_button from "../../images/exit-button.svg";
 import cart from "../../images/shopping-cart.svg";
-import cart_active from "../../images/shopping-cart_acitve.svg";
+// import cart_active from "../../images/shopping-cart_acitve.svg";
 import person from "../../images/person.svg";
-import person_active from "../../images/person_active.svg";
+// import person_active from "../../images/person_active.svg";
 import {
   getUserInfo,
   selectUser,
