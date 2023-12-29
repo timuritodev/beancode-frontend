@@ -8,6 +8,7 @@ export interface IProduct {
   v_picture: string;
   acidity: number;
   density: number;
+  big_description: string;
 }
 
 export interface IProductState {

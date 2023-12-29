@@ -32,6 +32,7 @@ const initialState: IProductState = {
       v_picture: "",
       acidity: 0,
       density: 0,
+      big_description: "",
     },
   ],
 };
