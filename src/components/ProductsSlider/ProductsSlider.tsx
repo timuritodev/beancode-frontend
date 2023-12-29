@@ -5,8 +5,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FC } from 'react';
 import { IProductsProp } from '../../types/Product.types';
 import { SmallProduct } from '../SmallProduct/SmallProduct';
-import arrow_next from "../../images/arrow-next.svg";
-import arrow_prev from "../../images/arrow-prev.svg";
+// import arrow_next from "../../images/arrow-next.svg";
+// import arrow_prev from "../../images/arrow-prev.svg";
+import arrow_next_2 from "../../images/arrow_next_2.svg";
+import arrow_prev_2 from "../../images/arrow_prev_2.svg";
+
 
 export const ProductsSlider: FC<IProductsProp> = ({ data }) => {
     const settings = {
@@ -16,8 +19,8 @@ export const ProductsSlider: FC<IProductsProp> = ({ data }) => {
         slidesToShow: 3,
         slidesToScroll: 3,
         arrows: true,
-        prevArrow: <img src={arrow_prev} alt="Previous" />,
-        nextArrow: <img src={arrow_next} alt="Next" />,
+        prevArrow: <img className="slick-prev" src={arrow_prev_2} alt="Previous" />,
+        nextArrow: <img className="slick-next" src={arrow_next_2} alt="Next" />,
         responsive: [
             {
                 breakpoint: 1320,

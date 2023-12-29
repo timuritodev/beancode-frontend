@@ -1,3 +1,11 @@
+/* .smallproduct {
+    width: 280px;
+}
+
+.smallproduct__container {
+    width: 280px;
+} */
+
 .smallproduct__image {
     width: 280px;
     height: 280px;
