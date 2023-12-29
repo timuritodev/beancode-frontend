@@ -79,6 +79,7 @@ const initialState: IUserState = {
   status: "idle",
   error: null,
   user: {
+    id: 0,
     name: "",
     surname: "",
     phone: "",
@@ -112,6 +113,7 @@ const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = "success";
+        state.user.id = action.payload.user.id;
         state.user.name = action.payload.user.name;
         state.user.surname = action.payload.user.surname;
         state.user.phone = action.payload.user.phone;

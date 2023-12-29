@@ -1,17 +1,29 @@
 import { IProduct } from "../../types/Product.types";
 import "./Product.css";
 import img from "../../images/product.jpg";
-import { useAppDispatch } from "../../services/typeHooks";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
+import { addToCartApi } from "../../services/redux/slices/cart/cart";
+import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
+import { selectUser } from "../../services/redux/slices/user/user";
 
 export const Product = ({ data }: { data: IProduct }) => {
+  const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClickImage = () => {
     navigate("/product-page");
     dispatch(getProductbyidApi(data.id));
+  };
+
+  const userId = user.id;
+  const productId = data.id;
+
+  const handleClickButton = () => {
+    console.log(userId, productId, 222)
+    dispatch(addToCartApi({userId, productId}));
+    console.log(111)
   };
 
   // Функция для создания массива элементов-зерен в зависимости от значения
@@ -69,7 +81,7 @@ export const Product = ({ data }: { data: IProduct }) => {
             <p className="product__weight"> {data.weight}</p>
           </div>
 
-          <button type="submit" className="product__button">
+          <button type="submit" className="product__button" onClick={handleClickButton}>
             В корзину
           </button>
         </div>

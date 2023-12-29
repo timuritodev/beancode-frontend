@@ -37,6 +37,7 @@ export interface ISignUpData extends ISignInData {
 // }
 
 export interface IUser {
+  id: number;
   name: string;
   surname: string;
   phone: string;
