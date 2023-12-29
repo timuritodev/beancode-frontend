@@ -1,0 +1,20 @@
+.smallproduct__image {
+    width: 280px;
+    height: 280px;
+}
+
+.smallproduct__title {
+    color: var(--Black_text, #0F100F);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.smallproduct__description {
+    color: var(--Black_text, #0F100F);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

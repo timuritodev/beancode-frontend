@@ -22,6 +22,10 @@ export interface IProductbyIdState {
   product: IProduct;
 }
 
-export interface IProductProp {
+export interface IProductsProp {
   data: IProduct[];
+}
+
+export interface IProductProp {
+  data: IProduct;
 }

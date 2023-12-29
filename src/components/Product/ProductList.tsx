@@ -1,9 +1,9 @@
 import "./Product.css";
-import { IProductProp } from "../../types/Product.types";
+import { IProductsProp } from "../../types/Product.types";
 import { Product } from "./Product";
 import { FC } from "react";
 
-export const ProductList: FC<IProductProp> = ({ data }) => {
+export const ProductList: FC<IProductsProp> = ({ data }) => {
   return (
     <div className="productlist">
       {data.length !== 0 &&
