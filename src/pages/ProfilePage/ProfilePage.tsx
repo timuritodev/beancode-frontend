@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { useEffect, useState } from "react";
 import { getProductsApi } from "../../services/redux/slices/product/product";
+import { resetCart } from "../../services/redux/slices/cart/cart";
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +36,6 @@ const ProfilePage = () => {
     if (user.token) {
     //   console.log(user.token, 444);
       dispatch(getUserInfo(user.token));
-      console.log(user)
       // .unwrap()
       // .then(() => {
       //     if (user.nickname) {
@@ -70,6 +70,7 @@ const ProfilePage = () => {
             className="button__profile"
             onClick={() => {
               dispatch(signOut());
+              dispatch(resetCart());
             }}
           >
             <img className="button__profile__img" src={exit_button} />

@@ -11,7 +11,8 @@ export const Product = ({ data }: { data: IProduct }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const cart = useAppSelector((state) => state.cart.cart);
+  console.log(cart)
   const handleClickImage = () => {
     navigate("/product-page");
     dispatch(getProductbyidApi(data.id));

@@ -11,7 +11,8 @@ export const addToCartApi = createAsyncThunk(
             const json = await response.json();
             // console.log(fulfillWithValue(json))
             // console.log(fulfillWithValue(json.acess))
-            return fulfillWithValue(json);
+            // return fulfillWithValue(json);
+            return json;
         } catch (error: unknown) {
             return rejectWithValue(error);
         }
@@ -55,21 +56,27 @@ const initialState: ICartState = {
 const cartSlice = createSlice({
     name: "@@cart",
     initialState,
-    reducers: {},
+    reducers: {
+        resetCart: () => initialState,
+    },
     extraReducers: (builder) => {
         builder
             .addCase(addToCartApi.fulfilled, (state, action) => {
                 state.status = "success";
-                state.cart = action.payload;
+                // state.cart.push(action.payload.product);
+                // state.cart = action.payload.product;
+                state.cart = [...state.cart, action.payload.product];
             })
-            .addMatcher(
-                (action) => action.type.endsWith("/rejected"),
-                (state, action) => {
-                    state.status = "failed";
-                    state.error = action.payload.statusText;
-                }
-            );
+        // .addMatcher(
+        //     (action) => action.type.endsWith("/rejected"),
+        //     (state, action) => {
+        //         state.status = "failed";
+        //         state.error = action.payload.statusText;
+        //     }
+        // );
     },
 });
+
+export const { resetCart } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;
