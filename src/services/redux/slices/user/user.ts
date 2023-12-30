@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSignUp, fetchSignIn, fetchGetUserInfo } from "./userApi";
-import { IUser, ISignInData } from "../../../../types/Auth.types";
+import { IUser, ISignInData, ISignUpData } from "../../../../types/Auth.types";
 
 export interface IUserState {
   status: "idle" | "success" | "loading" | "failed";
@@ -26,7 +26,7 @@ export const signInUser = createAsyncThunk(
 
 export const signUpUser = createAsyncThunk(
   "@@user/signUp",
-  async (data: IUser, { fulfillWithValue, rejectWithValue }) => {
+  async (data: ISignUpData, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchSignUp(data);
       const responseData = { status: response.status, ok: response.ok };
@@ -36,30 +36,6 @@ export const signUpUser = createAsyncThunk(
     }
   }
 );
-
-// export const getUserInfo = createAsyncThunk(
-//   "@@user/getUserInfo",
-//   async (token: string, { fulfillWithValue, rejectWithValue }) => {
-//     // console.log(token, 999);
-//     try {
-//       const response = await fetchGetUserInfo(token);
-//       const json = await response.json();
-//       //   console.log(json, 'data');
-//       const userData = {
-//         name: json.name,
-//         surname: json.surname,
-//         phone: json.phone,
-//         email: json.email,
-//         address: json.address,
-//       };
-
-//       return fulfillWithValue(userData);
-//       //   return fulfillWithValue(json);
-//     } catch (error: unknown) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
 
 export const getUserInfo = createAsyncThunk(
   "@@user/getUserInfo",
@@ -98,9 +74,6 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     signOut: () => initialState,
-    // signOut: (state, action) => {
-    //   state.user = initialState.user;
-    // },
   },
   extraReducers: (builder) => {
     builder

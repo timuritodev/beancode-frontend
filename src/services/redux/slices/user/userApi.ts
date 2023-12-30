@@ -29,7 +29,7 @@ export const fetchData = (
   }).then((res) => checkRes(res));
 };
 
-export const fetchSignUp = (data: IUser): Promise<Response> => {
+export const fetchSignUp = (data: ISignUpData): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/signup`, "POST", data).then((res) =>
     checkRes(res)
   );

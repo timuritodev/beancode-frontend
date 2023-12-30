@@ -28,8 +28,13 @@ export interface ISignInData {
   password: string;
 }
 
-export interface ISignUpData extends ISignInData {
-  fav_genres: number[];
+export interface ISignUpData {
+	name: string;
+	surname: string;
+	phone: string;
+	email: string;
+	address: string;
+	password: string;
 }
 
 // export interface IAvatar {
@@ -44,7 +49,7 @@ export interface IUser {
   email: string;
   address: string;
   password: string;
-  token?: string;
+  token: string;
 }
 
 // export interface IResetPasswordData {

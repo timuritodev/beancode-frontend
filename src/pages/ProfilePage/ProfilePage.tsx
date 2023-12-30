@@ -33,6 +33,7 @@ const ProfilePage = () => {
 
   dispatch(getProductsApi());
   useEffect(() => {
+    console.log(user.token, 444444)
     if (user.token) {
     //   console.log(user.token, 444);
       dispatch(getUserInfo(user.token));
@@ -49,8 +50,6 @@ const ProfilePage = () => {
     }
   }, [dispatch, user]);
 
-//   console.log(user);
-//   console.log(user.token);
   return (
     <section className="profile">
       <div className="profile__container">
@@ -77,7 +76,7 @@ const ProfilePage = () => {
             <span className="button__profile__text">Выйти</span>
           </button>
         </div>
-        {isAccountVisible && (
+        {isAccountVisible && user.token !== '' ? (
           <div className="account__container">
             <div className="input__container">
               <label className="profile__label">Имя</label>
@@ -141,7 +140,7 @@ const ProfilePage = () => {
               />
             </div>
           </div>
-        )}
+        ) : <h2>Нужно Зарегистрироваться</h2>}
         {isOrderVisible && <h2>Нет заказов</h2>}
       </div>
     </section>

@@ -24,7 +24,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const handleClickButton = () => {
     console.log(userId, productId, 222)
     dispatch(addToCartApi({userId, productId}));
-    console.log(111)
+    console.log(userId, productId, 222111)
   };
 
   // Функция для создания массива элементов-зерен в зависимости от значения

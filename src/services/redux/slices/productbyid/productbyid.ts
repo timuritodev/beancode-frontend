@@ -28,6 +28,7 @@ const initialState: IProductbyIdState = {
     v_picture: "",
     acidity: 0,
     density: 0,
+    big_description: "",
   },
 };
 
