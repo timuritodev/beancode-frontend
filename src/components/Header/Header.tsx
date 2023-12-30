@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/person.svg";
 import loop from "../../images/loop.svg";
+import CartButton from "../CartButton/CartButton";
 
 const Header: FC = () => {
   return (
@@ -47,6 +48,7 @@ const Header: FC = () => {
           </Link>
         </div>
       </div>
+      <CartButton />
     </header>
   );
 };

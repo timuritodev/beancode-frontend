@@ -15,6 +15,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage/ProductPage";
+import { CartPage } from "./pages/CartPage/CartPage";
 
 const Root: FC = () => {
   return (
@@ -27,6 +28,7 @@ const Root: FC = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/product-page" element={<ProductPage />} />
+          <Route path="/cart-page" element={<CartPage />} />
           {/* <Route
 						path="/recover-password"
 						element={
