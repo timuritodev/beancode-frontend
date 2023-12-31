@@ -11,7 +11,7 @@ export const addToCartApi = createAsyncThunk(
       const json = await response.json();
       // console.log(fulfillWithValue(json))
       // console.log(fulfillWithValue(json.acess))
-      // return fulfillWithValue(json);
+      return fulfillWithValue(json);
       return json;
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -27,7 +27,7 @@ export const deleteFromCartApi = createAsyncThunk(
       const json = await response.json();
       // console.log(fulfillWithValue(json))
       // console.log(fulfillWithValue(json.acess))
-      // return fulfillWithValue(json);
+      return fulfillWithValue(json);
       return json;
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -75,16 +75,19 @@ const cartSlice = createSlice({
     builder
       .addCase(addToCartApi.fulfilled, (state, action) => {
         state.status = "success";
-        // state.cart = action.payload.product;
         state.cart = [...state.cart, action.payload.product];
-      })
+      })      
       .addCase(deleteFromCartApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.cart = state.cart.filter((item) => {
-          console.log(item, item.id, 999);
-          return item.id !== action.payload.productId;
-        });
+        const indexToDelete = state.cart.findIndex(item => item.id === action.payload.productId);
+        if (indexToDelete !== -1) {
+          state.cart = [
+            ...state.cart.slice(0, indexToDelete),
+            ...state.cart.slice(indexToDelete + 1),
+          ];
+        }
       })
+      
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {
