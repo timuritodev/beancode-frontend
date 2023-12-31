@@ -41,6 +41,11 @@
   margin: 0;
 }
 
+.product-card__count-container {
+    display: flex;
+    height: 34px;
+}
+
 .product-card__price {
   color: var(--Black_text, #0f100f);
   text-align: center;

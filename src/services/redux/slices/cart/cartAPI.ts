@@ -31,6 +31,12 @@ export const fetchAddToCart = (data: ICartData  ): Promise<Response> => {
   );
 };
 
+export const fetchDeleteFromCart = (data: ICartData  ): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/cart/remove`, "POST", data).then((res) =>
+    checkRes(res)
+  );
+};
+
 // export const fetchGetUserInfo = (
 //   token: string | { token: string }
 // ): Promise<Response> => {

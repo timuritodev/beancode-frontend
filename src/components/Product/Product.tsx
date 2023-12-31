@@ -11,8 +11,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const cart = useAppSelector((state) => state.cart.cart);
-  console.log(cart)
+
   const handleClickImage = () => {
     navigate("/product-page");
     dispatch(getProductbyidApi(data.id));
@@ -22,9 +21,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const productId = data.id;
 
   const handleClickButton = () => {
-    console.log(userId, productId, 222)
-    dispatch(addToCartApi({userId, productId}));
-    console.log(userId, productId, 222111)
+    dispatch(addToCartApi({ userId, productId }));
   };
 
   // Функция для создания массива элементов-зерен в зависимости от значения
@@ -82,7 +79,11 @@ export const Product = ({ data }: { data: IProduct }) => {
             <p className="product__weight"> {data.weight}</p>
           </div>
 
-          <button type="submit" className="product__button" onClick={handleClickButton}>
+          <button
+            type="submit"
+            className="product__button"
+            onClick={handleClickButton}
+          >
             В корзину
           </button>
         </div>
