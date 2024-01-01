@@ -9,8 +9,7 @@
   justify-content: center;
   background: var(--White_bg, #f8f8f8);
   visibility: hidden;
-  z-index: 2;
-  border-radius: 15px;
+  z-index: 20;
 }
 
 .popup-cart_opened {

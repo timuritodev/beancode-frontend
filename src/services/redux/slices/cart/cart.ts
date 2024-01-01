@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAddToCart, fetchDeleteFromCart } from "./cartAPI";
+import { fetchAddToCart, fetchDeleteAll, fetchDeleteFromCart } from "./cartAPI";
 import { ICartData, ICartState } from "../../../../types/Cart.types";
 
 export const addToCartApi = createAsyncThunk(
@@ -29,6 +29,19 @@ export const deleteFromCartApi = createAsyncThunk(
       // console.log(fulfillWithValue(json.acess))
       return fulfillWithValue(json);
       return json;
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteAllApi = createAsyncThunk(
+  "@@cart/deleteAll",
+  async (userId: number, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchDeleteAll(userId);
+      const json = await response;
+      return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -87,7 +100,10 @@ const cartSlice = createSlice({
           ];
         }
       })
-      
+      .addCase(deleteAllApi.fulfilled, (state) => {
+        state.status = "success";
+        state.cart = [];
+      })  
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

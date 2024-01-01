@@ -12,7 +12,7 @@ const checkRes = (res: Response) => {
 export const fetchData = (
   url: string,
   method: string,
-  data?: ICartData,
+  data?: ICartData | number,
   token?: string
 ) => {
   return fetch(url, {
@@ -25,14 +25,20 @@ export const fetchData = (
   }).then((res) => checkRes(res));
 };
 
-export const fetchAddToCart = (data: ICartData  ): Promise<Response> => {
+export const fetchAddToCart = (data: ICartData): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/cart/add`, "POST", data).then((res) =>
     checkRes(res)
   );
 };
 
-export const fetchDeleteFromCart = (data: ICartData  ): Promise<Response> => {
+export const fetchDeleteFromCart = (data: ICartData): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/cart/remove`, "POST", data).then((res) =>
+    checkRes(res)
+  );
+};
+
+export const fetchDeleteAll = (data: number): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/cart/${data}`, "DELETE").then((res) =>
     checkRes(res)
   );
 };

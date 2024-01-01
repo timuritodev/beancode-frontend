@@ -2,6 +2,7 @@
     width: 733px;
     height: 290px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .product-card {
