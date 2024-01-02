@@ -49,15 +49,15 @@ export const CatalogPage = () => {
     <section className="catalog">
       <div className="catalog__container">
         <h1 className="catalog__title">Интернет-магазин</h1>
-        <form>
+        <form className="catalog__form">
             <select
               id="sortDropdown"
-              className="products__dropdown"
+              className="catalog__dropdown"
               name="sortOption"
               value={sortOption}
               onChange={handleSortChange}
             >
-              <option value="">-- Выберите опцию сортировки --</option>
+              <option value="">Выберите опцию сортировки</option>
               <option value="name">Названию (в алфавитном порядке)</option>
               <option value="maxPrice">Макс. Цене (по убыванию)</option>
               <option value="minPrice">Мин. Цене (по возрастанию)</option>

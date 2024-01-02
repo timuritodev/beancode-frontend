@@ -6,8 +6,9 @@
   /* padding: 0 80px; */
 }
 
-/* .product {
-} */
+.product {
+  max-width: 348px;
+}
 
 /* .product__container {
 }
@@ -80,7 +81,8 @@
   line-height: normal;
   width: 180px;
   height: 52px;
-  margin: 0 0 0 54px;
+  margin: 0 0 0 40px;
+  padding: 0;
 }
 
 .grains__container {

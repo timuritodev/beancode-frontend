@@ -22,5 +22,30 @@
   font-weight: 500;
   line-height: 70px;
   /* 134.615% */
-  margin: 64px;
+  margin: 48px 0 64px 0;
+}
+
+.catalog__form {
+  /* Add styles as needed for your dropdown */
+  margin-left: auto; 
+  padding: 0 0 64px 0;
+}
+
+.catalog__dropdown {
+  /* display: flex;
+  align-items: center; */
+  align-self: center;
+  align-content: center;
+  margin: 0;
+  border: none;
+  border-radius: var(--Border-Radius-rounded-none, 0px);
+  border-bottom: 1px solid var(--Black_text, #0F100F);
+  padding: 0 0 12px 0;
+  background-color: transparent;
+  width: 300px;
+  color: var(--Black_text, #0f100f);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
