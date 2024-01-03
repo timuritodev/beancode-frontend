@@ -12,11 +12,11 @@
     height: 100%;
     background: url(../../images/beans.png);
     transform-origin: center center;
+    z-index: 2;
   }
   
   .intro__content {
     position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,5 +58,6 @@
     color: #f8f8f8;
     cursor: pointer;
     text-align: center;
+    z-index: 6;
   }
   

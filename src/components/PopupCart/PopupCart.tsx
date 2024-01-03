@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import "./PopupCart.css";
 import { ProductCardList } from "../ProductCard/ProductCardList";
 import { deleteAllApi } from "../../services/redux/slices/cart/cart";
@@ -24,6 +24,17 @@ export const PopupCart: FC<PopupCartProps> = ({
     cartproducts.forEach((product) => {
         sum += parseInt(product.price, 10);
     });
+
+    useEffect(() => {
+        if (isPopupOpen) {
+            document.body.classList.add("no-scroll");
+        } else {
+            document.body.classList.remove("no-scroll");
+        }
+        return () => {
+            document.body.classList.remove("no-scroll");
+        };
+    }, [isPopupOpen]);
 
     return (
         <div className={`popup-cart ${isPopupOpen ? "popup-cart_opened" : ""}`}>

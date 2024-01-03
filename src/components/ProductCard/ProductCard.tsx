@@ -7,6 +7,8 @@ import { addToCartApi, deleteFromCartApi } from "../../services/redux/slices/car
 import { selectUser } from "../../services/redux/slices/user/user";
 import minus from "../../images/minus.svg";
 import plus from "../../images/plus.svg";
+import { useNavigate } from "react-router";
+import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 
 interface ProductCardProps {
     data: IProduct;
@@ -15,7 +17,13 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const user = useAppSelector(selectUser);
+
+    const handleClickImage = () => {
+        navigate("/product-page");
+        dispatch(getProductbyidApi(data.id));
+    };
 
     const userId = user.id;
     const productId = data.id;
@@ -29,17 +37,17 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
     }
     return (
         <div className="product-card">
-            <img className="product-card__img" src={img} alt={data.title} />
+            <img className="product-card__img" src={img} alt={data.title} onClick={handleClickImage} />
             <div className="product-card__text-container">
                 <h3 className="product-card__title">{data.title}</h3>
                 <p className="product-card__text">{data.weight}</p>
             </div>
             <div className="product-card__count-container">
-                <button className="product-card__button product-card__button_minus" onClick={handleClickMinus} >
+                <button className="product-card__button" onClick={handleClickMinus} >
                     <img className="product-card__button__img_minus" src={minus} />
                 </button>
                 <p className="product-card__count">{count}</p>
-                <button className="product-card__button product-card__button_plus" onClick={handleClickPlus} >
+                <button className="product-card__button" onClick={handleClickPlus} >
                     <img className="product-card__button__img_plus" src={plus} />
                 </button>
             </div>

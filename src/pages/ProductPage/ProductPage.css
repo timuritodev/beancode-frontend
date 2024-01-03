@@ -61,6 +61,13 @@
   margin: 32px 0 0 0;
 }
 
+.products__wrapper_2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0 0 0;
+}
+
 .products__info {
   color: var(--Black_text, #0f100f);
   font-size: 16px;
