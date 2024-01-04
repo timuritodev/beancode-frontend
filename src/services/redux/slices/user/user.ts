@@ -1,7 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchSignUp, fetchSignIn, fetchGetUserInfo } from "./userApi";
-import { IUser, ISignInData, ISignUpData } from "../../../../types/Auth.types";
+import {
+  fetchSignUp,
+  fetchSignIn,
+  fetchGetUserInfo,
+  fetchEditUserInfo,
+} from "./userApi";
+import {
+  IUser,
+  ISignInData,
+  ISignUpData,
+  IEditProfileData,
+} from "../../../../types/Auth.types";
 
 export interface IUserState {
   status: "idle" | "success" | "loading" | "failed";
@@ -51,6 +61,26 @@ export const getUserInfo = createAsyncThunk(
   }
 );
 
+export const editUserInfo = createAsyncThunk(
+  "@@user/editUserInfo",
+  async (
+    arg: {
+      data: IEditProfileData;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
+    try {
+      const response = await fetchEditUserInfo(data, token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IUserState = {
   status: "idle",
   error: null,
@@ -93,12 +123,14 @@ const userSlice = createSlice({
         state.user.email = action.payload.user.email;
         state.user.address = action.payload.user.address;
       })
-      //   .addCase(editUserInfo.fulfilled, (state, action) => {
-      //     state.status = "success";
-      //     state.user.nickname = action.payload.username;
-      //     state.user.dateOfBirth = action.payload.date_of_birth;
-      //     state.user.sex = action.payload.sex;
-      //   })
+      .addCase(editUserInfo.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user.name = action.payload.user.name;
+        state.user.surname = action.payload.user.surname;
+        state.user.phone = action.payload.user.phone;
+        state.user.email = action.payload.user.email;
+        state.user.address = action.payload.user.address;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

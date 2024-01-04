@@ -12,7 +12,7 @@ import SignInPage from "./pages/AuthPage/SignInPage";
 import SignUpPage from "./pages/AuthPage/SignUpPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage/ProductPage";
 import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
