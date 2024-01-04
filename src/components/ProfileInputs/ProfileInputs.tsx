@@ -13,11 +13,11 @@ export const ProfileInputs = () => {
 
   const token = user.token;
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    phone: "",
-    email: "",
-    address: "",
+    name: user.name,
+    surname: user.surname,
+    phone: user.phone,
+    email: user.email,
+    address: user.address,
   });
 
   const handleChange = (e: any) => {
@@ -31,6 +31,7 @@ export const ProfileInputs = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     dispatch(editUserInfo({ data: formData, token: token }));
+    dispatch(getUserInfo(user.token));
   };
 
   useEffect(() => {
@@ -112,10 +113,10 @@ export const ProfileInputs = () => {
           placeholder={user.address}
           required
         />
+      </div>
         <button type="submit" className="signup__button" onClick={handleSubmit}>
           Зарегистрироваться
         </button>
-      </div>
     </div>
   );
 };
