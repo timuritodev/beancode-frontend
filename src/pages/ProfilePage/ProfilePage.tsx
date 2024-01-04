@@ -25,17 +25,19 @@ const ProfilePage = () => {
 
   const handleOrderButtonClick = () => {
     setIsOrderVisible(!isOrderVisible);
+    // setIsAccountVisible(!isAccountVisible);
   };
 
   const handleAccountButtonClick = () => {
     setIsAccountVisible(!isAccountVisible);
+    // setIsOrderVisible(!isOrderVisible);
   };
 
   dispatch(getProductsApi());
   useEffect(() => {
-    console.log(user.token, 444444)
+    console.log(user.token, 444444);
     if (user.token) {
-    //   console.log(user.token, 444);
+      //   console.log(user.token, 444);
       dispatch(getUserInfo(user.token));
       // .unwrap()
       // .then(() => {
@@ -76,7 +78,7 @@ const ProfilePage = () => {
             <span className="button__profile__text">Выйти</span>
           </button>
         </div>
-        {isAccountVisible && user.token !== '' ? (
+        {isAccountVisible && user.token !== "" ? (
           <div className="account__container">
             <div className="input__container">
               <label className="profile__label">Имя</label>
@@ -140,7 +142,9 @@ const ProfilePage = () => {
               />
             </div>
           </div>
-        ) : <h2>Нужно Зарегистрироваться</h2>}
+        ) : (
+          <h2>Нужно Зарегистрироваться</h2>
+        )}
         {isOrderVisible && <h2>Нет заказов</h2>}
       </div>
     </section>

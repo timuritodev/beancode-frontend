@@ -6,7 +6,7 @@ import logo from "../../images/logo.svg";
 
 const Footer: FC = () => {
   return (
-    <footer className="footer" id="footer">
+    <footer className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}>
       <div className="footer__container">
         <div className="footer__blocks">
           <div className="subsribe__block">
@@ -35,13 +35,13 @@ const Footer: FC = () => {
           </div>
           <div className="faq__block">
             <h2 className="faq__title">FAQ</h2>
-            <Link to="/" className="faq__link">
+            <Link to="/delivery-page" className="faq__link">
               О доставке
             </Link>
-            <Link to="/" className="faq__link">
+            <Link to="/payment-page" className="faq__link">
               Об оплате
             </Link>
-            <Link to="/" className="faq__link">
+            <Link to="/bonus-page" className="faq__link">
               Бонусная программа
             </Link>
           </div>

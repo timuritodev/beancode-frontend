@@ -1,14 +1,15 @@
 import { FC } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/person.svg";
 import loop from "../../images/loop.svg";
 import CartButton from "../CartButton/CartButton";
 
 const Header: FC = () => {
+  const location = useLocation();
   return (
-    <header className="header" id="header">
+    <header className={`header ${location.pathname === "/" ? "header_dark" : ""}`}>
       <div className="header__container">
         <Link to="/">
           <img className="header__logo" alt="logo" src={logo} />

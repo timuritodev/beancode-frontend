@@ -15,6 +15,9 @@ import MainPage from "./pages/MainPage/MainPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage/ProductPage";
+import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
+import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage";
+import { BonusPage } from "./pages/BonusPage/BonusPage";
 
 const Root: FC = () => {
   return (
@@ -27,6 +30,9 @@ const Root: FC = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/product-page" element={<ProductPage />} />
+          <Route path="/payment-page" element={<PaymentPage />} />
+          <Route path="/delivery-page" element={<DeliveryPage />} />
+          <Route path="/bonus-page" element={<BonusPage />} />
           {/* <Route
 						path="/recover-password"
 						element={
