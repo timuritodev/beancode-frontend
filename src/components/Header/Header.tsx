@@ -1,15 +1,41 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/person.svg";
 import loop from "../../images/loop.svg";
 import CartButton from "../CartButton/CartButton";
+import Search from "../Search/Search";
 
 const Header: FC = () => {
   const location = useLocation();
+
+  const [values, setValues] = useState("");
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target;
+    const value = target.value;
+    setValues(value);
+  };
+
+  const setSearchClose = () => {
+    setIsOpenSearch(false);
+  };
+
+  useEffect(() => {
+    if (values.length > 0) {
+      setIsOpenSearch(true);
+    }
+    if (values.length < 1) {
+      setIsOpenSearch(false);
+    }
+  }, [values]);
+
   return (
-    <header className={`header ${location.pathname === "/" ? "header_dark" : ""}`}>
+    <header
+      className={`header ${location.pathname === "/" ? "header_dark" : ""}`}
+    >
       <div className="header__container">
         <Link to="/">
           <img className="header__logo" alt="logo" src={logo} />
@@ -38,9 +64,9 @@ const Header: FC = () => {
               name="name"
               type="text"
               placeholder="Поиск"
-              // onChange={handleChange}
-              // onBlur={setSearchClose}
-              // value={values}
+              onChange={handleChange}
+              //   onBlur={setSearchClose}
+              value={values}
               autoComplete="off"
             />
           </form>
@@ -50,6 +76,11 @@ const Header: FC = () => {
         </div>
       </div>
       <CartButton />
+      <Search
+        isOpenSearch={isOpenSearch}
+        isClose={setSearchClose}
+        values={values}
+      />
     </header>
   );
 };
