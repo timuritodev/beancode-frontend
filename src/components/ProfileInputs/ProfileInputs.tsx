@@ -31,22 +31,11 @@ export const ProfileInputs = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     dispatch(editUserInfo({ data: formData, token: token }));
-    dispatch(getUserInfo(user.token));
   };
 
   useEffect(() => {
     if (user.token) {
       dispatch(getUserInfo(user.token));
-      // .unwrap()
-      // .then(() => {
-      //     if (user.nickname) {
-      //         setValue('nickname', user.nickname);
-      //     }
-      //     if (user.dateOfBirth) {
-      //         setValue('dateOfBirth', user.dateOfBirth);
-      //     }
-      // })
-      // .catch((err: unknown) => console.log('getUserInfo err', err));
     }
   }, [dispatch, user]);
 
@@ -114,9 +103,9 @@ export const ProfileInputs = () => {
           required
         />
       </div>
-        <button type="submit" className="signup__button" onClick={handleSubmit}>
-          Зарегистрироваться
-        </button>
+      <button type="submit" className="signup__button" onClick={handleSubmit}>
+        Зарегистрироваться
+      </button>
     </div>
   );
 };

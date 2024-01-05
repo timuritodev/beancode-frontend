@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { useState } from "react";
 import { resetCart } from "../../services/redux/slices/cart/cart";
 import { ProfileInputs } from "../../components/ProfileInputs/ProfileInputs";
+import { orders } from "../../utils/constants";
+import { OrderList } from "../../components/Order/OrderList";
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -18,13 +20,13 @@ export const ProfilePage = () => {
   const [isAccountVisible, setIsAccountVisible] = useState(true);
 
   const handleOrderButtonClick = () => {
-    setIsOrderVisible(!isOrderVisible);
-    // setIsAccountVisible(!isAccountVisible);
+    setIsOrderVisible(true);
+    setIsAccountVisible(false);
   };
 
   const handleAccountButtonClick = () => {
-    setIsAccountVisible(!isAccountVisible);
-    // setIsOrderVisible(!isOrderVisible);
+    setIsAccountVisible(true);
+    setIsOrderVisible(false);
   };
 
   return (
@@ -56,9 +58,13 @@ export const ProfilePage = () => {
         {isAccountVisible && user.token !== "" ? (
           <ProfileInputs />
         ) : (
-          <h2>Нужно Зарегистрироваться</h2>
+          user.token === "" && <h2>Нужно Зарегистрироваться</h2>
         )}
-        {isOrderVisible && <h2>Нет заказов</h2>}
+        {isOrderVisible && orders.length !== 0 && user.token !== "" ? (
+          <OrderList data={orders} />
+        ) : (
+          orders.length === 0 && user.token !== "" && <h2>Нет заказов</h2>
+        )}
       </div>
     </section>
   );

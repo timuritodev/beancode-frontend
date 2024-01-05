@@ -9,7 +9,7 @@
   margin: 0 48px 32px 0;
 }
 .profile__input {
-  color: var(--grey_light, #c8cac8);
+  color: var(--Black-1000-main, #333);
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
