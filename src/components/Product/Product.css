@@ -73,7 +73,6 @@
 }
 
 .product__price {
-  color: var(--Black_text, #0f100f);
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -82,12 +81,15 @@
   cursor: pointer;
 }
 
-.not-selected {
-    color: var(--Black_text, #fff);
-}
- 
-.product__weight {
+.selected {
   color: var(--Black_text, #0f100f);
+}
+
+.not-selected {
+  color: var(--Black_text, #818181);
+}
+
+.product__weight {
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

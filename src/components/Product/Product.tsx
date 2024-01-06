@@ -24,11 +24,13 @@ export const Product = ({ data }: { data: IProduct }) => {
     setSelectedWeight(weight);
   };
 
-  //   const handleWeightChange = (weight: string) => {
-  //     setSelectedWeight(weight);
-  //   };
+  console.log("Selected Price Class:", selectedPrice === data.price ? 1 : 0);
+  console.log(
+    "Selected Low Price Class:",
+    selectedPrice === data.low_price ? 1 : 0
+  );
 
-  console.log(selectedPrice,213123)
+  //   console.log(selectedPrice, 213123);
   return (
     <div className="product">
       <div className="product__container">
@@ -72,8 +74,8 @@ export const Product = ({ data }: { data: IProduct }) => {
         <div className="product__wrapper">
           <div className="product__price__wrapper">
             <div
-              className={`product__price ${
-                selectedPrice === data.price ? "" : "not-selected"
+              className={`product__price__container ${
+                selectedPrice === data.price ? "selected" : "not-selected"
               }`}
               onClick={() => handleChange(data.price, data.weight)}
             >
@@ -81,8 +83,8 @@ export const Product = ({ data }: { data: IProduct }) => {
               <p className="product__weight"> {data.weight}</p>
             </div>
             <div
-              className={`product__price ${
-                selectedPrice === data.low_price ? "" : "not-selected"
+              className={`product__price__container ${
+                selectedPrice === data.low_price ? "selected" : "not-selected"
               }`}
               onClick={() => handleChange(data.low_price, data.low_weight)}
             >
@@ -90,7 +92,11 @@ export const Product = ({ data }: { data: IProduct }) => {
               <p className="product__weight"> {data.low_weight}</p>
             </div>
           </div>
-          <MinusPlusButtons data={data} product_price={selectedPrice} product_weight={selectedWeight}/>
+          <MinusPlusButtons
+            data={data}
+            product_price={selectedPrice}
+            product_weight={selectedWeight}
+          />
         </div>
       </div>
     </div>
