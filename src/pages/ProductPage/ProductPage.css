@@ -55,6 +55,7 @@
   line-height: normal;
   margin: 32px 0 0 0;
 }
+
 .products__wrapper {
   display: flex;
   align-items: center;
@@ -89,6 +90,31 @@
   font-weight: 400;
   line-height: normal;
   margin: 64px 0 0 0;
+}
+
+.product__big-weight__container {
+  display: flex;
+  gap: 24px;
+  margin: 40px 0 0 0;
+}
+
+.products__big-weight {
+  color: var(--Black_text, #0F100F);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0 0 18px 0;
+  margin: 0;
+}
+
+.product-selected {
+  border-bottom: 1px solid #0F100F;
+}
+
+.product-not-selected {
+  border: none;
 }
 
 /* .products__option {

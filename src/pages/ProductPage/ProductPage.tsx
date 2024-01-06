@@ -1,12 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "./ProductPage.css";
 import { useAppSelector } from "../../services/typeHooks";
 import img from "../../images/product.jpg";
 import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
-// import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
+import { useState } from "react";
+import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
 
 export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
   const products = useAppSelector((state) => state.products.products);
+
+  const [selectedPrice, setSelectedPrice] = useState(product.price);
+  const [selectedWeight, setSelectedWeight] = useState(product.weight);
+
+  const handleChange = (price: string, weight: string) => {
+    setSelectedPrice(price);
+    setSelectedWeight(weight);
+  };
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Selected Option:", e.target.value);
@@ -28,9 +38,8 @@ export const ProductPage = () => {
                   {[...Array(5)].map((_, index) => (
                     <span
                       key={index}
-                      className={`grain ${
-                        index < product.acidity ? "filled" : "empty"
-                      }`}
+                      className={`grain ${index < product.acidity ? "filled" : "empty"
+                        }`}
                     ></span>
                   ))}
                 </div>
@@ -41,9 +50,8 @@ export const ProductPage = () => {
                   {[...Array(5)].map((_, index) => (
                     <span
                       key={index}
-                      className={`grain ${
-                        index < product.density ? "filled" : "empty"
-                      }`}
+                      className={`grain ${index < product.density ? "filled" : "empty"
+                        }`}
                     ></span>
                   ))}
                 </div>
@@ -59,6 +67,22 @@ export const ProductPage = () => {
               <option value="option2">Опция 2</option>
               <option value="option3">Опция 3</option>
             </select>
+            <div className="product__big-weight__container">
+              <div
+                className={`products__price__container ${selectedPrice === product.price ? "product-selected" : "product-not-selected"
+                  }`}
+                onClick={() => handleChange(product.price, product.weight)}
+              >
+                <p className="products__big-weight"> {product.weight}</p>
+              </div>
+              <div
+                className={`products__price__container ${selectedPrice === product.low_price ? "product-selected" : "product-not-selected"
+                  }`}
+                onClick={() => handleChange(product.low_price, product.low_weight)}
+              >
+                <p className="products__big-weight"> {product.low_weight}</p>
+              </div>
+            </div>
           </div>
           <div className="products__info__container">
             <img
@@ -67,11 +91,21 @@ export const ProductPage = () => {
               alt={product.h_picture}
             />
             <div className="products__wrapper_2">
-              <div className="products__price__container">
-                <p className="products__price">{product.price} ₽&nbsp;</p>
-                <p className="products__weight"> {product.weight}</p>
-              </div>
-              {/* <MinusPlusButtons data={product} /> */}
+
+              {selectedPrice === product.price ?
+                <div className="products__price__container">
+                  <p className="products__price">{product.price} ₽&nbsp;</p>
+                  <p className="products__weight"> {product.weight}</p>
+                </div> :
+                <div className="products__price__container">
+                  <p className="products__price">{product.low_price} ₽&nbsp;</p>
+                  <p className="products__weight"> {product.low_weight}</p>
+                </div>}
+              <MinusPlusButtons
+                data={product}
+                product_price={selectedPrice}
+                product_weight={selectedWeight}
+              />
             </div>
           </div>
         </div>

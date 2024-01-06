@@ -24,13 +24,6 @@ export const Product = ({ data }: { data: IProduct }) => {
     setSelectedWeight(weight);
   };
 
-  console.log("Selected Price Class:", selectedPrice === data.price ? 1 : 0);
-  console.log(
-    "Selected Low Price Class:",
-    selectedPrice === data.low_price ? 1 : 0
-  );
-
-  //   console.log(selectedPrice, 213123);
   return (
     <div className="product">
       <div className="product__container">

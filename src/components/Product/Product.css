@@ -70,6 +70,7 @@
 .product__price__container {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .product__price {
@@ -78,7 +79,6 @@
   font-weight: 400;
   line-height: normal;
   margin: 0;
-  cursor: pointer;
 }
 
 .selected {
