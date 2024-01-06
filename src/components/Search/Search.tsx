@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
-import { getProductsApi } from "../../services/redux/slices/product/product";
+// import { getProductsApi } from "../../services/redux/slices/product/product";
 import { IProduct } from "../../types/Product.types";
 import img from "../../images/product.jpg";
 
@@ -23,9 +23,9 @@ const Search = ({
   const cards = useAppSelector((state) => state.products.products);
   const [isFiltredCards, setIsFiltredCards] = useState(false);
 
-  useEffect(() => {
-    dispatch(getProductsApi());
-  }, [dispatch, values]);
+//   useEffect(() => {
+//     dispatch(getProductsApi());
+//   }, [dispatch, values]);
 
   const filteredCards = cards.filter((card) =>
     card.title.toLowerCase().includes(values.toLowerCase())

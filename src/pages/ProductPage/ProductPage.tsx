@@ -2,7 +2,7 @@ import "./ProductPage.css";
 import { useAppSelector } from "../../services/typeHooks";
 import img from "../../images/product.jpg";
 import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
-import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
+// import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
 
 export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -71,7 +71,7 @@ export const ProductPage = () => {
                 <p className="products__price">{product.price} ₽&nbsp;</p>
                 <p className="products__weight"> {product.weight}</p>
               </div>
-              <MinusPlusButtons data={product} />
+              {/* <MinusPlusButtons data={product} /> */}
             </div>
           </div>
         </div>

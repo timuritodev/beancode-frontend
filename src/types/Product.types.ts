@@ -9,6 +9,8 @@ export interface IProduct {
   acidity: number;
   density: number;
   big_description: string;
+  low_price: string;
+  low_weight: string;
 }
 
 export interface IProductState {

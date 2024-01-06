@@ -12,9 +12,11 @@ import {
 
 interface MinusPlusButtonsProps {
     data: IProduct;
+    product_price: string;
+    product_weight: string;
 }
 
-export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({ data }) => {
+export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({ data, product_price, product_weight }) => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
 
@@ -26,18 +28,19 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({ data }) => {
     const productCountInCart = cartproduct.filter(item => item.id === productId).length;
 
     const handleClickPlus = () => {
-        dispatch(addToCartApi({ userId, productId }));
+        dispatch(addToCartApi({ userId, productId, product_price, product_weight }));
     };
 
     const handleClickMinus = () => {
         dispatch(deleteFromCartApi({ userId, productId }));
     };
+
     return (
         <>
             {productCountInCart === 0 ? <button
                 type="submit"
                 className="product__button"
-                onClick={() => dispatch(addToCartApi({ userId, productId }))}
+                onClick={() => dispatch(addToCartApi({ userId, productId, product_price, product_weight }))}
             >
                 В корзину
             </button> : <div className="minus-plus__count-container">

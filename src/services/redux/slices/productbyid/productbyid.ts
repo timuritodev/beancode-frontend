@@ -29,6 +29,8 @@ const initialState: IProductbyIdState = {
     acidity: 0,
     density: 0,
     big_description: "",
+    low_price: "",
+    low_weight: "",
   },
 };
 
