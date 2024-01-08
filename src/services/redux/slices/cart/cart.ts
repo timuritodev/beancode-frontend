@@ -9,10 +9,7 @@ export const addToCartApi = createAsyncThunk(
     try {
       const response = await fetchAddToCart(data);
       const json = await response.json();
-      // console.log(fulfillWithValue(json))
-      // console.log(fulfillWithValue(json.acess))
       return fulfillWithValue(json);
-      return json;
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -25,10 +22,7 @@ export const deleteFromCartApi = createAsyncThunk(
     try {
       const response = await fetchDeleteFromCart(data);
       const json = await response.json();
-      // console.log(fulfillWithValue(json))
-      // console.log(fulfillWithValue(json.acess))
       return fulfillWithValue(json);
-      return json;
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -48,30 +42,6 @@ export const deleteAllApi = createAsyncThunk(
   }
 );
 
-// export const getUserInfo = createAsyncThunk(
-//   "@@user/getUserInfo",
-//   async (token: string, { fulfillWithValue, rejectWithValue }) => {
-//     // console.log(token, 999);
-//     try {
-//       const response = await fetchGetUserInfo(token);
-//       const json = await response.json();
-//       //   console.log(json, 'data');
-//       const userData = {
-//         name: json.name,
-//         surname: json.surname,
-//         phone: json.phone,
-//         email: json.email,
-//         address: json.address,
-//       };
-
-//       return fulfillWithValue(userData);
-//       //   return fulfillWithValue(json);
-//     } catch (error: unknown) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
 const initialState: ICartState = {
   status: "idle",
   error: null,
@@ -88,11 +58,11 @@ const cartSlice = createSlice({
     builder
       .addCase(addToCartApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.cart = [...state.cart, action.payload.product];
+        state.cart = [...state.cart, action.payload];
       })      
       .addCase(deleteFromCartApi.fulfilled, (state, action) => {
         state.status = "success";
-        const indexToDelete = state.cart.findIndex(item => item.id === action.payload.productId);
+        const indexToDelete = state.cart.findIndex(item => item.price === action.payload.price);
         if (indexToDelete !== -1) {
           state.cart = [
             ...state.cart.slice(0, indexToDelete),

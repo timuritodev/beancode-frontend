@@ -1,30 +1,29 @@
-import { IProduct } from "../../types/Product.types";
 import { FC } from "react";
 import { ProductCard } from "./ProductCard";
+import { ICart } from "../../types/Cart.types";
 
 interface ProductCardListProps {
-  data: IProduct[];
+  data: ICart[];
 }
 
 export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
-
-  const countProducts = (products: IProduct[]) => {
-    const productCount: Record<number, number> = {};
+  const countProducts = (products: ICart[]) => {
+    const productCount: Record<string, number> = {};
     products.forEach((product) => {
-      const productId = product.id;
-      productCount[productId] = (productCount[productId] || 0) + 1;
+      const productPrice = product.price;
+      productCount[productPrice] = (productCount[productPrice] || 0) + 1;
     });
     return productCount;
   };
 
   const productCounts = countProducts(data);
 
-  const uniqueData = Array.from(new Set(data.map((item) => item.id))).map(
-    (id) => {
-      const product = data.find((item) => item.id === id);
+  const uniqueData = Array.from(new Set(data.map((item) => item.price))).map(
+    (price) => {
+      const product = data.find((item) => item.price === price);
       return {
         ...product,
-        count: productCounts[id],
+        count: productCounts[price],
       };
     }
   );
@@ -33,11 +32,7 @@ export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
     <div className="product-card-list">
       {uniqueData.length !== 0 &&
         uniqueData.map((item) => (
-          <ProductCard
-            key={item.id}
-            data={item as IProduct}
-            count={item.count}
-          />
+          <ProductCard key={item.id} data={item as ICart} count={item.count} />
         ))}
     </div>
   );

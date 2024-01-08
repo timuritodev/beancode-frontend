@@ -1,7 +1,7 @@
 import { FC } from "react";
 import "./ProductCard.css";
 import img from "../../images/product.jpg";
-import { IProduct } from "../../types/Product.types";
+// import { IProduct } from "../../types/Product.types";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { addToCartApi, deleteFromCartApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
@@ -9,9 +9,10 @@ import minus from "../../images/minus.svg";
 import plus from "../../images/plus.svg";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
+import { ICart } from "../../types/Cart.types";
 
 interface ProductCardProps {
-    data: IProduct;
+    data: ICart;
     count: number;
 }
 
@@ -27,13 +28,15 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
 
     const userId = user.id;
     const productId = data.id;
+    const product_price = data.price;
+    const product_weight = data.weight;
 
     const handleClickPlus = () => {
-        dispatch(addToCartApi({ userId, productId }));
+        dispatch(addToCartApi({ userId, productId, product_price, product_weight }));
     };
 
     const handleClickMinus = () => {
-        dispatch(deleteFromCartApi({ userId, productId }));
+        dispatch(deleteFromCartApi({ userId, productId, product_price, product_weight }));
     }
     return (
         <div className="product-card">

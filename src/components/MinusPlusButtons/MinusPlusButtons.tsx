@@ -32,7 +32,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({ data, product_pric
     };
 
     const handleClickMinus = () => {
-        dispatch(deleteFromCartApi({ userId, productId }));
+        dispatch(deleteFromCartApi({ userId, productId, product_price, product_weight }));
     };
 
     return (
