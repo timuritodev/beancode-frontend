@@ -5,6 +5,7 @@ import "./PopupCart.css";
 import { ProductCardList } from "../ProductCard/ProductCardList";
 import { deleteAllApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
+import { useNavigate } from "react-router";
 
 interface PopupCartProps {
     isPopupOpen: boolean;
@@ -16,8 +17,14 @@ export const PopupCart: FC<PopupCartProps> = ({
     switchPopupTrailer,
 }) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const user = useAppSelector(selectUser);
     const cartproducts = useAppSelector((state) => state.cart.cart);
+
+    const handleClickOrderButton = () => {
+        navigate('/order-page');
+        switchPopupTrailer();
+	};
 
     let sum = 0;
 
@@ -61,7 +68,7 @@ export const PopupCart: FC<PopupCartProps> = ({
                     >
                         Продолжить покупки
                     </button>
-                    <button className="popup-cart__button-order" type="button">
+                    <button className="popup-cart__button-order" type="button" onClick={handleClickOrderButton}>
                         Оформить заказ
                     </button>
                 </div>
