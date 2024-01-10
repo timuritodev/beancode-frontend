@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./ProfileInputs.css";
+import "./OrderInputs.css";
 import {
   editUserInfo,
   getUserInfo,
@@ -7,7 +7,8 @@ import {
 } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { useEffect, useState } from "react";
-export const ProfileInputs = () => {
+
+export const OrderInputs = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
@@ -40,37 +41,37 @@ export const ProfileInputs = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="account__container">
-      <div className="input__container">
-        <label className="profile__label">Имя</label>
+    <div className="order__container">
+      <div className="order-input__container">
+        <label className="order__label">Имя</label>
         <input
           type="text"
           name="name"
-          className="profile__input"
+          className="order__input"
           value={formData.name}
           onChange={handleChange}
           placeholder={user.name}
           required
         />
       </div>
-      <div className="input__container">
-        <label className="profile__label">Фамилия</label>
+      <div className="order-input__container">
+        <label className="order__label">Фамилия</label>
         <input
           type="text"
           name="surname"
-          className="profile__input"
+          className="order__input"
           value={formData.surname}
           onChange={handleChange}
           placeholder={user.surname}
           required
         />
       </div>
-      <div className="input__container">
-        <label className="profile__label">Телефон</label>
+      <div className="order-input__container">
+        <label className="order__label">Телефон</label>
         <input
           type="text"
           name="phone"
-          className="profile__input"
+          className="order__input"
           value={formData.phone}
           onChange={handleChange}
           placeholder={user.phone}
@@ -78,12 +79,12 @@ export const ProfileInputs = () => {
         />
       </div>
 
-      <div className="input__container">
-        <label className="profile__label">Email</label>
+      <div className="order-input__container">
+        <label className="order__label">Email</label>
         <input
           type="email"
           name="email"
-          className="profile__input"
+          className="order__input"
           value={formData.email}
           onChange={handleChange}
           placeholder={user.email}
@@ -91,12 +92,12 @@ export const ProfileInputs = () => {
         />
       </div>
 
-      <div className="input__container">
-        <label className="profile__label">Адрес</label>
+      <div className="order-input__container">
+        <label className="order__label">Адрес</label>
         <input
           type="text"
           name="address"
-          className="profile__input"
+          className="order__input"
           value={formData.address}
           onChange={handleChange}
           placeholder={user.address}

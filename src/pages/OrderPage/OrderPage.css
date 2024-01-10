@@ -19,4 +19,25 @@
   font-style: normal;
   font-weight: 500;
   line-height: 70px; /* 134.615% */
+  margin: 48px 0 64px 0;
+}
+
+.order-page__wrapper {
+  display: flex;
+}
+
+.order-page__sec-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 756px;
+  margin: 0 51px 0 0;
+}
+.order-page__subtitle {
+  color: var(--Black_text, #0f100f);
+  font-family: Spectral;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 32px 0;
 }
