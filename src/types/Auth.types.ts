@@ -20,6 +20,8 @@ export interface IUser {
   email: string;
   address: string;
   password: string;
+  city: string;
+  area: string;
   token: string;
 }
 

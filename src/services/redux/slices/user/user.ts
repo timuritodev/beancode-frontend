@@ -92,6 +92,8 @@ const initialState: IUserState = {
     email: "",
     address: "",
     password: "",
+	city: "",
+	area: "",
     token: "",
   },
 };
@@ -122,6 +124,8 @@ const userSlice = createSlice({
         state.user.phone = action.payload.user.phone;
         state.user.email = action.payload.user.email;
         state.user.address = action.payload.user.address;
+        state.user.city = action.payload.user.city;
+        state.user.area = action.payload.user.area;
       })
       .addCase(editUserInfo.fulfilled, (state, action) => {
         state.status = "success";
@@ -130,6 +134,8 @@ const userSlice = createSlice({
         state.user.phone = action.payload.user.phone;
         state.user.email = action.payload.user.email;
         state.user.address = action.payload.user.address;
+        state.user.city = action.payload.user.city;
+        state.user.area = action.payload.user.area;
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

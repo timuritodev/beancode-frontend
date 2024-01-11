@@ -19,6 +19,8 @@ export const OrderInputs = () => {
     phone: user.phone,
     email: user.email,
     address: user.address,
+    city: user.city,
+    area: user.area,
   });
 
   const handleChange = (e: any) => {
@@ -104,7 +106,39 @@ export const OrderInputs = () => {
           required
         />
       </div>
-      <button type="submit" className="order-input__button" onClick={handleSubmit}>
+      <div className="order-input__container">
+        <label className="order__label">Город</label>
+        <input
+          type="text"
+          name="city"
+          className="order__input"
+          value={formData.city}
+          onChange={handleChange}
+          placeholder={user.city}
+          required
+        />
+      </div>
+      {user.area !== "" && (
+        <>
+          <div className="order-input__container">
+            <label className="order__label">Район</label>
+            <input
+              type="text"
+              name="area"
+              className="order__input"
+              value={formData.area}
+              onChange={handleChange}
+              placeholder={user.area}
+              required
+            />
+          </div>
+        </>
+      )}
+      <button
+        type="submit"
+        className="order-input__button"
+        onClick={handleSubmit}
+      >
         Изменить данные
       </button>
     </div>

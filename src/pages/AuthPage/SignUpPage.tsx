@@ -12,6 +12,8 @@ const SignUpPage = () => {
     phone: "",
     email: "",
     address: "",
+    city: "",
+    area: "",
     password: "",
   });
 
@@ -76,6 +78,30 @@ const SignUpPage = () => {
             placeholder="adress@gmail.com"
             required
           />
+          <label className="signup__label">Город</label>
+          <input
+            type="text"
+            name="city"
+            className="signup__input"
+            value={formData.city}
+            onChange={handleChange}
+            placeholder="Москва"
+            required
+          />
+          {formData.city === "Челны" || formData.city === "Наб. Челны" || formData.city === "Набережные Челны" && (
+            <>
+              <label className="signup__label">Район</label>
+              <input
+                type="text"
+                name="area"
+                className="signup__input"
+                value={formData.area}
+                onChange={handleChange}
+                placeholder="Новый город"
+                required
+              />
+            </>
+          )}
           <label className="signup__label">Адрес</label>
           <input
             type="text"
