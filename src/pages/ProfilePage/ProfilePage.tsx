@@ -58,12 +58,12 @@ export const ProfilePage = () => {
         {isAccountVisible && user.token !== "" ? (
           <ProfileInputs />
         ) : (
-          user.token === "" && <h2>Нужно Зарегистрироваться</h2>
+          user.token === "" && <p>Нужно Зарегистрироваться</p>
         )}
         {isOrderVisible && orders.length !== 0 && user.token !== "" ? (
           <OrderList data={orders} />
         ) : (
-          orders.length === 0 && user.token !== "" && <h2>Нет заказов</h2>
+          orders.length === 0 && user.token !== "" && <p>Нет заказов</p>
         )}
       </div>
     </section>

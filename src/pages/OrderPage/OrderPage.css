@@ -31,6 +31,7 @@
   flex-direction: column;
   width: 756px;
   margin: 0 51px 0 0;
+  gap: 80px;
 }
 .order-page__subtitle {
   color: var(--Black_text, #0f100f);

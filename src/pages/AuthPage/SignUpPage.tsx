@@ -88,7 +88,8 @@ const SignUpPage = () => {
             placeholder="Москва"
             required
           />
-          {formData.city === "Челны" || formData.city === "Наб. Челны" || formData.city === "Набережные Челны" && (
+          {/* {formData.city === "Челны" || formData.city === "Наб. Челны" || formData.city === "Набережные Челны" && ( */}
+          {formData.city === "Челны" && (
             <>
               <label className="signup__label">Район</label>
               <input
