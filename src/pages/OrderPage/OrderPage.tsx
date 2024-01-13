@@ -1,6 +1,7 @@
 import { DeliveryBlock } from "../../components/DeliveryBlock/DeliveryBlock";
 import { OrderInputs } from "../../components/OrderInputs/OrderInputs";
 import { OrderBlock } from "../../components/OrdersBlock/OrdersBlock";
+import { PaymentBlock } from "../../components/PaymentBlock/PaymentBlock";
 import "./OrderPage.css";
 
 export const OrderPage = () => {
@@ -17,6 +18,10 @@ export const OrderPage = () => {
             <div>
               <h2 className="order-page__subtitle">Способы доставки</h2>
               <DeliveryBlock />
+            </div>
+            <div>
+              <h2 className="order-page__subtitle">Способы оплаты</h2>
+              <PaymentBlock />
             </div>
           </div>
           <OrderBlock />

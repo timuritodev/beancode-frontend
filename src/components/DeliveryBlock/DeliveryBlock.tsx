@@ -45,12 +45,12 @@ export const DeliveryBlock = () => {
   const [isDeliveryPointVisible, setIsDeliveryPointVisible] = useState(true);
   const [isCourierVisible, setIsCourierVisible] = useState(false);
 
-  const handleOrderButtonClick = () => {
+  const handleDeliveryButtonClick = () => {
     setIsDeliveryPointVisible(true);
     setIsCourierVisible(false);
   };
 
-  const handleAccountButtonClick = () => {
+  const handleCourierButtonClick = () => {
     setIsCourierVisible(true);
     setIsDeliveryPointVisible(false);
   };
@@ -81,7 +81,7 @@ export const DeliveryBlock = () => {
           className={`delivery-block__button ${
             isDeliveryPointVisible ? "" : "delivery-block__button_add"
           }`}
-          onClick={handleAccountButtonClick}
+          onClick={handleCourierButtonClick}
         >
           <span
             className={`delivery-block__button__text ${
@@ -95,7 +95,7 @@ export const DeliveryBlock = () => {
           className={`delivery-block__button ${
             isCourierVisible ? "" : "delivery-block__button_add"
           }`}
-          onClick={handleOrderButtonClick}
+          onClick={handleDeliveryButtonClick}
         >
           <span
             className={`delivery-block__button__text ${
