@@ -24,6 +24,11 @@
 
 .order-page__wrapper {
   display: flex;
+  align-items: flex-start;
+}
+
+.order-page__wrapper > div:last-child {
+  flex-shrink: 0;
 }
 
 .order-page__sec-wrapper {
