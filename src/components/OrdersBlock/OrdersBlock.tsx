@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { OrderCardList } from "../OrderCard/OrderCardList";
 import "./OrdersBlock.css";
 import { FC, useState } from "react";
-import { useAppSelector } from "../../services/typeHooks";
 import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
+import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
+import { createOrderApi } from "../../services/redux/slices/order/order";
+import { selectUser } from "../../services/redux/slices/user/user";
 
 export const OrderBlock: FC = () => {
+  const dispatch = useAppDispatch();
   const cartproducts = useAppSelector((state) => state.cart.cart);
+  const user = useAppSelector(selectUser);
 
   let sum = 0;
 
@@ -18,6 +23,39 @@ export const OrderBlock: FC = () => {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const product_ids = cartproducts.map((item) => `${item.id}`).join(", ");
+  const product_titles = cartproducts.map((item) => `${item.title}`).join(", ");
+
+  const userId = user.id;
+  const phone = user.phone;
+  const email = user.email;
+  const address = user.address;
+  const city = user.city;
+  // sum: number;
+  // product_ids: string;
+  // product_titles: string;
+  const product_quantity = cartproducts.length;
+
+  const handleClickPayButton = () => {
+    dispatch(
+      createOrderApi({
+        userId,
+        phone,
+        email,
+        address,
+        city,
+        sum,
+        product_ids,
+        product_titles,
+        product_quantity,
+      })
+    );
+    // console.log(product_ids, 111);
+    // console.log(queryString, 333);
+
+    console.log(123);
   };
 
   return (
@@ -58,7 +96,11 @@ export const OrderBlock: FC = () => {
           />
         </button>
       </div>
-      <button type="submit" className="order-block__pay-button">
+      <button
+        type="submit"
+        className="order-block__pay-button"
+        onClick={handleClickPayButton}
+      >
         Оплатить заказ
       </button>
       <p className="order-block__disclaimer">

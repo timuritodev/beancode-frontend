@@ -16,12 +16,14 @@ import { userReducer } from './slices/user/user';
 import { productReducer } from './slices/product/product';
 import { productbyidReducer } from './slices/productbyid/productbyid';
 import { cartReducer } from './slices/cart/cart';
+import { orderReducer } from './slices/order/order';
 
 const rootReducer = combineReducers({
 	user: userReducer,
 	products: productReducer,
 	productbyid: productbyidReducer,
 	cart: cartReducer,
+	order: orderReducer,
 });
 
 const persistConfig = {
