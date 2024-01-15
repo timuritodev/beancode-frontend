@@ -15,10 +15,10 @@ export interface IOrderDetails {
   address: string;
   city: string;
   sum: number;
-  product_ids: string;
-  product_titles: string;
   product_quantity: number;
+  products_info: string;
 }
+
 export interface IOrderDetailsState {
   status: "idle" | "success" | "loading" | "failed";
   error: unknown;

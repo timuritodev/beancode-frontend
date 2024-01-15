@@ -25,18 +25,15 @@ export const OrderBlock: FC = () => {
     setIsChecked(!isChecked);
   };
 
-  const product_ids = cartproducts.map((item) => `${item.id}`).join(", ");
-  const product_titles = cartproducts.map((item) => `${item.title}`).join(", ");
-
   const userId = user.id;
   const phone = user.phone;
   const email = user.email;
   const address = user.address;
   const city = user.city;
-  // sum: number;
-  // product_ids: string;
-  // product_titles: string;
   const product_quantity = cartproducts.length;
+  const products_info = cartproducts
+    .map((item) => `${item.id} ${item.title} ${item.weight}`)
+    .join(", ");
 
   const handleClickPayButton = () => {
     dispatch(
@@ -47,9 +44,8 @@ export const OrderBlock: FC = () => {
         address,
         city,
         sum,
-        product_ids,
-        product_titles,
         product_quantity,
+        products_info,
       })
     );
     // console.log(product_ids, 111);
