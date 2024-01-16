@@ -7,6 +7,7 @@ import ic_info from "../../images/ic_info.svg";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { createOrderApi } from "../../services/redux/slices/order/order";
 import { selectUser } from "../../services/redux/slices/user/user";
+import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -48,10 +49,13 @@ export const OrderBlock: FC = () => {
         products_info,
       })
     );
-    // console.log(product_ids, 111);
-    // console.log(queryString, 333);
-
-    console.log(123);
+    dispatch(
+      sendEmailApi({
+        from: user.email,
+        subject: "Заказ",
+        text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+      })
+    );
   };
 
   return (
@@ -60,7 +64,8 @@ export const OrderBlock: FC = () => {
       <OrderCardList data={cartproducts} />
       <div className="order-block__details">
         <p className="order-block__text">
-          {cartproducts.length} товара на сумму
+          {cartproducts.length} товара на сумму 
+          {/* Todo товар или товара */}
         </p>
         <p className="order-block__text">{sum} ₽</p>
       </div>
@@ -119,21 +124,6 @@ export const OrderBlock: FC = () => {
         </span>
         <img className="checkbox__img" src={ic_info} />
       </label>
-      {/* <div className="checkbox__order-block__container">
-        <label className="checkbox__order-block">
-          <input
-            className="order__checkbox-button"
-            type="checkbox"
-            id="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          <span className="span__checkbox">
-            Получать новости и спецпредложения
-          </span>
-          <img className="checkbox__img" src={ic_info} />
-        </label>
-      </div> */}
     </div>
   );
 };

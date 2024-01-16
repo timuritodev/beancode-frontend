@@ -34,6 +34,7 @@ const InfoBlock = () => {
             <button className="button__info">
               <span className="button__info__text">Документация</span>
             </button>
+            {/* Todo Документация */}
           </div>
         </div>
         <p className="info__sort">40+ сортов</p>

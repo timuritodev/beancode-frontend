@@ -7,19 +7,19 @@
 export const API_BASE_URL = "http://localhost:3001";
 
 export const orders = [
-  {
-    id: 1,
-    number: 221133,
-    info: "Обжаривается",
-    delivery: "Доставка ожидается 3 декабря",
-  },
-  {
-    id: 2,
-    number: 99880011,
-    info: "В пути asdss",
-    delivery: "В пункт вывоза 3 декабря",
-  },
-  { id: 3, number: 77664400, info: "Отменен", delivery: "" },
+  // {
+  //   id: 1,
+  //   number: 221133,
+  //   info: "Обжаривается",
+  //   delivery: "Доставка ожидается 3 декабря",
+  // },
+  // {
+  //   id: 2,
+  //   number: 99880011,
+  //   info: "В пути asdss",
+  //   delivery: "В пункт вывоза 3 декабря",
+  // },
+  // { id: 3, number: 77664400, info: "Отменен", delivery: "" },
 ];
 
 // export const VALIDATION_SETTINGS = {

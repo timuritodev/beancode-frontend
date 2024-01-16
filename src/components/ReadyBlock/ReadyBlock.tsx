@@ -15,6 +15,7 @@ const ReadyBlock = () => {
           </p>
           <p className="ready__text_special">Specialty coffee association</p>
           <Link to="/" className="ready__link">Требования к готовой продукции</Link>
+          {/* Todo Требования к готовой продукции */}
         </div>
       </div>
     </div>

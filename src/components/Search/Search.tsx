@@ -43,7 +43,6 @@ const Search = ({
     navigate("/product-page");
     dispatch(getProductbyidApi(id));
     isClose();
-    console.log(123123)
     // window.scrollTo(0, 0);
   };
 
@@ -61,7 +60,8 @@ const Search = ({
               <article className="search__card-desc">
                 <p className="search__card-name">{item.title}</p>
                 <div className="search__card-info">
-                  <p className="search__card-year">{item.price}</p>
+                  <p className="search__card-year">{item.price} ₽</p>
+                  <p className="search__card-year">{item.weight}</p>
                 </div>
               </article>
             </div>

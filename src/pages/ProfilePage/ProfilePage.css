@@ -12,10 +12,10 @@
 }
 
 .profile__buttons {
-    display: flex;
-    flex-direction: column;
-    margin: 0 200px 0 0;
-    min-width: 188px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 200px 0 0;
+  min-width: 188px;
 }
 .button__profile {
   border: none;
@@ -42,14 +42,14 @@
 }
 
 .account__container {
-    display: flex;
-    margin: 0;
-    flex-wrap: wrap;
+  display: flex;
+  margin: 0;
+  flex-wrap: wrap;
 }
 .input__container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 48px 32px 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 48px 32px 0;
 }
 .profile__input {
   color: var(--grey_light, #c8cac8);
@@ -81,4 +81,14 @@
 .profile__label::placeholder {
   color: var(--placeholder-color, #a0a0a0);
   text-indent: 12px;
+}
+
+.profile__text {
+  color: var(--grey, #797979);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 82px 0 0 193px;
 }

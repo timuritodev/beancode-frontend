@@ -9,6 +9,7 @@ const Footer: FC = () => {
     <footer className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}>
       <div className="footer__container">
         <div className="footer__blocks">
+          {/* Todo рассылка писем */}
           <div className="subsribe__block">
             <h2 className="subscribe__title">Подпишитесь на нас,</h2>
             <p className="subscribe__text">

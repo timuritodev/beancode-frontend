@@ -11,6 +11,7 @@ import { resetCart } from "../../services/redux/slices/cart/cart";
 import { ProfileInputs } from "../../components/ProfileInputs/ProfileInputs";
 import { orders } from "../../utils/constants";
 import { OrderList } from "../../components/Order/OrderList";
+import { resetOrders } from "../../services/redux/slices/order/order";
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -49,6 +50,7 @@ export const ProfilePage = () => {
             onClick={() => {
               dispatch(signOut());
               dispatch(resetCart());
+              dispatch(resetOrders());
             }}
           >
             <img className="button__profile__img" src={exit_button} />
@@ -58,12 +60,12 @@ export const ProfilePage = () => {
         {isAccountVisible && user.token !== "" ? (
           <ProfileInputs />
         ) : (
-          user.token === "" && <p>Нужно Зарегистрироваться</p>
+          user.token === "" && <p className="profile__text">Нужно Зарегистрироваться</p>
         )}
         {isOrderVisible && orders.length !== 0 && user.token !== "" ? (
           <OrderList data={orders} />
         ) : (
-          orders.length === 0 && user.token !== "" && <p>Нет заказов</p>
+          isOrderVisible && orders.length === 0 && user.token !== "" && <p className="profile__text">Нет заказов</p>
         )}
       </div>
     </section>
