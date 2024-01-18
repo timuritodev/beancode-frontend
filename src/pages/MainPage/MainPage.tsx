@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useEffect } from "react";
 import { getCartApi } from "../../services/redux/slices/cart/cart";
+import { getOrdersApi } from "../../services/redux/slices/order/order";
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const MainPage = () => {
   useEffect(() => {
     if (user.token) {
       dispatch(getCartApi(user.id));
+      dispatch(getOrdersApi(user.id));
     }
   }, [dispatch, user.id, user.token]);
 

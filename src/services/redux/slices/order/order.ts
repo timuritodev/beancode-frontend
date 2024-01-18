@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCreateOrder } from "./orderAPI";
+import { fetchCreateOrder, fetchGetOrders } from "./orderAPI";
 import {
   IOrderDetails,
   IOrderDetailsState,
@@ -19,6 +19,19 @@ export const createOrderApi = createAsyncThunk(
   }
 );
 
+export const getOrdersApi = createAsyncThunk(
+    "@@order/getOrder",
+    async (userId: number, { fulfillWithValue, rejectWithValue }) => {
+      try {
+        const response = await fetchGetOrders(userId);
+        const json = await response;
+        return fulfillWithValue(json);
+      } catch (error: unknown) {
+        return rejectWithValue(error);
+      }
+    }
+  );
+
 const initialState: IOrderDetailsState = {
   status: "idle",
   error: null,
@@ -36,6 +49,10 @@ const orderSlice = createSlice({
       .addCase(createOrderApi.fulfilled, (state, action) => {
         state.status = "success";
         state.info = [...state.info, action.payload];
+      })
+      .addCase(getOrdersApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.info = action.payload;
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
