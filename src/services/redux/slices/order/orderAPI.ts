@@ -26,7 +26,7 @@ export const fetchData = (
 };
 
 export const fetchCreateOrder = (data: IOrderDetails): Promise<Response> => {
-  return fetchData(`${API_BASE_URL}/create/order`, "POST", data).then((res) =>
+  return fetchData(`${API_BASE_URL}/order/create`, "POST", data).then((res) =>
     checkRes(res)
   );
 };

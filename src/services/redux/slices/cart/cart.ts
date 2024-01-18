@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAddToCart, fetchDeleteAll, fetchDeleteFromCart } from "./cartAPI";
+import {
+  fetchAddToCart,
+  fetchDeleteAll,
+  fetchDeleteFromCart,
+  fetchGetCart,
+} from "./cartAPI";
 import { ICartData, ICartState } from "../../../../types/Cart.types";
 
 export const addToCartApi = createAsyncThunk(
@@ -42,6 +47,19 @@ export const deleteAllApi = createAsyncThunk(
   }
 );
 
+export const getCartApi = createAsyncThunk(
+  "@@cart/getCart",
+  async (userId: number, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchGetCart(userId);
+      // const json = await response;
+      return fulfillWithValue(response);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: ICartState = {
   status: "idle",
   error: null,
@@ -59,10 +77,12 @@ const cartSlice = createSlice({
       .addCase(addToCartApi.fulfilled, (state, action) => {
         state.status = "success";
         state.cart = [...state.cart, action.payload];
-      })      
+      })
       .addCase(deleteFromCartApi.fulfilled, (state, action) => {
         state.status = "success";
-        const indexToDelete = state.cart.findIndex(item => item.price === action.payload.price);
+        const indexToDelete = state.cart.findIndex(
+          (item) => item.price === action.payload.price
+        );
         if (indexToDelete !== -1) {
           state.cart = [
             ...state.cart.slice(0, indexToDelete),
@@ -73,7 +93,11 @@ const cartSlice = createSlice({
       .addCase(deleteAllApi.fulfilled, (state) => {
         state.status = "success";
         state.cart = [];
-      })  
+      })
+      .addCase(getCartApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.cart = action.payload;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

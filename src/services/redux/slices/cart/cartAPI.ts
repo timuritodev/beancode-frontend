@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { API_BASE_URL } from "../../../../utils/constants";
-import { ICartData } from "../../../../types/Cart.types";
+import { ICart, ICartData } from "../../../../types/Cart.types";
 
-const checkRes = (res: Response) => {
+const checkRes = (res: any) => {
   if (res.ok) {
     return res;
+  } else {
+    return Promise.reject(res);
+  }
+};
+
+const checkRes2 = (res: any) => {
+  if (res.ok) {
+    return res.json();
   } else {
     return Promise.reject(res);
   }
@@ -40,6 +49,12 @@ export const fetchDeleteFromCart = (data: ICartData): Promise<Response> => {
 export const fetchDeleteAll = (data: number): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/cart/${data}`, "DELETE").then((res) =>
     checkRes(res)
+  );
+};
+
+export const fetchGetCart = (userId: number): Promise<Array<ICart>> => {
+  return fetchData(`${API_BASE_URL}/cart/${userId}`, "GET").then((res) =>
+    checkRes2(res)
   );
 };
 
