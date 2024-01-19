@@ -1,12 +1,39 @@
-import { FC } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC, useState } from "react";
 import "./Footer.css";
 import button from "../../images/paper-airplane.svg";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { useAppDispatch } from "../../services/typeHooks";
+import { subcribeApi } from "../../services/redux/slices/subscription/subscription";
 
 const Footer: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const [email, setEmail] = useState(""); // Используйте отдельное состояние для email
+
+  const handleChange = (e: any) => {
+    setEmail(e.target.value); // Обновите состояние только для email
+  };
+
+  const isValidEmail = (email: string) => {
+    // Добавьте свою валидацию email, например, с использованием регулярных выражений.
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const handleSubribeButtonClick = () => {
+    if (isValidEmail(email)) {
+      dispatch(subcribeApi(email));
+    } else {
+      // Добавьте обработку ошибки, если email некорректен
+      console.error("Некорректный email");
+    }
+  };
+  
   return (
-    <footer className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}>
+    <footer
+      className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}
+    >
       <div className="footer__container">
         <div className="footer__blocks">
           {/* Todo рассылка писем */}
@@ -21,9 +48,7 @@ const Footer: FC = () => {
               name="email"
               type="text"
               placeholder="example@gmail.com"
-              // onChange={handleChange}
-              // onBlur={setSearchClose}
-              // value={values}
+              onChange={handleChange}
               autoComplete="off"
             />
             <button className="subscribe__button">
@@ -31,6 +56,7 @@ const Footer: FC = () => {
                 className="subscribe__button_img"
                 alt="subscribe__button_img"
                 src={button}
+                onClick={handleSubribeButtonClick}
               />
             </button>
           </div>
@@ -55,12 +81,12 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className="logo__block">
-            <img className="footer__logo" src={logo} />
-            <h2 className="footer__email">mugermanrb@beancode.ru</h2>
+          <img className="footer__logo" src={logo} />
+          <h2 className="footer__email">mugermanrb@beancode.ru</h2>
         </div>
         <div className="copyright__block">
-            <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
-            <p className="copyright__text">Дизайн - Гюзель Саберова</p>
+          <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
+          <p className="copyright__text">Дизайн - Гюзель Саберова</p>
         </div>
       </div>
     </footer>
