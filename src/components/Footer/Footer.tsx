@@ -10,14 +10,13 @@ import { subcribeApi } from "../../services/redux/slices/subscription/subscripti
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
 
-  const [email, setEmail] = useState(""); // Используйте отдельное состояние для email
+  const [email, setEmail] = useState("");
 
   const handleChange = (e: any) => {
-    setEmail(e.target.value); // Обновите состояние только для email
+    setEmail(e.target.value);
   };
 
   const isValidEmail = (email: string) => {
-    // Добавьте свою валидацию email, например, с использованием регулярных выражений.
     return /\S+@\S+\.\S+/.test(email);
   };
 
@@ -25,18 +24,16 @@ const Footer: FC = () => {
     if (isValidEmail(email)) {
       dispatch(subcribeApi(email));
     } else {
-      // Добавьте обработку ошибки, если email некорректен
       console.error("Некорректный email");
     }
   };
-  
+
   return (
     <footer
       className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}
     >
       <div className="footer__container">
         <div className="footer__blocks">
-          {/* Todo рассылка писем */}
           <div className="subsribe__block">
             <h2 className="subscribe__title">Подпишитесь на нас,</h2>
             <p className="subscribe__text">
