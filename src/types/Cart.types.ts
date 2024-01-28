@@ -18,4 +18,5 @@ export interface ICart {
   h_picture: string;
   weight: string;
   price: string;
+  key: string;
 }

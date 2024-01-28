@@ -32,7 +32,7 @@ export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
     <div className="product-card-list">
       {uniqueData.length !== 0 &&
         uniqueData.map((item) => (
-          <ProductCard key={item.id} data={item as ICart} count={item.count} />
+          <ProductCard key={item.key} data={item as ICart} count={item.count} />
         ))}
     </div>
   );

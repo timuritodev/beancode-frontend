@@ -47,18 +47,35 @@ export const deleteAllApi = createAsyncThunk(
   }
 );
 
+// export const getCartApi = createAsyncThunk(
+//   "@@cart/getCart",
+//   async (userId: number, { fulfillWithValue, rejectWithValue }) => {
+//     try {
+//       const response = await fetchGetCart(userId);
+//       // const json = await response;
+//       return fulfillWithValue(response);
+//     } catch (error: unknown) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
 export const getCartApi = createAsyncThunk(
   "@@cart/getCart",
   async (userId: number, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchGetCart(userId);
-      // const json = await response;
-      return fulfillWithValue(response);
+      const cartWithKeys = response.map(item => ({ ...item, key: generateUniqueKey(item.title, item.weight, item.id) }));
+      return fulfillWithValue(cartWithKeys);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
   }
 );
+
+const generateUniqueKey = (title:string, weight:string, id:number) => {
+  return `${title}_${weight}_${id}`;
+};
 
 const initialState: ICartState = {
   status: "idle",
