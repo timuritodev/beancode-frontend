@@ -9,6 +9,8 @@ export interface ISignUpData {
   phone: string;
   email: string;
   address: string;
+  city: string;
+  area: string;
   password: string;
 }
 
