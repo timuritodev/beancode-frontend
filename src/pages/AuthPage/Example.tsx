@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import './AuthPage.css';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import { CustomInputTypes } from '../../types/CustomInput.types';
@@ -40,7 +40,7 @@ export const Example = () => {
 
     const {
         register,
-        // handleSubmit,
+        handleSubmit,
         // reset,
         watch,
         formState: { errors, isDirty, isValid },
@@ -63,29 +63,40 @@ export const Example = () => {
         </p>
     );
 
-    const handleSubmit = async (e: any) => {
-        const userName = getValues('name');
-        const userSurname = getValues('surname');
-        const userPhone = getValues('phone');
-        const userEmail = getValues('email');
-        const userAddress = getValues('address');
-        const userCity = getValues('city');
-        const userArea = getValues('area');
-        const userPassword = getValues('password');
-        setUserData({
-            name: userName,
-            surname: userSurname,
-            phone: userPhone,
-            email: userEmail,
-            address: userAddress,
-            city: userCity,
-            area: userArea,
-            password: userPassword,
-        });
-        e.preventDefault();
-        dispatch(signUpUser(userData));
-        dispatch(setUser(userData));
-    };
+    const data = {
+        name: getValues('name'),
+        surname: getValues('surname'),
+        phone: getValues('phone'),
+        email: getValues('email'),
+        address: getValues('address'),
+        city: getValues('city'),
+        area: getValues('area'),
+        password: getValues('password'),
+    }
+
+
+   const onSubmit: SubmitHandler<ISignUpData> = () => {
+		dispatch(signUpUser(data))
+			.unwrap()
+			.then(() => {
+				setUserData({
+                    name:data.name,
+                    surname: data.surname,
+                    phone: data.phone,
+					email: data.name,
+                    address: data.address,
+                    city: data.city,
+                    area: data.area,
+					password: data.password,
+				});
+				console.log(data,123123)
+			})
+			.catch((err) => {
+				console.log(' dispatch(checkEmail(userEmail)) res', err);
+				// setAuthError(true);
+			});
+        dispatch(setUser(data));
+	};
 
     return (
         <main className="auth" id="sign-up-page">
@@ -102,7 +113,7 @@ export const Example = () => {
                 {width > 1000 ? formLink : null}
                 <form
                     className="auth__form auth__form_type_sign-up"
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     noValidate
                 >
                     <CustomInput
@@ -161,6 +172,14 @@ export const Example = () => {
                         }}
                         error={errors?.area?.message}
                     />
+                    {/* {userData.city === 'Челны' && <CustomInput
+                        inputType={CustomInputTypes.area}
+                        labelText={'Район'}
+                        validation={{
+                            ...register('area', AREA_VALIDATION_CONFIG),
+                        }}
+                        error={errors?.area?.message}
+                    />} */}
                     <CustomInput
                         inputType={CustomInputTypes.password}
                         labelText={'Пароль'}
@@ -194,7 +213,7 @@ export const Example = () => {
                     <button
                         type="submit"
                         className="signup__button"
-                        onClick={handleSubmit}
+                        onSubmit={handleSubmit(onSubmit)}
                     >
                         Зарегистрироваться
                     </button>
