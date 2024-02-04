@@ -32,5 +32,6 @@ export interface ICustomInput {
 	error?: string;
 	onChange?: any;
 	max?: string;
+	placeholder? : string;
 	defaultValue?: string;
 }

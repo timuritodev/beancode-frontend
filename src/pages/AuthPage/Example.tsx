@@ -19,49 +19,20 @@ import {
     SURNAME_VALIDATION_CONFIG,
     VALIDATION_SETTINGS,
 } from '../../utils/constants';
-// import { checkEmail, signUpUser } from 'src/services/redux/slices/user/user';
 import { signUpUser, setUser } from "../../services/redux/slices/user/user";
-import { useResize } from '../../hooks/useResize';
 
 export const Example = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [userData, setUserData] = useState<ISignUpData>({
-        name: "",
-        surname: "",
-        phone: "",
-        email: "",
-        address: "",
-        city: "",
-        area: "",
-        password: "",
-    });
-    // const [authError, setAuthError] = useState(false);
 
     const {
         register,
         handleSubmit,
-        // reset,
+        reset,
         watch,
         formState: { errors, isDirty, isValid },
         getValues,
     } = useForm<ISignUpData>({ mode: 'onChange' });
-
-    const formTitle = (
-        <h1 className="auth__title auth__title_type_sign-up">
-            Создать учетную запись
-        </h1>
-    );
-    const { width } = useResize();
-    const formLink = (
-        <p className="auth__link-text">
-            {`${width > 1000 ? `У вас уже есть учетная запись?` : 'Есть учетная запись?'
-                }`}
-            <Link to="/sign-in" className="auth__link">
-                Войти
-            </Link>
-        </p>
-    );
 
     const data = {
         name: getValues('name'),
@@ -70,49 +41,21 @@ export const Example = () => {
         email: getValues('email'),
         address: getValues('address'),
         city: getValues('city'),
-        area: getValues('area'),
+        area: getValues('area') === undefined ? '' : getValues('area'),
         password: getValues('password'),
     }
 
-
-   const onSubmit: SubmitHandler<ISignUpData> = () => {
-		dispatch(signUpUser(data))
-			.unwrap()
-			.then(() => {
-				setUserData({
-                    name:data.name,
-                    surname: data.surname,
-                    phone: data.phone,
-					email: data.name,
-                    address: data.address,
-                    city: data.city,
-                    area: data.area,
-					password: data.password,
-				});
-				console.log(data,123123)
-			})
-			.catch((err) => {
-				console.log(' dispatch(checkEmail(userEmail)) res', err);
-				// setAuthError(true);
-			});
+    console.log(data, 1312313)
+    const onSubmit: SubmitHandler<ISignUpData> = () => {
+        dispatch(signUpUser(data))
         dispatch(setUser(data));
-	};
+    };
 
     return (
-        <main className="auth" id="sign-up-page">
-            {/* <BackButton
-                type={'button'}
-                buttonText={`${width <= 1000 ? '' : 'Назад'}`}
-                handleButtonClick={() => navigate(-1)}
-            /> */}
-            <div className="auth__container auth__container_type_auth">
-                {formTitle}
-                <p className="auth__hint">
-                    Зарегистрируйтесь с помощью электронной почты
-                </p>
-                {width > 1000 ? formLink : null}
-                <form
-                    className="auth__form auth__form_type_sign-up"
+        <section className="signup">
+            <div className="signup__container">
+                <h1 className="signup__title">Регистрация</h1>
+                <form className="signup__form"
                     onSubmit={handleSubmit(onSubmit)}
                     noValidate
                 >
@@ -122,6 +65,7 @@ export const Example = () => {
                         validation={{
                             ...register('name', NAME_VALIDATION_CONFIG),
                         }}
+                        placeholder='Иван'
                         error={errors?.name?.message}
                     />
                     <CustomInput
@@ -130,6 +74,7 @@ export const Example = () => {
                         validation={{
                             ...register('surname', SURNAME_VALIDATION_CONFIG),
                         }}
+                        placeholder='Иванов'
                         error={errors?.surname?.message}
                     />
                     <CustomInput
@@ -138,6 +83,7 @@ export const Example = () => {
                         validation={{
                             ...register('phone', PHONE_VALIDATION_CONFIG),
                         }}
+                        placeholder='+7-909-90-90-35'
                         error={errors?.phone?.message}
                     />
                     <CustomInput
@@ -146,6 +92,7 @@ export const Example = () => {
                         validation={{
                             ...register('email', EMAIL_VALIDATION_CONFIG),
                         }}
+                        placeholder='email@example.com'
                         error={errors?.email?.message}
                     />
                     <CustomInput
@@ -154,6 +101,7 @@ export const Example = () => {
                         validation={{
                             ...register('address', ADDRESS_VALIDATION_CONFIG),
                         }}
+                        placeholder='ул. Пушкина, д. 9, кв. 192'
                         error={errors?.address?.message}
                     />
                     <CustomInput
@@ -162,37 +110,33 @@ export const Example = () => {
                         validation={{
                             ...register('city', CITY_VALIDATION_CONFIG),
                         }}
+                        placeholder='Москва'
                         error={errors?.city?.message}
                     />
-                    <CustomInput
+                    {data.city === 'Челны' && <CustomInput
                         inputType={CustomInputTypes.area}
                         labelText={'Район'}
                         validation={{
                             ...register('area', AREA_VALIDATION_CONFIG),
                         }}
+                        placeholder='Новый город'
                         error={errors?.area?.message}
-                    />
-                    {/* {userData.city === 'Челны' && <CustomInput
-                        inputType={CustomInputTypes.area}
-                        labelText={'Район'}
-                        validation={{
-                            ...register('area', AREA_VALIDATION_CONFIG),
-                        }}
-                        error={errors?.area?.message}
-                    />} */}
-                    <CustomInput
-                        inputType={CustomInputTypes.password}
-                        labelText={'Пароль'}
-                        // showPasswordButton={true}
-                        validation={{
-                            ...register('password', PASSWORD_VALIDATION_CONFIG),
-                        }}
-                        error={errors?.password?.message}
-                    />
-                    {/* <span className="input__span input__span_type_password">
-                        Минимум 8 символов (заглавные и строчные латинские буквы и
-                        цифры)
-                    </span> */}
+                    />}
+                    <div>
+                        <CustomInput
+                            inputType={CustomInputTypes.password}
+                            labelText={'Пароль'}
+                            showPasswordButton={true}
+                            validation={{
+                                ...register('password', PASSWORD_VALIDATION_CONFIG),
+                            }}
+                            error={errors?.password?.message}
+                        />
+                        <span className="input__span input__span_type_password">
+                            Минимум 8 символов (заглавные и строчные латинские буквы и
+                            цифры)
+                        </span>
+                    </div>
                     {/* <CustomInput
                         inputType={CustomInputTypes.repeatPassword}
                         labelText={'Повторите пароль'}
@@ -219,6 +163,6 @@ export const Example = () => {
                     </button>
                 </form>
             </div>
-        </main>
+        </section>
     );
 };
