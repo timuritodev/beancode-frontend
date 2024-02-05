@@ -8,7 +8,7 @@ import { store, persistor } from "./services/redux/store";
 
 import "./index.css";
 
-import SignInPage from "./pages/AuthPage/SignInPage";
+import SignInPage from "./pages/AuthPage/SignInPage2";
 // import SignUpPage from "./pages/AuthPage/SignUpPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
@@ -19,7 +19,7 @@ import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage";
 import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
-import { Example } from "./pages/AuthPage/Example";
+import { SignUpPage } from "./pages/AuthPage/SignUpPage2";
 
 const Root: FC = () => {
   return (
@@ -27,7 +27,7 @@ const Root: FC = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="/sign-up" element={<Example />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/catalog" element={<CatalogPage />} />

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import './AuthPage.css';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import { CustomInputTypes } from '../../types/CustomInput.types';
-import { useAppDispatch } from "../../../src/services/typeHooks";
+import { useAppDispatch } from "../../services/typeHooks";
 import { ISignUpData } from '../../types/Auth.types';
 import {
     ADDRESS_VALIDATION_CONFIG,
@@ -21,7 +21,7 @@ import {
 } from '../../utils/constants';
 import { signUpUser, setUser } from "../../services/redux/slices/user/user";
 
-export const Example = () => {
+export const SignUpPage = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
