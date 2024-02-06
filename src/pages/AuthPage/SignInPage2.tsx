@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./AuthPage.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -18,7 +17,6 @@ import {
 } from "../../services/redux/slices/user/user";
 
 const SignInPage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [authError, setAuthError] = useState(false);
 
@@ -26,7 +24,7 @@ const SignInPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty, isValid },
+    formState: { errors },
     getValues,
   } = useForm<ISignInData>({ mode: "onChange" });
 
@@ -48,7 +46,7 @@ const SignInPage = () => {
   useEffect(() => {
     reset();
     setAuthError(false);
-  }, []);
+  }, [reset]);
 
   return (
     <section className="signup">

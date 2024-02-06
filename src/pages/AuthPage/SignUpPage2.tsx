@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './AuthPage.css';
 import CustomInput from '../../components/CustomInput/CustomInput';
@@ -24,9 +22,7 @@ export const SignUpPage = () => {
     const {
         register,
         handleSubmit,
-        reset,
-        watch,
-        formState: { errors, isDirty, isValid },
+        formState: { errors },
         getValues,
     } = useForm<ISignUpData>({ mode: 'onChange' });
 

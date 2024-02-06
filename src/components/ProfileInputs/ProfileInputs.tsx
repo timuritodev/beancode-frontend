@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./ProfileInputs.css";
 import {
   editUserInfo,
@@ -30,9 +28,7 @@ export const ProfileInputs = () => {
   const {
     register,
     handleSubmit,
-    reset,
-    watch,
-    formState: { errors, isDirty, isValid },
+    formState: { errors },
     getValues,
   } = useForm<ISignUpData>({ mode: "onChange" });
 
