@@ -1,13 +1,27 @@
-.account__container {
+/* .account__container {
   display: flex;
   margin: 0;
   flex-wrap: wrap;
-}
+} */
+
 .input__container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 48px 32px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  width: 800px;
+  margin: 0 auto; 
 }
+
+/* .input__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 32px;
+  column-gap: 48px;
+  width: 800px;
+  /* margin: 0 48px 32px 0; 
+} */
+
 .profile__input {
   color: var(--Black-1000-main, #333);
   font-size: 20px;

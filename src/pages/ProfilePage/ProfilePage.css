@@ -46,11 +46,7 @@
   margin: 0;
   flex-wrap: wrap;
 }
-.input__container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 48px 32px 0;
-}
+
 .profile__input {
   color: var(--grey_light, #c8cac8);
   font-size: 20px;

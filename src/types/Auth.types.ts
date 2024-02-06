@@ -32,5 +32,7 @@ export interface IEditProfileData {
   surname: string | undefined;
   phone: string | undefined;
   email: string | undefined;
+  city: string | undefined;
+  area: string | undefined;
   address: string | undefined;
 }

@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './AuthPage.css';
 import CustomInput from '../../components/CustomInput/CustomInput';
@@ -17,12 +15,10 @@ import {
     PASSWORD_VALIDATION_CONFIG,
     PHONE_VALIDATION_CONFIG,
     SURNAME_VALIDATION_CONFIG,
-    VALIDATION_SETTINGS,
 } from '../../utils/constants';
 import { signUpUser, setUser } from "../../services/redux/slices/user/user";
 
 export const SignUpPage = () => {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const {
@@ -45,7 +41,6 @@ export const SignUpPage = () => {
         password: getValues('password'),
     }
 
-    console.log(data, 1312313)
     const onSubmit: SubmitHandler<ISignUpData> = () => {
         dispatch(signUpUser(data))
         dispatch(setUser(data));
