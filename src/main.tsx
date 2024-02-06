@@ -20,11 +20,13 @@ import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage";
 import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
 import { SignUpPage } from "./pages/AuthPage/SignUpPage2";
+// import { App } from "./pages/App/App";
 
 const Root: FC = () => {
   return (
     <div className="page">
       <Routes>
+        {/* <Route index element={<App />} /> */}
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
@@ -36,54 +38,6 @@ const Root: FC = () => {
           <Route path="/delivery-page" element={<DeliveryPage />} />
           <Route path="/bonus-page" element={<BonusPage />} />
           <Route path="/order-page" element={<OrderPage />} />
-          {/* <Route
-						path="/recover-password"
-						element={
-							user.token ? (
-								<>
-									<Loader />
-									<Navigate to="/" />
-								</>
-							) : (
-								<RecoverPasswordPage />
-							)
-						}
-					/>
-					<Route
-						path="/reset-password/:code"
-						element={
-							user.token ? (
-								<>
-									<Loader />
-									<Navigate to="/" />
-								</>
-							) : (
-								<ResetPasswordPage />
-							)
-						}
-					/>
-					<Route path="/reset-password" element={<ResetPasswordPage />} />
-					<Route
-						path="/confirm-email"
-						element={
-							user.token ? (
-								<>
-									<Loader />
-									<Navigate to="/" />
-								</>
-							) : (
-								<ConfirmEmailPage />
-							)
-						}
-					/>
-					<Route
-						path="/profile"
-						element={
-							<ProtectedRoute>
-								<ProfilePage />
-							</ProtectedRoute>
-						}
-					/> */}
         </Route>
       </Routes>
     </div>
