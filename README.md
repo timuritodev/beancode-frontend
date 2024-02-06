@@ -1,27 +1,26 @@
-# React + TypeScript + Vite
+# Интернет-магазин Beancode
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Ссылка на опубликованную версию
+https://beancode.ru - проект пока что еще в раработке, но в скором времени его можно будет увидеть по этой ссылке.
 
-Currently, two official plugins are available:
+### Функционал 
+Регистарция/логин. Зарегистрированный пользователь может добавлять товары в корзину, оставлять заявки на оформление заказа, отправлять письма, оплачивать заказ, выбирать адрес доставки.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Стек
 
-## Expanding the ESLint configuration
+React, TS, Redux, RTK, CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Установка
 
-- Configure the top-level `parserOptions` property like this:
+1. Перед запуском проекта убедитесь, что на вашем компьютере установлен Node.js.
+2. Клонируйте репозиторий.
+3. Откройте терминал или командную строку и перейдите в каталог проекта.
+4. Установите зависимости:  
+   `npm install`
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Запуск проекта:
+```bash
+npm run start - запускает проект. Откройте http://localhost:5173, чтобы просмотреть его в браузере.
+
+npm run build — сборка приложения в папку dist.
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

@@ -2,18 +2,19 @@
 @import url(./vendor/fonts/fonts.css);
 
 :root {
-	margin: 0;
-	font-family: 'Caveat','Shadows','Mullish', 'Arial', 'Oswald', 'Unbounded', 'DM Sans', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	background-color: #fff;
+  margin: 0;
+  /* font-family: sans-serif; */
+  font-family: 'Ubuntu', 'Spectral', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 .page {
-	margin: 0 auto;
+  margin: 0 auto;
 }
