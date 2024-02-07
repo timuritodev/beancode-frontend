@@ -44,20 +44,16 @@
   line-height: normal;
 }
 
-.subscribe__input {
-  color: var(--grey_light, #c8cac8);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  outline: none;
-  border: none;
-  padding: 0 0 12px 0;
-  margin: 46px 0 0 0;
-  width: 300px;
-  background-color: transparent;
-  border-radius: var(--Border-Radius-rounded-none, 0px);
-  border-bottom: 1px solid var(--Black_text, #0f100f);
+.footer-input__container {
+  /* display: flex;
+  align-items: center;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: 300px 50px; /* Ширина первого блока - 300px, второго - 50px */
+  grid-gap: 24px;
+  align-items: center;
+  width: 400px;
+  margin: 32px 0 0 0;
 }
 
 .subscribe__button {

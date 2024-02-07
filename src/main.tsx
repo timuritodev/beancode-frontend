@@ -20,6 +20,7 @@ import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage";
 import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
 import { SignUpPage } from "./pages/AuthPage/SignUpPage2";
+import { AboutPage } from "./pages/AboutPage/AboutPage";
 // import { App } from "./pages/App/App";
 
 const Root: FC = () => {
@@ -37,6 +38,7 @@ const Root: FC = () => {
           <Route path="/payment-page" element={<PaymentPage />} />
           <Route path="/delivery-page" element={<DeliveryPage />} />
           <Route path="/bonus-page" element={<BonusPage />} />
+          <Route path="/about-page" element={<AboutPage/>} />
           <Route path="/order-page" element={<OrderPage />} />
         </Route>
       </Routes>

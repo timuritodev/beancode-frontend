@@ -1,3 +1,4 @@
+import { ISubcription } from "../../../../types/Subcription.types";
 import { API_BASE_URL } from "../../../../utils/constants";
 
 const checkRes = (res: Response) => {
@@ -11,7 +12,7 @@ const checkRes = (res: Response) => {
 export const fetchData = (
   url: string,
   method: string,
-  email?: string,
+  email?: ISubcription,
   token?: string
 ) => {
   return fetch(url, {
@@ -25,7 +26,7 @@ export const fetchData = (
   }).then((res) => checkRes(res));
 };
 
-export const fetchSubcribe = (data: string): Promise<Response> => {
+export const fetchSubcribe = (data: ISubcription): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/subscription/add`, "POST", data).then(
     (res) => checkRes(res)
   );

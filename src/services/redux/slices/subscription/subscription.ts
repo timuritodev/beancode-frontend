@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ISubcriptionState } from "../../../../types/Subcription.types";
+import { ISubcription, ISubcriptionState } from "../../../../types/Subcription.types";
 import { fetchSubcribe } from "./subscriptionAPI";
 
 export const subcribeApi = createAsyncThunk(
   "@@subcribe/add",
-  async (email: string, { fulfillWithValue, rejectWithValue }) => {
+  async (email: ISubcription, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchSubcribe(email);
       const json = await response.json();

@@ -1,33 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./Footer.css";
 import button from "../../images/paper-airplane.svg";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useAppDispatch } from "../../services/typeHooks";
 import { subcribeApi } from "../../services/redux/slices/subscription/subscription";
+import { SubmitHandler, useForm } from "react-hook-form";
+import CustomInput from "../CustomInput/CustomInput";
+import { CustomInputTypes } from "../../types/CustomInput.types";
+import { EMAIL_VALIDATION_CONFIG } from "../../utils/constants";
+import { ISubcription } from "../../types/Subcription.types";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
 
-  const [email, setEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<ISubcription>({ mode: "onChange" });
 
-  const handleChange = (e: any) => {
-    setEmail(e.target.value);
+  const onSubmit: SubmitHandler<ISubcription> = () => {
+    dispatch(subcribeApi({ email: getValues("email") })).unwrap();
   };
-
-  const isValidEmail = (email: string) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
-
-  const handleSubribeButtonClick = () => {
-    if (isValidEmail(email)) {
-      dispatch(subcribeApi(email));
-    } else {
-      console.error("Некорректный email");
-    }
-  };
-
   return (
     <footer
       className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}
@@ -39,23 +35,29 @@ const Footer: FC = () => {
             <p className="subscribe__text">
               Чтобы узнавать о новинках и скидках
             </p>
-            <input
-              className="subscribe__input"
-              id="email"
-              name="email"
-              type="text"
-              placeholder="example@gmail.com"
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <button className="subscribe__button">
-              <img
-                className="subscribe__button_img"
-                alt="subscribe__button_img"
-                src={button}
-                onClick={handleSubribeButtonClick}
+            <form
+              className="footer-input__container"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+            >
+              <CustomInput
+                inputType={CustomInputTypes.email}
+                // labelText={"Электронная почта"}
+                validation={{
+                  ...register("email", EMAIL_VALIDATION_CONFIG),
+                }}
+                placeholder="email@example.com"
+                error={errors?.email?.message}
               />
-            </button>
+              <button className="subscribe__button">
+                <img
+                  className="subscribe__button_img"
+                  alt="subscribe__button_img"
+                  src={button}
+                  onClick={handleSubmit(onSubmit)}
+                />
+              </button>
+            </form>
           </div>
           <div className="faq__block">
             <h2 className="faq__title">FAQ</h2>
@@ -65,8 +67,11 @@ const Footer: FC = () => {
             <Link to="/payment-page" className="faq__link">
               Об оплате
             </Link>
-            <Link to="/bonus-page" className="faq__link">
+            {/* <Link to="/bonus-page" className="faq__link">
               Бонусная программа
+            </Link> */}
+            <Link to="/about-page" className="faq__link">
+              О компании
             </Link>
           </div>
           <div className="contacts__block">

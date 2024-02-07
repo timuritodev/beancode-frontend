@@ -99,9 +99,9 @@
     border-bottom: 0.5px solid #ea4335;
 }
 
-.input__field_invalid:focus {
-    /* border: 0.5px solid #ea4335; */
-}
+/* .input__field_invalid:focus {
+    border: 0.5px solid #ea4335;
+} */
 
 .input__span {
     color: #9ca3af;
