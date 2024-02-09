@@ -8,8 +8,7 @@ import { store, persistor } from "./services/redux/store";
 
 import "./index.css";
 
-import SignInPage from "./pages/AuthPage/SignInPage2";
-// import SignUpPage from "./pages/AuthPage/SignUpPage";
+import {SignInPage} from "./pages/AuthPage/SignInPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
@@ -19,9 +18,8 @@ import { PaymentPage } from "./pages/PaymentPage/PaymentPage";
 import { DeliveryPage } from "./pages/DeliveryPage/DeliveryPage";
 import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
-import { SignUpPage } from "./pages/AuthPage/SignUpPage2";
+import { SignUpPage } from "./pages/AuthPage/SignUpPage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
-// import { App } from "./pages/App/App";
 
 const Root: FC = () => {
   return (
@@ -51,7 +49,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+//   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
         <BrowserRouter>
@@ -59,5 +57,5 @@ root.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+//   </React.StrictMode>
 );

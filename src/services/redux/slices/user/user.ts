@@ -25,8 +25,6 @@ export const signInUser = createAsyncThunk(
     try {
       const response = await fetchSignIn(data);
       const json = await response.json();
-      // console.log(fulfillWithValue(json))
-      // console.log(fulfillWithValue(json.acess))
       return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -53,7 +51,6 @@ export const getUserInfo = createAsyncThunk(
     try {
       const response = await fetchGetUserInfo(token);
       const json = await response.json();
-      console.log(json);
       return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -92,8 +89,8 @@ const initialState: IUserState = {
     email: "",
     address: "",
     password: "",
-	city: "",
-	area: "",
+    city: "",
+    area: "",
     token: "",
   },
 };

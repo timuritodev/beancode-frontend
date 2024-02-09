@@ -46,8 +46,6 @@ export const fetchGetUserInfo = (
   token: string | { token: string }
 ): Promise<Response> => {
   const tokenString = typeof token === "string" ? token : token.token;
-  console.log("Authorization Token:", tokenString);
-
   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, tokenString).then(
     (res) => checkRes(res)
   );
