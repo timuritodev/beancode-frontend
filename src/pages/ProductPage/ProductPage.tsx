@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import "./ProductPage.css";
 import { useAppSelector } from "../../services/typeHooks";
-import img from "../../images/product.jpg";
 import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
 import { useState } from "react";
 import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
@@ -21,6 +20,10 @@ export const ProductPage = () => {
   const handleDropdownChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Selected Option:", e.target.value);
   };
+
+  const backendBaseUrl = "https://bean-code.ru";
+
+  const imageUrl = backendBaseUrl + product.h_picture;
 
   return (
     <div className="products">
@@ -87,7 +90,7 @@ export const ProductPage = () => {
           <div className="products__info__container">
             <img
               className="products__image"
-              src={img}
+              src={imageUrl}
               alt={product.h_picture}
             />
             <div className="products__wrapper_2">

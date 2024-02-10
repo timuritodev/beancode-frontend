@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IProduct } from "../../types/Product.types";
 import "./Product.css";
-import img from "../../images/serrado.jpg";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -24,12 +23,16 @@ export const Product = ({ data }: { data: IProduct }) => {
     setSelectedWeight(weight);
   };
 
+  const backendBaseUrl = "https://bean-code.ru";
+
+  const imageUrl = backendBaseUrl + data.h_picture;
+
   return (
     <div className="product">
       <div className="product__container">
         <img
           className="product__image"
-          src={img}
+          src={imageUrl}
           alt={data.h_picture}
           onClick={handleClickImage}
         />
