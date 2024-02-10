@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IProduct } from "../../types/Product.types";
 import "./Product.css";
-import img from "../../images/product.jpg";
+import img from "../../images/serrado.jpg";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -11,7 +11,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [selectedPrice, setSelectedPrice] = useState(data.price);
+  const [selectedPrice, setSelectedPrice] = useState(data.low_price);
   const [selectedWeight, setSelectedWeight] = useState(data.weight);
 
   const handleClickImage = () => {
@@ -68,21 +68,21 @@ export const Product = ({ data }: { data: IProduct }) => {
           <div className="product__price__wrapper">
             <div
               className={`product__price__container ${
-                selectedPrice === data.price ? "selected" : "not-selected"
-              }`}
-              onClick={() => handleChange(data.price, data.weight)}
-            >
-              <p className="product__price">{data.price} ₽/</p>
-              <p className="product__weight"> {data.weight}</p>
-            </div>
-            <div
-              className={`product__price__container ${
                 selectedPrice === data.low_price ? "selected" : "not-selected"
               }`}
               onClick={() => handleChange(data.low_price, data.low_weight)}
             >
               <p className="product__price">{data.low_price} ₽/</p>
               <p className="product__weight"> {data.low_weight}</p>
+            </div>
+            <div
+              className={`product__price__container ${
+                selectedPrice === data.price ? "selected" : "not-selected"
+              }`}
+              onClick={() => handleChange(data.price, data.weight)}
+            >
+              <p className="product__price">{data.price} ₽/</p>
+              <p className="product__weight"> {data.weight}</p>
             </div>
           </div>
           <MinusPlusButtons

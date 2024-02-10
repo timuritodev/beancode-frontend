@@ -8,23 +8,26 @@ export const OrderCardList: FC<IOrderCardProps> = ({ data }) => {
   const countProducts = (products: ICart[]) => {
     const productCount: Record<string, number> = {};
     products.forEach((product) => {
-      const productPrice = product.price;
-      productCount[productPrice] = (productCount[productPrice] || 0) + 1;
+      const productKey = `${String(product.id)}_${product.price}`;
+      productCount[productKey] = (productCount[productKey] || 0) + 1;
     });
     return productCount;
   };
 
   const productCounts = countProducts(data);
 
-  const uniqueData = Array.from(new Set(data.map((item) => item.price))).map(
-    (price) => {
-      const product = data.find((item) => item.price === price);
-      return {
-        ...product,
-        count: productCounts[price],
-      };
-    }
-  );
+  const uniqueData = Array.from(
+    new Set(data.map((item) => `${String(item.id)}_${item.price}`))
+  ).map((key) => {
+    const [id, price] = key.split("_");
+    const product = data.find(
+      (item) => String(item.id) === id && item.price === (price)
+    );
+    return {
+      ...product,
+      count: productCounts[key],
+    };
+  });
 
   return (
     <div className="order-cardlist">

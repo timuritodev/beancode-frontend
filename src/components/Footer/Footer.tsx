@@ -76,15 +76,16 @@ const Footer: FC = () => {
           </div>
           <div className="contacts__block">
             <h2 className="contacts__title">Контакты</h2>
-            <p className="contacts__text">По общим вопросам:</p>
-            <p className="contacts__number">+7911 910-33-29</p>
+             <p className="contacts__text">По всем вопросам:</p>
+            {/*<p className="contacts__number">+7911 910-33-29</p>
             <p className="contacts__text">Интернет-магазин</p>
-            <p className="contacts__number">+921 912-00-95</p>
+            <p className="contacts__number">+921 912-00-95</p> */}
+            <p className="contacts__number">+7 960 061-33-30</p>
           </div>
         </div>
         <div className="logo__block">
           <img className="footer__logo" src={logo} />
-          <h2 className="footer__email">mugermanrb@beancode.ru</h2>
+          <h2 className="footer__email">coffee@beancode.ru</h2>
         </div>
         <div className="copyright__block">
           <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
