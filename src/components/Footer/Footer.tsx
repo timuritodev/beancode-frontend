@@ -10,9 +10,12 @@ import CustomInput from "../CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { EMAIL_VALIDATION_CONFIG } from "../../utils/constants";
 import { ISubcription } from "../../types/Subcription.types";
+import { useResize } from "../../hooks/useResize";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
+
+  const { width } = useResize();
 
   const {
     register,
@@ -76,16 +79,19 @@ const Footer: FC = () => {
           </div>
           <div className="contacts__block">
             <h2 className="contacts__title">Контакты</h2>
-             <p className="contacts__text">По всем вопросам:</p>
+            <p className="contacts__text">По всем вопросам:</p>
             {/*<p className="contacts__number">+7911 910-33-29</p>
             <p className="contacts__text">Интернет-магазин</p>
             <p className="contacts__number">+921 912-00-95</p> */}
             <p className="contacts__number">+7 960 061-33-30</p>
+            {width < 767 && (
+              <h2 className="footer__email">coffee@beancode.ru</h2>
+            )}
           </div>
         </div>
         <div className="logo__block">
           <img className="footer__logo" src={logo} />
-          <h2 className="footer__email">coffee@beancode.ru</h2>
+          {width > 767 && <h2 className="footer__email">coffee@beancode.ru</h2>}
         </div>
         <div className="copyright__block">
           <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>

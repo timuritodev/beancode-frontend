@@ -4,8 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/person.svg";
 import loop from "../../images/loop.svg";
+import loop_small from "../../images/loop_small.svg";
 import CartButton from "../CartButton/CartButton";
 import Search from "../Search/Search";
+import { useResize } from "../../hooks/useResize";
+import { BurgerButton } from "../BurgerButton/BurgerButton";
 
 const Header: FC = () => {
   const location = useLocation();
@@ -18,6 +21,9 @@ const Header: FC = () => {
     const value = target.value;
     setValues(value);
   };
+
+  const { width } = useResize();
+  console.log(width);
 
   const setSearchClose = () => {
     setIsOpenSearch(false);
@@ -37,6 +43,7 @@ const Header: FC = () => {
       className={`header ${location.pathname === "/" ? "header_dark" : ""}`}
     >
       <div className="header__container">
+        {width < 767 && <BurgerButton />}
         <Link to="/">
           <img className="header__logo" alt="logo" src={logo} />
         </Link>
@@ -51,27 +58,37 @@ const Header: FC = () => {
             Логин
           </Link>
         </div>
+
         <div className="header__search__container">
-          <form className="header__search">
+          {width < 1279 ? (
             <img
               className="header__search-button_search"
-              src={loop}
+              src={loop_small}
               alt="Кнопка поиска"
             />
-            <input
-              className="header__search-input"
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Поиск"
-              onChange={handleChange}
-              //   onBlur={setSearchClose}
-              value={values}
-              autoComplete="off"
-            />
-          </form>
+            // TODO
+          ) : (
+            <form className="header__search">
+              <img
+                className="header__search-button_search"
+                src={loop}
+                alt="Кнопка поиска"
+              />
+              <input
+                className="header__search-input"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Поиск"
+                onChange={handleChange}
+                //   onBlur={setSearchClose}
+                value={values}
+                autoComplete="off"
+              />
+            </form>
+          )}
           <Link to="/profile">
-            <img className="" alt="icon" src={icon} />
+            <img className="header__profile-icon" alt="icon" src={icon} />
           </Link>
         </div>
       </div>
