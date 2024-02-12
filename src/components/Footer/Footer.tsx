@@ -1,7 +1,7 @@
 import { FC } from "react";
 import "./Footer.css";
 import button from "../../images/paper-airplane.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useAppDispatch } from "../../services/typeHooks";
 import { subcribeApi } from "../../services/redux/slices/subscription/subscription";
@@ -14,6 +14,7 @@ import { useResize } from "../../hooks/useResize";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const { width } = useResize();
 

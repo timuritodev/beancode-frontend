@@ -5,11 +5,14 @@ const PackageBlock = () => {
   return (
     <div className="package">
       <div className="package__container">
-        <p className="package__digit">03</p>
         <div className="package__text__container">
-          <h2 className="package__title">Процесс упаковки</h2>
+          <div className="package__digit-title__container">
+            <p className="package__digit">03</p>
+            <h2 className="package__title">Процесс упаковки</h2>
+          </div>
           <p className="package__text">
-            Упаковочное образование разработано и произведено российской<br/>
+            Упаковочное образование разработано и произведено российской
+            <br />
             компанией МАКИЗ
           </p>
         </div>

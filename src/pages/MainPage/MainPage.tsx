@@ -27,12 +27,12 @@ const MainPage = () => {
     <section className="main">
       <div className="main__container">
         <IntroBlock />
-         <TextBlock />
-       <InfoBlock />
-        {/* <RoastBlock />
+        <TextBlock />
+        <InfoBlock />
+        <RoastBlock />
         <PackageBlock />
         <ReadyBlock />
-        <TreatmentBlock /> */}
+        <TreatmentBlock />
       </div>
     </section>
   );
