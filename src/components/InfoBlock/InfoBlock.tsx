@@ -14,11 +14,13 @@ const InfoBlock = () => {
   return (
     <div className="info__block">
       <div className="info__block__container">
-        <p className="info__digit">01</p>
         <div className="info__container">
-          <h2 className="info__container__title">
-            Поставки зеленого кофе и входной контроль
-          </h2>
+          <div className="info__title-digit__container">
+            <p className="info__digit">01</p>
+            <h2 className="info__container__title">
+              Поставки зеленого кофе и входной контроль
+            </h2>
+          </div>
           <p className="info__container__text">
             Мы соблюдаем при входном контроле Российские и международные
             стандарты
@@ -32,7 +34,10 @@ const InfoBlock = () => {
                 <img className="button__info__img" src={arrow_opened} />
               )}
             </button>
-            <Link to="https://disk.yandex.ru/i/2mZekmtWRv35KQ" className="button__info__text">
+            <Link
+              to="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
+              className="button__info__text"
+            >
               Документация
             </Link>
           </div>
