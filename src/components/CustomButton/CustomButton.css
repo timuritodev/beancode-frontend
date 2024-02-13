@@ -3,10 +3,12 @@
   background: var(--Accent, #465244);
   border: none;
   color: var(--White_text, #f6f6f6);
+  font-family: Ubuntu;
   font-size: 20px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
   max-width: 574px;
   height: 64px;
   margin: 16px 0 0 0;
@@ -27,65 +29,14 @@
   opacity: 1;
 }
 
-@media screen and (max-width: 1300px) {
-  .button {
-    width: 288px;
-    align-self: end;
-  }
-
-  .button_type_toMain {
-    width: 540px;
-    align-self: center;
-  }
-  .button_type_toMain-sign-in {
-    width: 540px;
-    align-self: center;
-  }
-
-  .button_type_preferences {
-    margin-right: 50px;
-  }
-}
-
-.button_type_preferences {
-  margin-right: 50px;
-}
-@media screen and (max-width: 1000px) {
-  .button_type_profile {
-    align-self: center;
-    max-width: 280px;
-    margin-top: 50px;
-  }
-  .button_type_preferences {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .button_type_toMain-sign-in {
-    width: 100%;
-    font-size: 16px;
-    line-height: 18px;
-    margin-top: 15px;
-  }
-}
-@media screen and (max-width: 650px) {
-  .button_type_toMain {
-    width: 280px;
-    font-size: 16px;
-    line-height: 18px;
-  }
-  .button {
-    padding: 11px 0;
-  }
-}
 @media screen and (max-width: 600px) {
-  .button_type_profile {
-    font-size: 16px;
-    padding: 7px 0;
-  }
-  .button_type_preferences {
-    max-width: 280px;
-    font-size: 16px;
-    line-height: 18px;
-    padding: 11px 0;
+  .button {
+    max-width: 328px;
+    height: 52px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    padding: 9px 0;
   }
 }
