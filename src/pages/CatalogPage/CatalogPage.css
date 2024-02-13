@@ -14,20 +14,18 @@
 }
 
 .catalog__title {
-  color: var(--Black_text, #0F100F);
+  color: var(--Black_text, #0f100f);
   text-align: center;
   font-family: Spectral;
   font-size: 52px;
   font-style: normal;
   font-weight: 500;
   line-height: 70px;
-  /* 134.615% */
   margin: 48px 0 64px 0;
 }
 
 .catalog__form {
-  /* Add styles as needed for your dropdown */
-  margin-left: auto; 
+  margin-left: auto;
   padding: 0 0 64px 0;
 }
 
@@ -39,7 +37,7 @@
   margin: 0;
   border: none;
   border-radius: var(--Border-Radius-rounded-none, 0px);
-  border-bottom: 1px solid var(--Black_text, #0F100F);
+  border-bottom: 1px solid var(--Black_text, #0f100f);
   padding: 0 0 12px 0;
   background-color: transparent;
   width: 300px;
@@ -48,4 +46,34 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+@media screen and (max-width: 767px) {
+  .catalog {
+    padding: 32px 0 45px 0;
+  }
+
+  .catalog__container {
+    padding: 0 16px;
+  }
+
+  .catalog__title {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: 0em;
+    margin: 0 0 24px 0;
+  }
+
+  .catalog__form {
+    margin: auto;
+    padding: 0 0 0 0;
+  }
+
+  .catalog__dropdown {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
 }

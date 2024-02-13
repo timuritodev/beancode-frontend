@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 0;
+  padding: 8px 0 16px 0;
 }
 
 .product__container:hover {
@@ -24,9 +24,11 @@
 
 .product__image {
   width: 348px;
+  height: 348px;
 }
 
 .product__title {
+  font-family: Ubuntu;
   color: var(--Black_text, #0f100f);
   font-size: 20px;
   font-style: normal;
@@ -37,6 +39,7 @@
 }
 
 .product__description {
+  font-family: Ubuntu;
   color: var(--Black_text, #0f100f);
   font-size: 16px;
   font-style: normal;
@@ -59,6 +62,7 @@
 }
 
 .product__info {
+  font-family: Ubuntu;
   color: var(--Black_text, #0f100f);
   font-size: 16px;
   font-style: normal;
@@ -74,6 +78,7 @@
 }
 
 .product__price {
+  font-family: Ubuntu;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -90,6 +95,7 @@
 }
 
 .product__weight {
+  font-family: Ubuntu;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -116,4 +122,80 @@
 
 .empty {
   background-image: url(../../images/bean_empy.svg);
+}
+
+@media screen and (max-width: 767px) {
+  .productlist {
+    max-width: 1280px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    /* padding: 0 80px; */
+  }
+
+  .product__container {
+    width: 328px;
+  }
+
+  .product__container:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .product__image {
+    width: 312px;
+    height: 328px;
+  }
+
+  .product__title {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    margin: 42px 0 8px 8px;
+    margin-right: auto;
+  }
+
+  .product__description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
+
+  .product__wrapper {
+    margin: 24px 0 0 8px;
+  }
+
+  .product__price__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product__info {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
+
+  .product__price__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .product__price {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+  }
+
+  .product__weight {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
 }
