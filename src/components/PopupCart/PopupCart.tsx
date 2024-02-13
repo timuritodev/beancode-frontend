@@ -51,7 +51,7 @@ export const PopupCart: FC<PopupCartProps> = ({
                     В вашей корзине {cartproducts.length} товаров
                 </p>
                 <ProductCardList data={cartproducts} />
-                <div className="popup-cart__info__container">
+                 <div className="popup-cart__info__container">
                     <button className="popup-cart__button-delete" type="button" onClick={() => {
                         dispatch(deleteAllApi(user.id));
                         switchPopupTrailer();
@@ -71,13 +71,13 @@ export const PopupCart: FC<PopupCartProps> = ({
                     <button className="popup-cart__button-order" type="button" onClick={handleClickOrderButton}>
                         Оформить заказ
                     </button>
-                </div>
+                </div>{/**/}
             </div>
             <button
                 className="popup-cart__close"
                 type="button"
                 onClick={switchPopupTrailer}
-            />
+            /> 
         </div>
     );
 };

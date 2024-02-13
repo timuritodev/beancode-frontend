@@ -23,11 +23,11 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 228px;
     margin: 0 79.5px 0 32px;
 }
 
 .product-card__title {
+    font-family: Ubuntu;
     color: var(--Black_text, #0f100f);
     font-size: 20px;
     font-style: normal;
@@ -37,6 +37,7 @@
 }
 
 .product-card__text {
+    font-family: Ubuntu;
     color: var(--Black_text, #0f100f);
     font-size: 16px;
     font-style: normal;
@@ -84,5 +85,57 @@
 }
 
 @media screen and (max-width: 767px) {
+    .product-card-list {
+        width: 328px;
+        height: 370px;
+    }
     
+    .product-card {
+        flex-wrap: wrap;
+        padding: 24px 0 16px 0;
+    }
+    
+    .product-card__text-container {
+        margin: 0 10px 0 16px;
+    }
+    
+    .product-card__title {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+    }
+    
+    .product-card__text {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .product-card__count-container {
+        display: flex;
+        align-items: center;
+        height: 34px;
+        gap: 13px;
+        margin: 0;
+        margin-left: auto;
+    }
+    
+    .product-card__count {
+        border-radius: var(--Border-Radius-rounded-none, 0px);
+        border: 1px solid var(--grey_light, #C8CAC8);
+        margin: 0;
+        padding: 5.81px 10.55px;
+    }
+    
+    .product-card__price {
+        color: var(--Black_text, #0f100f);
+        text-align: center;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin: 13.5px 0 0 0;
+    }
 }

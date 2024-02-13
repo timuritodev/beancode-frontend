@@ -12,6 +12,7 @@ import plus from "../../images/plus.svg";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { ICart } from "../../types/Cart.types";
+import { useResize } from "../../hooks/useResize";
 
 interface ProductCardProps {
   data: ICart;
@@ -22,6 +23,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const { width } = useResize();
 
   const handleClickImage = () => {
     navigate("/product-page");
@@ -61,16 +63,33 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
         <h3 className="product-card__title">{data.title}</h3>
         <p className="product-card__text">{data.weight}</p>
       </div>
-      <div className="product-card__count-container">
-        <button className="product-card__button" onClick={handleClickMinus}>
-          <img className="product-card__button__img_minus" src={minus} />
-        </button>
-        <p className="product-card__count">{count}</p>
-        <button className="product-card__button" onClick={handleClickPlus}>
-          <img className="product-card__button__img_plus" src={plus} />
-        </button>
-      </div>
-      <p className="product-card__price">{data.price} ₽</p>
+      {width > 767 ? (
+        <>
+          <div className="product-card__count-container">
+            <button className="product-card__button" onClick={handleClickMinus}>
+              <img className="product-card__button__img_minus" src={minus} />
+            </button>
+            <p className="product-card__count">{count}</p>
+            <button className="product-card__button" onClick={handleClickPlus}>
+              <img className="product-card__button__img_plus" src={plus} />
+            </button>
+          </div>
+          <p className="product-card__price">{data.price} ₽</p>
+        </>
+      ) : (
+        <>
+          <p className="product-card__price">{data.price} ₽</p>
+          <div className="product-card__count-container">
+            <button className="product-card__button" onClick={handleClickMinus}>
+              <img className="product-card__button__img_minus" src={minus} />
+            </button>
+            <p className="product-card__count">{count}</p>
+            <button className="product-card__button" onClick={handleClickPlus}>
+              <img className="product-card__button__img_plus" src={plus} />
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
