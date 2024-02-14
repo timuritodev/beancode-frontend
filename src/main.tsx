@@ -8,7 +8,7 @@ import { store, persistor } from "./services/redux/store";
 
 import "./index.css";
 
-import {SignInPage} from "./pages/AuthPage/SignInPage";
+import { SignInPage } from "./pages/AuthPage/SignInPage";
 import { Layout } from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
@@ -20,14 +20,15 @@ import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
 import { SignUpPage } from "./pages/AuthPage/SignUpPage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
+import { App } from "./pages/App/App";
 
 const Root: FC = () => {
   return (
     <div className="page">
       <Routes>
-        {/* <Route index element={<App />} /> */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
+          <Route index element={<App />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />
@@ -36,7 +37,7 @@ const Root: FC = () => {
           <Route path="/payment-page" element={<PaymentPage />} />
           <Route path="/delivery-page" element={<DeliveryPage />} />
           <Route path="/bonus-page" element={<BonusPage />} />
-          <Route path="/about-page" element={<AboutPage/>} />
+          <Route path="/about-page" element={<AboutPage />} />
           <Route path="/order-page" element={<OrderPage />} />
         </Route>
       </Routes>
@@ -49,13 +50,13 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-//   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-        <BrowserRouter>
-          <Root />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-//   </React.StrictMode>
+  //   <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
+  //   </React.StrictMode>
 );
