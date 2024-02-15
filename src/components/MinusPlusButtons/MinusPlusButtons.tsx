@@ -49,6 +49,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
     dispatch(
       deleteFromCartApi({ userId, productId, product_price, product_weight })
     );
+    // TODO почему то не получается удалить товар с 250гр со страницы /product-page
   };
 
   const handleClickButton = () => {
@@ -70,7 +71,6 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
       {productCountInCart === 0 ? (
         <button
           type="submit"
-          // className="product__button"
           className={`product__button ${
             location.pathname === "/product-page"
               ? "minus-plus__count-container_add"

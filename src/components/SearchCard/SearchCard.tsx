@@ -8,9 +8,10 @@ import { getProductbyidApi } from "../../services/redux/slices/productbyid/produ
 export interface SearchCardProps {
   data: IProduct;
   isClose: () => void;
+  switchPopup: () => void;
 }
 
-export const SearchCard: FC<SearchCardProps> = ({ data, isClose }) => {
+export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose }) => {
     navigate("/product-page");
     dispatch(getProductbyidApi(id));
     isClose();
+    switchPopup();
     window.scrollTo(0, 0);
   };
 

@@ -84,6 +84,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               isOpenSearch={isOpenSearch}
               isClose={setSearchClose}
               values={values}
+              switchPopup={switchPopup}
             />
           </form>
           <div className="burger__links-container">

@@ -6,13 +6,14 @@ import { SearchCard } from "./SearchCard";
 interface SearchCardListProps {
   data: IProduct[];
   isClose: () => void;
+  switchPopup: () => void;
 }
 
-export const SearchCardList: FC<SearchCardListProps> = ({ data, isClose }) => {
+export const SearchCardList: FC<SearchCardListProps> = ({ data, isClose, switchPopup }) => {
   return (
     <div className="searchcardlist">
       {data.length !== 0 &&
-        data.map((item) => <SearchCard key={item.id} data={item} isClose={isClose}/>)}
+        data.map((item) => <SearchCard key={item.id} data={item} isClose={isClose} switchPopup={switchPopup}/>)}
     </div>
   );
 };
