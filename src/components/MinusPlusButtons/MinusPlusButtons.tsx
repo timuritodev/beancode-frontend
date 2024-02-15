@@ -11,6 +11,7 @@ import {
 } from "../../services/redux/slices/cart/cart";
 import { PopupChanges } from "../Popups/PopupChanges";
 import { PopupErrorAdd } from "../Popups/PopupErrorAdd";
+import { useLocation } from "react-router-dom";
 
 interface MinusPlusButtonsProps {
   data: IProduct;
@@ -25,6 +26,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const location = useLocation();
 
   const cartproduct = useAppSelector((state) => state.cart.cart);
 
@@ -68,13 +70,24 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
       {productCountInCart === 0 ? (
         <button
           type="submit"
-          className="product__button"
+          // className="product__button"
+          className={`product__button ${
+            location.pathname === "/product-page"
+              ? "minus-plus__count-container_add"
+              : ""
+          } `}
           onClick={handleClickButton}
         >
           В корзину
         </button>
       ) : (
-        <div className="minus-plus__count-container">
+        <div
+          className={`minus-plus__count-container ${
+            location.pathname === "/product-page"
+              ? "minus-plus__count-container_add"
+              : ""
+          } `}
+        >
           <button
             className="minus-plus__button minus-plus__button_minus"
             onClick={handleClickMinus}

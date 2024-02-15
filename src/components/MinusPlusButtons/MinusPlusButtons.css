@@ -55,6 +55,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .minus-plus__count-container_add {
+    width: 328px !important;
+    margin: 24px 0 0 0 !important;
+  }
+
   .minus-plus__count-container {
     border-radius: 64px;
     background: var(--Accent, #465244);
