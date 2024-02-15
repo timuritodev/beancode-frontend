@@ -66,8 +66,8 @@ const Header: FC = () => {
               src={loop_small}
               alt="Кнопка поиска"
             />
-            // TODO
           ) : (
+            // TODO
             <form className="header__search">
               <img
                 className="header__search-button_search"
@@ -85,6 +85,11 @@ const Header: FC = () => {
                 value={values}
                 autoComplete="off"
               />
+              <Search
+                isOpenSearch={isOpenSearch}
+                isClose={setSearchClose}
+                values={values}
+              />
             </form>
           )}
           <Link to="/profile">
@@ -93,11 +98,6 @@ const Header: FC = () => {
         </div>
       </div>
       <CartButton />
-      <Search
-        isOpenSearch={isOpenSearch}
-        isClose={setSearchClose}
-        values={values}
-      />
     </header>
   );
 };
