@@ -21,7 +21,7 @@ export const OrderPage = () => {
             </div>
             <div>
               <h2 className="order-page__subtitle">Способы оплаты</h2>
-              <PaymentBlock />
+              <PaymentBlock /> 
             </div>
           </div>
           <OrderBlock />

@@ -7,33 +7,51 @@ import {
 } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ISignUpData } from "../../types/Auth.types";
+import CustomInput from "../../components/CustomInput/CustomInput";
+import { CustomInputTypes } from "../../types/CustomInput.types";
+import { CITY_VALIDATION_CONFIG } from "../../utils/constants";
+import { CustomButton } from "../CustomButton/CustomButton";
 
 export const DeliveryBlock = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   const token = user.token;
-  const [formData, setFormData] = useState({
-    name: user.name,
-    surname: user.surname,
-    phone: user.phone,
-    email: user.email,
-    address: user.address,
-    city: user.city,
-    area: user.area,
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+    getValues,
+  } = useForm<ISignUpData>({ mode: "onChange" });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const data = {
+    name: getValues("name"),
+    surname: getValues("surname"),
+    phone: getValues("phone"),
+    email: getValues("email"),
+    address: getValues("address"),
+    city: getValues("city"),
+    area: getValues("area") === undefined ? "" : getValues("area"),
+    password: getValues("password"),
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    dispatch(editUserInfo({ data: formData, token: token }));
+  const onSubmit: SubmitHandler<ISignUpData> = () => {
+    dispatch(
+      editUserInfo({
+        data: {
+          name: getValues("name"),
+          surname: getValues("surname"),
+          phone: getValues("phone"),
+          email: getValues("email"),
+          address: getValues("address"),
+          city: getValues("city"),
+          area: getValues("area") === undefined ? "" : getValues("area"),
+        },
+        token: token,
+      })
+    ).unwrap();
   };
 
   useEffect(() => {
@@ -57,25 +75,22 @@ export const DeliveryBlock = () => {
 
   return (
     <div className="delivery-block__container">
-      <div className="delivery-block-input__container">
-        <label className="delivery-block__label">Город</label>
-        <input
-          type="text"
-          name="city"
-          className="delivery-block__input"
-          value={formData.city}
-          onChange={handleChange}
-          placeholder={user.city}
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        className="delivery-block-input__button"
-        onClick={handleSubmit}
-      >
-        Изменить данные
-      </button>
+      <CustomInput
+        inputType={CustomInputTypes.city}
+        labelText={"Город"}
+        validation={{
+          ...register("city", CITY_VALIDATION_CONFIG),
+        }}
+        placeholder="Москва"
+        defaultValue={user.city}
+        error={errors?.city?.message}
+      />
+      <CustomButton
+        buttonText={"Изменить данные"}
+        handleButtonClick={handleSubmit(onSubmit)}
+        disabled={!isDirty || !isValid}
+        type="button"
+      />
       <div className="delivery-block__buttons_container">
         <button
           className={`delivery-block__button ${

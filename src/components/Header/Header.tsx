@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import icon from "../../images/person.svg";
+import icon from "../../images/person_active.svg";
 import loop from "../../images/loop.svg";
 import loop_small from "../../images/loop_small.svg";
 import CartButton from "../CartButton/CartButton";

@@ -18,6 +18,7 @@
     flex-wrap: wrap;
     row-gap: 32px;
     column-gap: 48px;
-    width: 300px;
+    width: 328px;
+    margin: 0 16px;
   }
 }

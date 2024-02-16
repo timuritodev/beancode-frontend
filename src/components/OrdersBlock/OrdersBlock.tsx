@@ -76,8 +76,9 @@ export const OrderBlock: FC = () => {
       <div className="order-block__details">
         <p className="order-block__total">Итого</p>
         <p className="order-block__total"> ₽</p>
+        {/* TODO добавить сюда цену за доставку */}
       </div>
-      <div className="order-block__input_container">
+      {/* <div className="order-block__input_container">
         <input
           className="order-block__input"
           id="promo"
@@ -96,7 +97,8 @@ export const OrderBlock: FC = () => {
             src={button}
           />
         </button>
-      </div>
+      </div> */} 
+      {/* TODO добавить промокоды */}
       <button
         type="submit"
         className="order-block__pay-button"

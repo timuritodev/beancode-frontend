@@ -96,7 +96,7 @@ const Footer: FC = () => {
         </div>
         <div className="copyright__block">
           <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
-          <p className="copyright__text">Дизайн - Гюзель Саберова</p>
+          {/* <p className="copyright__text">Дизайн - Гюзель Саберова</p> */}
         </div>
       </div>
     </footer>
