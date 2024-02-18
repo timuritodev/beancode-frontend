@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OrderCardList } from "../OrderCard/OrderCardList";
 import "./OrdersBlock.css";
@@ -8,6 +9,8 @@ import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { createOrderApi } from "../../services/redux/slices/order/order";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
+import { payApi } from "../../services/redux/slices/pay/pay";
+import { IPayData } from "../../types/Pay.types";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -36,26 +39,34 @@ export const OrderBlock: FC = () => {
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
     .join(", ");
 
-  const handleClickPayButton = () => {
+  const handleClickPayButton = async () => {
     dispatch(
-      createOrderApi({
-        userId,
-        phone,
-        email,
-        address,
-        city,
-        sum,
-        product_quantity,
-        products_info,
-      })
-    );
-    dispatch(
-      sendEmailApi({
-        from: user.email,
-        subject: "Заказ",
-        text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
-      })
-    );
+      payApi({
+        userName: "r-beancode-api",
+        password: "r-beancode*?1",
+        orderNumber: "123555555555555555",
+        amount: `1000`,
+        returnUrl: "https://beancode.ru/profile",
+      }))
+    // dispatch(
+    //   createOrderApi({
+    //     userId,
+    //     phone,
+    //     email,
+    //     address,
+    //     city,
+    //     sum,
+    //     product_quantity,
+    //     products_info,
+    //   })
+    // );
+    // dispatch(
+    //   sendEmailApi({
+    //     from: user.email,
+    //     subject: "Заказ",
+    //     text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+    //   })
+    // );
   };
 
   return (
@@ -64,7 +75,7 @@ export const OrderBlock: FC = () => {
       <OrderCardList data={cartproducts} />
       <div className="order-block__details">
         <p className="order-block__text">
-          {cartproducts.length} товара на сумму 
+          {cartproducts.length} товара на сумму
           {/* Todo товар или товара */}
         </p>
         <p className="order-block__text">{sum} ₽</p>
@@ -97,7 +108,7 @@ export const OrderBlock: FC = () => {
             src={button}
           />
         </button>
-      </div> */} 
+      </div> */}
       {/* TODO добавить промокоды */}
       <button
         type="submit"

@@ -17,6 +17,7 @@ import { productReducer } from './slices/product/product';
 import { productbyidReducer } from './slices/productbyid/productbyid';
 import { cartReducer } from './slices/cart/cart';
 import { orderReducer } from './slices/order/order';
+import { payReducer } from './slices/pay/pay';
 
 const rootReducer = combineReducers({
 	user: userReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
 	productbyid: productbyidReducer,
 	cart: cartReducer,
 	order: orderReducer,
+	pay: payReducer,
 });
 
 const persistConfig = {
