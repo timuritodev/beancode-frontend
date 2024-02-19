@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OrderCardList } from "../OrderCard/OrderCardList";
 import "./OrdersBlock.css";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
@@ -10,14 +10,24 @@ import { createOrderApi } from "../../services/redux/slices/order/order";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
-import { IPayData } from "../../types/Pay.types";
-import { useNavigate } from "react-router";
-
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const user = useAppSelector(selectUser);
+  const formUrl = useAppSelector((state) => state.pay.response.formUrl);
+
+  const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
+
+  const [redirecting, setRedirecting] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
+  const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   let sum = 0;
 
@@ -25,53 +35,60 @@ export const OrderBlock: FC = () => {
     sum += parseInt(product.price, 10);
   });
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const userId = user.id;
-  const phone = user.phone;
-  const email = user.email;
-  const address = user.address;
-  const city = user.city;
-  const product_quantity = cartproducts.length;
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
     .join(", ");
 
   const handleClickPayButton = async () => {
-    dispatch(
-      payApi({
+    try {
+      await dispatch(
+        payApi({
+          userName: payApiUsername,
+          password: payApiPassword,
+          orderNumber: `${randomOrderNumber}`,
+          amount: `${sum * 100}`,
+          returnUrl: "https://beancode.ru/profile",
+          failUrl: "/",
+          clientId: `${user.id}`,
+          email: user.email,
+          phone: user.phone,
+        })
+      );
 
+      setRedirecting(true);
 
-        orderNumber: "1235554555155555556455",
-        amount: `1000`,
-        returnUrl: "https://beancode.ru/profile",
-      })
-    )
-    .then(()=> {})
-    // dispatch(
-    //   createOrderApi({
-    //     userId,
-    //     phone,
-    //     email,
-    //     address,
-    //     city,
-    //     sum,
-    //     product_quantity,
-    //     products_info,
-    //   })
-    // );
-    // dispatch(
-    //   sendEmailApi({
-    //     from: user.email,
-    //     subject: "Заказ",
-    //     text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
-    //   })
-    // );
+      await dispatch(
+        createOrderApi({
+          userId: user.id,
+          phone: user.phone,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+          sum: sum,
+          product_quantity: cartproducts.length,
+          products_info,
+          orderNumber: `${randomOrderNumber}`,
+        })
+      );
+      // dispatch(
+      //   sendEmailApi({
+      //     from: user.email,
+      //     subject: "Заказ",
+      //     text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${cartproducts.length} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+      //   })
+      // );
+    } catch (error) {
+      console.error("Error in payApi call:", error);
+      return;
+    }
   };
+
+  useEffect(() => {
+    if (redirecting && formUrl) {
+      window.location.href = formUrl;
+      setRedirecting(false);
+    }
+  }, [redirecting, formUrl]);
 
   return (
     <div className="order-block">

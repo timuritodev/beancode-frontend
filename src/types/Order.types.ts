@@ -17,6 +17,7 @@ export interface IOrderDetails {
   sum: number;
   product_quantity: number;
   products_info: string;
+  orderNumber: string;
 }
 
 export interface IOrderDetailsState {
