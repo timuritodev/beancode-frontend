@@ -11,6 +11,8 @@ import { selectUser } from "../../services/redux/slices/user/user";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
 import { IPayData } from "../../types/Pay.types";
+import { useNavigate } from "react-router";
+
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -42,12 +44,14 @@ export const OrderBlock: FC = () => {
   const handleClickPayButton = async () => {
     dispatch(
       payApi({
-        userName: "r-beancode-api",
-        password: "r-beancode*?1",
-        orderNumber: "123555555555555555",
+
+
+        orderNumber: "1235554555155555556455",
         amount: `1000`,
         returnUrl: "https://beancode.ru/profile",
-      }))
+      })
+    )
+    .then(()=> {})
     // dispatch(
     //   createOrderApi({
     //     userId,

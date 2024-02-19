@@ -179,7 +179,7 @@
   }
 
   .order-block__details {
-    width: 87%;
+    width: 328px;
     display: flex;
     justify-content: space-between;
   }
