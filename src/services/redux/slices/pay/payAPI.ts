@@ -2,8 +2,6 @@
 import { IPayData } from "../../../../types/Pay.types";
 import { API_BASE_URL } from "../../../../utils/constants";
 
-const url = "http://localhost:3001/api-pay";
-
 const checkRes = (res: Response) => {
   if (res.ok) {
     return res;
@@ -23,7 +21,7 @@ const objectToFormData = (obj: Record<string, any>) => {
 export const fetchPay = (data: IPayData): Promise<Response> => {
   const formData = objectToFormData(data);
 
-  return fetch(url, {
+  return fetch(`${API_BASE_URL}/api-pay`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",

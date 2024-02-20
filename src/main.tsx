@@ -27,9 +27,9 @@ const Root: FC = () => {
     <div className="page">
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<App />} /> */}
-          {/* <Route path="/main" element={<MainPage />} /> */}
-          <Route index element={<MainPage />} />
+          <Route index element={<App />} />
+          <Route path="/main" element={<MainPage />} />
+          {/* <Route index element={<MainPage />} /> */}
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />
