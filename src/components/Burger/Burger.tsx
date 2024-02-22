@@ -31,6 +31,10 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
     setIsOpenSearch(false);
   };
 
+  const handleLinkClick = () => {
+    switchPopup();
+  };
+
   useEffect(() => {
     if (values.length > 0) {
       setIsOpenSearch(true);
@@ -88,14 +92,14 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             />
           </form>
           <div className="burger__links-container">
-            <Link to="/" className="burger__link">
+            <Link to="/catalog" className="burger__link" onClick={handleLinkClick}>
               Интернет-магазин
             </Link>
-            <Link to="/sign-up" className="burger__link">
+            <Link to="/sign-up" className="burger__link" onClick={handleLinkClick}>
               Регистрация
             </Link>
-            <Link to="/sign-in" className="burger__link">
-              Логин
+            <Link to="/sign-in" className="burger__link" onClick={handleLinkClick}>
+              Вход в учетную запись
             </Link>
           </div>
         </div>

@@ -9,10 +9,14 @@ import CartButton from "../CartButton/CartButton";
 import Search from "../Search/Search";
 import { useResize } from "../../hooks/useResize";
 import { BurgerButton } from "../BurgerButton/BurgerButton";
+import { useAppSelector } from "../../services/typeHooks";
+import { selectUser } from "../../services/redux/slices/user/user";
 
 const Header: FC = () => {
+  const user = useAppSelector(selectUser);
   const location = useLocation();
 
+  console.log(user.token, 123123);
   const [values, setValues] = useState("");
   const [isOpenSearch, setIsOpenSearch] = useState(false);
 
@@ -48,15 +52,19 @@ const Header: FC = () => {
           <img className="header__logo" alt="logo" src={logo} />
         </Link>
         <div className="header__links">
-          <Link to="/" className="header__link">
+          <Link to="/catalog" className="header__link">
             Интернет-магазин
           </Link>
-          <Link to="/sign-up" className="header__link">
-            Регистрация
-          </Link>
-          <Link to="/sign-in" className="header__link">
-            Логин
-          </Link>
+          {user.token === "" && (
+            <>
+              <Link to="/sign-up" className="header__link">
+                Регистрация
+              </Link>
+              <Link to="/sign-in" className="header__link">
+                Вход в учетную запись
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="header__search__container">

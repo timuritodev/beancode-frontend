@@ -24,7 +24,7 @@
   letter-spacing: 0em;
   margin: 40px 0 92px 0;
   width: 100%; /* Take full width */
-  text-align: right;
+  /* text-align: right; */
 }
 
 @media screen and (max-width: 767px) {
@@ -49,7 +49,7 @@
     line-height: 30px;
     letter-spacing: 0em;
     margin: 16px 0 0 0;
-    text-align: right;
+    /* text-align: right; */
     width: auto; /* Auto width for larger screens */
     height: auto; /* Auto height for larger screens */
   }

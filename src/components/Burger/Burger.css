@@ -19,7 +19,7 @@
   width: 100vw;
   height: 100vh;
   gap: 30px;
-  padding: 24px 0 64px 0;
+  padding: 0 0 64px 0;
   background: #e3e5e4;
   z-index: 3;
 }
@@ -37,7 +37,7 @@
   justify-content: space-around;
   align-items: center;
   height: 24px;
-  padding: 15px 0;
+  padding: 24px 0;
 }
 
 .burger-links__wrapper {

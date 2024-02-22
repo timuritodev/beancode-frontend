@@ -38,7 +38,6 @@
   align-items: center;
 }
 
-
 .button__profile__img {
   width: 20px;
   height: 20px;
@@ -58,6 +57,17 @@
   color: #0f100f;
 }
 
+.profile__link {
+  color: var(--grey, #797979);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  margin: 82px 0 0 193px;
+}
+
 @media screen and (max-width: 767px) {
   .profile__container {
     align-items: center;
@@ -74,6 +84,15 @@
   }
 
   .profile__text {
+    color: var(--grey, #797979);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 100px 0;
+  }
+
+  .profile__link {
     color: var(--grey, #797979);
     font-size: 20px;
     font-style: normal;

@@ -8,7 +8,7 @@ const PackageBlock = () => {
         <div className="package__text__container">
           <div className="package__digit-title__container">
             <p className="package__digit">03</p>
-            <h2 className="package__title">Процесс упаковки</h2>
+            <h2 className="package__title">Процесс дозировки и упаковки</h2>
           </div>
           <p className="package__text">
             Упаковочное образование разработано и произведено российской

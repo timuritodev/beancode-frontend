@@ -16,6 +16,7 @@ import {
   resetOrders,
 } from "../../services/redux/slices/order/order";
 import { useResize } from "../../hooks/useResize";
+import { Link } from "react-router-dom";
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -94,7 +95,11 @@ export const ProfilePage = () => {
           <ProfileInputs />
         ) : (
           user.token === "" && (
-            <p className="profile__text">Нужно Зарегистрироваться</p>
+            // <p className="profile__link">Нужно Зарегистрироваться</p>
+            <Link to="/sign-up" className="profile__link">
+              Нужно Зарегистрироваться
+            </Link>
+            // <p className="profile__text">Нужно Зарегистрироваться</p>
           )
         )}
         {isOrderVisible && orders.length !== 0 && user.token !== "" ? (

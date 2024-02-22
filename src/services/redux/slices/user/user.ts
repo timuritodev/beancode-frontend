@@ -37,8 +37,8 @@ export const signUpUser = createAsyncThunk(
   async (data: ISignUpData, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchSignUp(data);
-      const responseData = { status: response.status, ok: response.ok };
-      return fulfillWithValue(responseData);
+      const json = await response.json();
+      return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -110,8 +110,9 @@ const userSlice = createSlice({
         state.status = "success";
         state.user.token = action.payload;
       })
-      .addCase(signUpUser.fulfilled, (state) => {
+      .addCase(signUpUser.fulfilled, (state, action: PayloadAction<string>) => {
         state.status = "success";
+        state.user.token = action.payload;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = "success";

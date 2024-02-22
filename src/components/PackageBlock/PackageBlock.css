@@ -28,7 +28,7 @@
 .package__title {
   color: var(--Black_text, #0f100f);
   font-family: Spectral;
-  font-size: 52px;
+  font-size: 48px;
   font-style: normal;
   font-weight: 500;
   line-height: 70px; /* 134.615% */

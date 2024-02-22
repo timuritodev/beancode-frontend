@@ -46,7 +46,7 @@ const InfoBlock = () => {
             </div>
           )}
         </div>
-        <p className="info__sort">40+ сортов</p>
+        {/* <p className="info__sort">40+ сортов</p> */}
         {width < 767 && (
             <div className="button__container">
               <button className="button__info" onClick={handleButtonClick}>
