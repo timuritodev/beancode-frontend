@@ -1,14 +1,14 @@
 import { ICart } from "./Cart.types";
 
-export interface IOrder {
-  id: number;
-  number: number;
-  info: string;
-  delivery: string;
-}
+// export interface IOrder {
+//   id: number;
+//   orderNumber: number;
+//   info?: string;
+//   delivery?: string;
+// }
 
 export interface IOrderDetails {
-  // id: number;
+  id?: number;
   userId: number;
   phone: string;
   email: string;
@@ -27,7 +27,7 @@ export interface IOrderDetailsState {
 }
 
 export interface IOrderProps {
-  data: IOrder[];
+  data: IOrderDetails[];
 }
 
 export interface IOrderCardProps {

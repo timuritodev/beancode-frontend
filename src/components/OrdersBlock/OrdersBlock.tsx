@@ -24,6 +24,7 @@ export const OrderBlock: FC = () => {
 
   const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
   const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
+  const payApiPasswordWa = process.env.REACT_APP_PAY_API_PASSWORD_ST;
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -47,8 +48,8 @@ export const OrderBlock: FC = () => {
           password: payApiPassword,
           orderNumber: `${randomOrderNumber}`,
           amount: `${sum * 100}`,
-          returnUrl: "https://beancode.ru/profile",
-          failUrl: "/",
+          returnUrl: "https://beancode.ru/payment-sucess",
+          failUrl: "https://beancode.ru/payment-sucess",
           clientId: `${user.id}`,
           email: user.email,
           phone: user.phone,
@@ -70,13 +71,13 @@ export const OrderBlock: FC = () => {
           orderNumber: `${randomOrderNumber}`,
         })
       );
-      // dispatch(
-      //   sendEmailApi({
-      //     from: user.email,
-      //     subject: "Заказ",
-      //     text: `Адрес электронной почты - ${user.email} \n ФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${cartproducts.length} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
-      //   })
-      // );
+      dispatch(
+        sendEmailApi({
+          from: user.email,
+          subject: "Заказ",
+          text: `Номер заказа - ${randomOrderNumber} \nАдрес электронной почты - ${user.email} \nФИО${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${cartproducts.length} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+        })
+      );
     } catch (error) {
       console.error("Error in payApi call:", error);
       return;
@@ -106,8 +107,8 @@ export const OrderBlock: FC = () => {
         <p className="order-block__text">{sum} ₽</p>
       </div> */}
       <div className="order-block__details">
-        <p className="order-block__total">Итого</p>
-        <p className="order-block__total"> ₽</p>
+        {/* <p className="order-block__total">Итого</p>
+        <p className="order-block__total"> ₽</p> */}
         {/* TODO добавить сюда цену за доставку */}
       </div>
       {/* <div className="order-block__input_container">

@@ -20,7 +20,9 @@ import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
 import { SignUpPage } from "./pages/AuthPage/SignUpPage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
-import { App } from "./pages/App/App";
+// import { App } from "./pages/App/App";
+import { InfoPaymentPageSucess } from "./pages/InfoPaymentPage/InfoPaymentPageSucess";
+import { InfoPaymentPageFail } from "./pages/InfoPaymentPage/InfoPaymentPageFail";
 
 const Root: FC = () => {
   return (
@@ -40,6 +42,8 @@ const Root: FC = () => {
           <Route path="/bonus-page" element={<BonusPage />} />
           <Route path="/about-page" element={<AboutPage />} />
           <Route path="/order-page" element={<OrderPage />} />
+          <Route path="/payment-sucess" element={<InfoPaymentPageSucess />} />
+          <Route path="/payment-fail" element={<InfoPaymentPageFail />} />
         </Route>
       </Routes>
     </div>

@@ -15,14 +15,14 @@ export const OrderPage = () => {
               <h2 className="order-page__subtitle">Личные данные</h2>
               <OrderInputs />
             </div>
-            <div>
+            {/* <div>
               <h2 className="order-page__subtitle">Способы доставки</h2>
               <DeliveryBlock />
             </div>
             <div>
               <h2 className="order-page__subtitle">Способы оплаты</h2>
               <PaymentBlock /> 
-            </div>
+            </div> */}
           </div>
           <OrderBlock />
         </div>

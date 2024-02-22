@@ -6,17 +6,22 @@ import person from "../../images/person.svg";
 import person_active from "../../images/person_active.svg";
 import { selectUser, signOut } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { resetCart } from "../../services/redux/slices/cart/cart";
 import { ProfileInputs } from "../../components/ProfileInputs/ProfileInputs";
-import { orders } from "../../utils/constants";
+// import { orders } from "../../utils/constants";
 import { OrderList } from "../../components/Order/OrderList";
-import { resetOrders } from "../../services/redux/slices/order/order";
+import {
+  getOrdersApi,
+  resetOrders,
+} from "../../services/redux/slices/order/order";
 import { useResize } from "../../hooks/useResize";
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const orders = useAppSelector((state) => state.order.info);
+
   const { width } = useResize();
 
   const [isOrderVisible, setIsOrderVisible] = useState(false);
@@ -32,7 +37,12 @@ export const ProfilePage = () => {
     setIsOrderVisible(false);
   };
 
-  console.log(isAccountVisible)
+  useEffect(() => {
+    if (user.token) {
+      dispatch(getOrdersApi(user.id));
+    }
+  }, [dispatch, user.id, user.token]);
+
   return (
     <section className="profile">
       <div className="profile__container">
@@ -41,7 +51,10 @@ export const ProfilePage = () => {
             className="button__profile"
             onClick={handleAccountButtonClick}
           >
-            <img className="button__profile__img" src={isAccountVisible ? person_active : person} />
+            <img
+              className="button__profile__img"
+              src={isAccountVisible ? person_active : person}
+            />
             <span
               className={`button__profile__text ${
                 isAccountVisible === true ? "button__profile__text_active" : ""
@@ -51,7 +64,10 @@ export const ProfilePage = () => {
             </span>
           </button>
           <button className="button__profile" onClick={handleOrderButtonClick}>
-            <img className="button__profile__img" src={isOrderVisible ? cart_active : cart} />
+            <img
+              className="button__profile__img"
+              src={isOrderVisible ? cart_active : cart}
+            />
             <span
               className={`button__profile__text ${
                 isOrderVisible === true ? "button__profile__text_active" : ""

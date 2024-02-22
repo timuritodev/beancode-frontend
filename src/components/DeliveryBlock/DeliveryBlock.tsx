@@ -13,6 +13,13 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { CITY_VALIDATION_CONFIG } from "../../utils/constants";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { Helmet } from "react-helmet";
+
+declare global {
+  interface Window {
+    CDEKWidget: any; // или замените 'any' на более конкретный тип, если он известен
+  }
+}
 
 export const DeliveryBlock = () => {
   const dispatch = useAppDispatch();
@@ -73,8 +80,33 @@ export const DeliveryBlock = () => {
     setIsDeliveryPointVisible(false);
   };
 
+  useEffect(() => {
+    document.addEventListener("DOMContentLoaded", function () {
+      const yandexMapScript = document.createElement("script");
+      yandexMapScript.src = `https://api-maps.yandex.ru/2.1/?apikey=c71385a4-e8d4-4e71-8c0d-f0d16956e3ba&lang=ru_RU`;
+      yandexMapScript.async = true;
+      yandexMapScript.onload = () => {
+        new window.CDEKWidget({
+          from: "Новосибирск",
+          root: "cdek-map",
+          apiKey: "c71385a4-e8d4-4e71-8c0d-f0d16956e3ba",
+          servicePath: "http://localhost:3001/service.php",
+          defaultLocation: "Новосибирск",
+        });
+      };
+      document.head.appendChild(yandexMapScript);
+    });
+  }, []);
+
   return (
     <div className="delivery-block__container">
+      <Helmet>
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+          // charset="utf-8"
+        ></script>
+      </Helmet>
       <CustomInput
         inputType={CustomInputTypes.city}
         labelText={"Город"}
@@ -121,7 +153,10 @@ export const DeliveryBlock = () => {
           </span>
         </button>
       </div>
-      {isCourierVisible && <h2>СДЕК, 5POST</h2>}
+      {/* {isCourierVisible && <h2>СДЕК, 5POST</h2>} */}
+      {isCourierVisible && (
+        <div id="cdek-map" style={{ width: "800px", height: "600px" }}></div>
+      )}
       {isDeliveryPointVisible && <h2>Курьер</h2>}
     </div>
   );
