@@ -1,22 +1,19 @@
-import React from 'react';
-import { useState } from 'react';
-import './BurgerButton.css';
-import { Burger } from '../Burger/Burger.tsx';
+import { FC } from "react";
+import "./BurgerButton.css";
+import { Burger } from "../Burger/Burger.tsx";
 
-export const BurgerButton = () => {
-	const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-	const switchPopup = () => {
-		setIsPopupOpen(!isPopupOpen);
-	};
-
-	return (
-		<div className="burger-button">
-			<button className="burger-button__image" onClick={switchPopup} />
-			<Burger
-				isPopupOpen={isPopupOpen}
-				switchPopup={switchPopup}
-			/>
-		</div>
-	);
+interface IBurgerButtonProps {
+  isPopupOpen: boolean;
+  switchPopup: () => void;
+}
+export const BurgerButton: FC<IBurgerButtonProps> = ({
+  isPopupOpen,
+  switchPopup,
+}) => {
+  return (
+    <div className="burger-button">
+      <button className="burger-button__image" onClick={switchPopup} />
+      <Burger isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
+    </div>
+  );
 };

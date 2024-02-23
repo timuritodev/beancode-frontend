@@ -42,12 +42,18 @@ const Header: FC = () => {
     }
   }, [values]);
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Burger
+
+	const switchPopup = () => { 
+		setIsPopupOpen(!isPopupOpen);
+	};
+  
   return (
     <header
       className={`header ${location.pathname === "/" ? "header_dark" : ""}`}
     >
       <div className="header__container">
-        {width < 767 && <BurgerButton />}
+        {width < 767 && <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup}/>}
         <Link to="/">
           <img className="header__logo" alt="logo" src={logo} />
         </Link>
@@ -73,6 +79,7 @@ const Header: FC = () => {
               className="header__search-button_search"
               src={loop_small}
               alt="Кнопка поиска"
+              onClick={switchPopup}
             />
           ) : (
             // TODO

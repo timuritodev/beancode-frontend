@@ -61,6 +61,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
                 className="header__search-button_search"
                 src={loop_small}
                 alt="Кнопка поиска"
+              onClick={switchPopup}
               />
               <Link to="/profile">
                 <img className="header__profile-icon" alt="icon" src={icon} />

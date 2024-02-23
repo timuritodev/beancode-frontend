@@ -11,7 +11,7 @@ export const Layout: FC = () => {
 
   return (
     <div className="layout">
-      {location.pathname === "/" ? (
+      {/* {location.pathname === "/" ? (
         <Outlet />
       ) : (
         <>
@@ -19,10 +19,10 @@ export const Layout: FC = () => {
           <Outlet />
           <Footer />
         </>
-      )}
-      {/* <Header />
+      )} */}
+      <Header />
       <Outlet />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };
