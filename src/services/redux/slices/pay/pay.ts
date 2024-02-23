@@ -4,35 +4,25 @@ import { IPayData, IResponse } from "../../../../types/Pay.types";
 import { fetchPay } from "./payAPI";
 
 export const payApi = createAsyncThunk(
-    "@@pay/register",
-    async (data: IPayData, { fulfillWithValue, rejectWithValue }) => {
-      try {
-        const response = await fetchPay(data);
-  
-        if (!response.ok) {
-          // Если статус ответа не успешный, бросаем ошибку
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-  
-        const text = await response.text(); // Получаем текстовый ответ
-  
-        console.log("Server response:", text); // Выводим текстовый ответ в консоль
-  
-        // Вместо того, чтобы использовать response.json(), используем JSON.parse() после проверки на корректный JSON
-        const json = JSON.parse(text);
-  
-        return fulfillWithValue(json);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          return rejectWithValue(error.message);
-        } else {
-          return rejectWithValue("An error occurred");
-        }
+  "@@pay/register",
+  async (data: IPayData, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchPay(data);
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+      const text = await response.text();
+      const json = JSON.parse(text);
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue("An error occurred");
       }
     }
-  );
-  
-  
+  }
+);
 
 export interface IPayState {
   status: "idle" | "success" | "loading" | "failed";
@@ -47,7 +37,7 @@ const initialState: IPayState = {
     orderId: "",
     formUrl: "",
     errorCode: "",
-    errorMessage: ""
+    errorMessage: "",
   },
 };
 
@@ -72,7 +62,6 @@ const paySlice = createSlice({
 });
 
 export const payReducer = paySlice.reducer;
-
 
 // /* eslint-disable @typescript-eslint/no-unused-vars */
 // import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";

@@ -24,7 +24,7 @@ export interface IPayData {
 }
 
 export interface IResponse {
-  orderId?: string;
+  orderId: string;
   formUrl?: string;
   errorCode?: string;
   errorMessage?: string;
