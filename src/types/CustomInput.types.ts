@@ -2,7 +2,7 @@
 export enum CustomInputTypes {
 	name = 'name',
     surname = 'surname',
-    phone = 'tel',
+    phone = 'phone',
     email = 'email',
     address = 'address',
     city = 'city',

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Popup from "./Popup";
+import { useNavigate } from "react-router-dom";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -10,6 +11,13 @@ export const PopupLogin: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClickClose = () => {
+    setIsOpened(false);
+    navigate("/catalog");
+  };
+
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
       <div className="popup__container">
@@ -26,7 +34,7 @@ export const PopupLogin: FC<IChangesSavedPopup> = ({
         </p>
         <button
           className="popup__close popup__close_type_saved-changes"
-          onClick={() => setIsOpened(false)}
+          onClick={handleClickClose}
         >
           Закрыть
         </button>

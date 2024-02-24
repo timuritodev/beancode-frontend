@@ -36,8 +36,10 @@ export const VALIDATION_SETTINGS = {
     },
   },
   password: {
-    pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]+$/,
-    minLength: 8,
+    // pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]+$/,
+    // minLength: 8,
+    pattern: /^[\s\S]*$/,  
+    minLength: 1,  
     maxLength: 32,
     messages: {
       noPassword: 'Необходимо ввести пароль',
@@ -69,8 +71,8 @@ export const VALIDATION_SETTINGS = {
     },
   },
   phone: {
-    pattern: /^[0-9]+$/iu,
-    // pattern: /^\+7-\d{3}-\d{2}-\d{2}-\d{3}$/iu,
+    // pattern: /^[0-9]+$/iu,
+    pattern: /^\+7-\d{3}-\d{2}-\d{2}-\d{3}$/iu,
     minLength: 2,
     maxLength: 42,
     messages: {

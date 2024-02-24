@@ -151,9 +151,9 @@ export const SignUpPage = () => {
               }}
               error={errors?.password?.message}
             />
-            <span className="input__span input__span_type_password">
+            {/* <span className="input__span input__span_type_password">
               Минимум 8 символов (заглавные и строчные латинские буквы и цифры)
-            </span>
+            </span> */}
           </div>
           {/* <CustomInput
                         inputType={CustomInputTypes.repeatPassword}

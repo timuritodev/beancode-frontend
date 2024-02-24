@@ -11,7 +11,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const navigate = useNavigate();
 
   const [selectedPrice, setSelectedPrice] = useState(data.low_price);
-  const [selectedWeight, setSelectedWeight] = useState(data.weight);
+  const [selectedWeight, setSelectedWeight] = useState(data.low_weight);
 
   const handleClickImage = () => {
     navigate("/product-page");

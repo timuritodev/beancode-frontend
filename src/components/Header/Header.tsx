@@ -16,7 +16,6 @@ const Header: FC = () => {
   const user = useAppSelector(selectUser);
   const location = useLocation();
 
-  console.log(user.token, 123123);
   const [values, setValues] = useState("");
   const [isOpenSearch, setIsOpenSearch] = useState(false);
 
@@ -27,7 +26,6 @@ const Header: FC = () => {
   };
 
   const { width } = useResize();
-  console.log(width);
 
   const setSearchClose = () => {
     setIsOpenSearch(false);

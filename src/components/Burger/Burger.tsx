@@ -7,7 +7,6 @@ import icon from "../../images/person_active.svg";
 import loop from "../../images/loop.svg";
 import loop_small from "../../images/loop_small.svg";
 import logo from "../../images/logo.svg";
-import { useResize } from "../../hooks/useResize";
 
 interface BurgerProps {
   isPopupOpen: boolean;
@@ -23,9 +22,6 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
     const value = target.value;
     setValues(value);
   };
-
-  const { width } = useResize();
-  console.log(width);
 
   const setSearchClose = () => {
     setIsOpenSearch(false);
@@ -54,7 +50,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               onClick={switchPopup}
             />
             <Link to="/">
-              <img className="header__logo" alt="logo" src={logo} />
+              <img className="header__logo" alt="logo" src={logo} onClick={switchPopup}/>
             </Link>
             <div className="burger-links__wrapper">
               <img
@@ -64,7 +60,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               onClick={switchPopup}
               />
               <Link to="/profile">
-                <img className="header__profile-icon" alt="icon" src={icon} />
+                <img className="header__profile-icon" alt="icon" src={icon}  onClick={switchPopup}/>
               </Link>
             </div>
           </div>
