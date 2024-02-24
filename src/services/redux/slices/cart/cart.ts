@@ -65,7 +65,10 @@ export const getCartApi = createAsyncThunk(
   async (userId: number, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchGetCart(userId);
-      const cartWithKeys = response.map(item => ({ ...item, key: generateUniqueKey(item.title, item.weight, item.id) }));
+      const cartWithKeys = response.map((item) => ({
+        ...item,
+        key: generateUniqueKey(item.title, item.weight, item.id),
+      }));
       return fulfillWithValue(cartWithKeys);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -73,7 +76,7 @@ export const getCartApi = createAsyncThunk(
   }
 );
 
-const generateUniqueKey = (title:string, weight:string, id:number) => {
+const generateUniqueKey = (title: string, weight: string, id: number) => {
   return `${title}_${weight}_${id}`;
 };
 
@@ -97,14 +100,12 @@ const cartSlice = createSlice({
       })
       .addCase(deleteFromCartApi.fulfilled, (state, action) => {
         state.status = "success";
+        const { id, price } = action.payload;
         const indexToDelete = state.cart.findIndex(
-          (item) => item.price === action.payload.price
+          (item) => item.id === id && item.price === price
         );
         if (indexToDelete !== -1) {
-          state.cart = [
-            ...state.cart.slice(0, indexToDelete),
-            ...state.cart.slice(indexToDelete + 1),
-          ];
+          state.cart = state.cart.filter((_, index) => index !== indexToDelete);
         }
       })
       .addCase(deleteAllApi.fulfilled, (state) => {

@@ -46,13 +46,16 @@ export const productbyidSlice = createSlice({
         state.status = "success";
         state.product = action.payload;
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          state.status = "failed";
-          state.error = action.payload.statusText;
-        }
-      );
+      .addCase(getProductbyidApi.pending, (state) => {
+				state.status = 'loading';
+			})
+      // .addMatcher(
+      //   (action) => action.type.endsWith("/rejected"),
+      //   (state, action) => {
+      //     state.status = "failed";
+      //     state.error = action.payload.statusText;
+      //   }
+      // );
   },
 });
 
