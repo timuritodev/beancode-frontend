@@ -4,12 +4,16 @@ import { selectUser } from "../../services/redux/slices/user/user";
 import { getStatusApi } from "../../services/redux/slices/orderStatus/orderStatus";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { createOrderApi, getOrdersApi } from "../../services/redux/slices/order/order";
+import {
+  createOrderApi,
+  getOrdersApi,
+} from "../../services/redux/slices/order/order";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 
 export const InfoPaymentPageSucess = () => {
   const dispatch = useAppDispatch();
   const orderRes = useAppSelector((state) => state.pay.response);
+  const orders = useAppSelector((state) => state.order.info);
   const orderStatus = useAppSelector((state) => state.orderStatus.response);
   const user = useAppSelector(selectUser);
 
@@ -28,9 +32,17 @@ export const InfoPaymentPageSucess = () => {
 
   const isOrderProcessed = orderStatus.OrderNumber === orderId;
 
-  console.log(products_info)
+  const isOrderProcessed2 = orders.find((order) => order.orderNumber === orderId) !== undefined;
+
+
+  // console.log(isOrderProcessed, "isOrderProcessed");
+  // console.log(isOrderProcessed2, "isOrderProcessed2");
+  // console.log(orderStatus.OrderNumber, "orderStatus.OrderNumber");
+  // console.log(orderId, "orderId");
+
   useEffect(() => {
-    if (!isOrderProcessed) {
+    dispatch(getOrdersApi(user.id));
+    if (!isOrderProcessed2) {
       dispatch(
         getStatusApi({
           userName: payApiUsername,
@@ -53,7 +65,6 @@ export const InfoPaymentPageSucess = () => {
                 orderNumber: orderId || "",
               })
             );
-
             dispatch(
               sendEmailApi({
                 from: user.email,
@@ -84,7 +95,7 @@ export const InfoPaymentPageSucess = () => {
     sum,
     product_quantity,
     products_info,
-    isOrderProcessed,
+    isOrderProcessed2,
   ]);
 
   return (

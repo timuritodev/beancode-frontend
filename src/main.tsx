@@ -20,7 +20,7 @@ import { BonusPage } from "./pages/BonusPage/BonusPage";
 import { OrderPage } from "./pages/OrderPage/OrderPage";
 import { SignUpPage } from "./pages/AuthPage/SignUpPage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
-import { App } from "./pages/App/App";
+// import { App } from "./pages/App/App";
 import { InfoPaymentPageSucess } from "./pages/InfoPaymentPage/InfoPaymentPageSucess";
 import { InfoPaymentPageFail } from "./pages/InfoPaymentPage/InfoPaymentPageFail";
 
@@ -29,9 +29,9 @@ const Root: FC = () => {
     <div className="page">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<App />} />
-          <Route path="/main" element={<MainPage />} />
-          {/* <Route index element={<MainPage />} /> */}
+          {/* <Route index element={<App />} /> */}
+          {/* <Route path="/main" element={<MainPage />} /> */}
+          <Route index element={<MainPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<ProfilePage />} />

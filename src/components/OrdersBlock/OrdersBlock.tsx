@@ -6,11 +6,11 @@ import { FC, useEffect, useState } from "react";
 import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
-import { createOrderApi } from "../../services/redux/slices/order/order";
+// import { createOrderApi } from "../../services/redux/slices/order/order";
 import { selectUser } from "../../services/redux/slices/user/user";
-import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
+// import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
-import { resetCart } from "../../services/redux/slices/cart/cart";
+import { deleteAllApi } from "../../services/redux/slices/cart/cart";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -57,7 +57,7 @@ export const OrderBlock: FC = () => {
           phone: user.phone,
         })
       );
-      dispatch(resetCart());
+      dispatch(deleteAllApi(user.id));
       setRedirecting(true);
     } catch (error) {
       console.error("Error in payApi call:", error);
