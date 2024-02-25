@@ -92,7 +92,7 @@ export const InfoPaymentPageSucess = () => {
       <div className="info-payment__container">
         <h1 className="info-payment__title">Оплата прошла успешно</h1>
         <p className="info-payment__text">
-          В близжайшее время с вами свяжется менеджер и уточнит детали заказа
+          В ближайшее время с вами свяжется менеджер и уточнит детали заказа
         </p>
       </div>
     </section>
