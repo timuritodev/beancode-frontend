@@ -14,15 +14,21 @@ import {
   PHONE_VALIDATION_CONFIG,
   SURNAME_VALIDATION_CONFIG,
 } from "../../utils/constants";
-import { signUpUser, setUser, getUserInfo } from "../../services/redux/slices/user/user";
+import {
+  signUpUser,
+  setUser,
+  getUserInfo,
+} from "../../services/redux/slices/user/user";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
 import { PopupRegister } from "../../components/Popups/PopupRegister";
+import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
 
 export const SignUpPage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
   const {
     register,
@@ -55,12 +61,16 @@ export const SignUpPage = () => {
         password: getValues("password"),
       })
     )
-    .unwrap()
-    .then((res) => {
-      dispatch(setUser({ name: data.name, email: data.email, token: res }));
-      dispatch(getUserInfo(res));
-      setIsSavedPopupOpened(true);
-    })
+      .unwrap()
+      .then((res) => {
+        dispatch(setUser({ name: data.name, email: data.email, token: res }));
+        dispatch(getUserInfo(res));
+        setIsSavedPopupOpened(true);
+      })
+      .catch((err) => {
+        setIsErrorPopupOpened(true);
+        console.log("dispatch signInUser err:", err);
+      });
   };
 
   useEffect(() => {
@@ -183,6 +193,10 @@ export const SignUpPage = () => {
       <PopupRegister
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
+      />
+      <PopupErrorRegister
+        isOpened={isErrorPopupOpened}
+        setIsOpened={setIsErrorPopupOpened}
       />
     </section>
   );

@@ -17,12 +17,14 @@ import {
 } from "../../services/redux/slices/user/user";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { PopupLogin } from "../../components/Popups/PopupLogin";
+import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
 
 export const SignInPage = () => {
   const dispatch = useAppDispatch();
 
   const [authError, setAuthError] = useState(false);
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
   const {
     register,
@@ -46,6 +48,7 @@ export const SignInPage = () => {
         setIsSavedPopupOpened(true);
       })
       .catch((err) => {
+        setIsErrorPopupOpened(true);
         console.log("dispatch signInUser err:", err);
       });
   };
@@ -91,22 +94,24 @@ export const SignInPage = () => {
             Забыли пароль?
           </Link> */}
           {/* TODO recover button */}
-          {authError ? (
-            <p className="auth__form-error auth__form-error_type_login">
-              Неверный логин или пароль.
-            </p>
-          ) : null}
           <CustomButton
             buttonText={"Войти"}
             handleButtonClick={handleSubmit(onSubmit)}
             disabled={!isDirty || !isValid}
             type="button"
           />
+          <Link to="/sign-up" className="signup__link">
+            Зарегистрироваться
+          </Link>
         </form>
       </div>
       <PopupLogin
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
+      />
+      <PopupErrorLogin
+        isOpened={isErrorPopupOpened}
+        setIsOpened={setIsErrorPopupOpened}
       />
     </section>
   );

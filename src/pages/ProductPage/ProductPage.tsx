@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
 import { Grains } from "../../components/Grains/Grains";
 import { useResize } from "../../hooks/useResize";
+import Loader from "../../components/Loader/Loader";
 
 export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -16,19 +17,16 @@ export const ProductPage = () => {
   const [selectedWeight, setSelectedWeight] = useState("");
 
   useEffect(() => {
-    // Set default values when product is available
     if (product) {
       setSelectedPrice(product.low_price);
       setSelectedWeight(product.low_weight);
     }
-  }, [product]); 
+  }, [product]);
   const handleChange = (price: string, weight: string) => {
     setSelectedPrice(price);
     setSelectedWeight(weight);
-    console.log(selectedPrice, "adad");
-    console.log('papapa')
   };
-console.log('addada')
+
   const handleDropdownChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Selected Option:", e.target.value);
   };
@@ -40,7 +38,7 @@ console.log('addada')
   return (
     <>
       {loading === "loading" ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
         <div className="products">
           {width > 767 ? (

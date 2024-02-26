@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 // import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
-import { deleteAllApi } from "../../services/redux/slices/cart/cart";
+import { deleteAllApi, resetCart } from "../../services/redux/slices/cart/cart";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -58,6 +58,7 @@ export const OrderBlock: FC = () => {
         })
       );
       dispatch(deleteAllApi(user.id));
+      dispatch(resetCart());
       setRedirecting(true);
     } catch (error) {
       console.error("Error in payApi call:", error);

@@ -95,11 +95,15 @@ export const ProfilePage = () => {
           <ProfileInputs />
         ) : (
           user.token === "" && (
-            // <p className="profile__link">Нужно Зарегистрироваться</p>
-            <Link to="/sign-up" className="profile__link">
-              Нужно Зарегистрироваться
-            </Link>
-            // <p className="profile__text">Нужно Зарегистрироваться</p>
+            <div className="profile__links__container">
+              <Link to="/sign-up" className="profile__link">
+                Нужно Зарегистрироваться
+              </Link>
+              <p className="profile__link">или</p>
+              <Link to="/sign-in" className="profile__link">
+                Войти в учетную запись
+              </Link>
+            </div>
           )
         )}
         {isOrderVisible && orders.length !== 0 && user.token !== "" ? (

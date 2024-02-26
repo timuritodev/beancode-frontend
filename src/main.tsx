@@ -23,6 +23,8 @@ import { AboutPage } from "./pages/AboutPage/AboutPage";
 // import { App } from "./pages/App/App";
 import { InfoPaymentPageSucess } from "./pages/InfoPaymentPage/InfoPaymentPageSucess";
 import { InfoPaymentPageFail } from "./pages/InfoPaymentPage/InfoPaymentPageFail";
+import ScrollToTop from "./hooks/ScrollToTop";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 const Root: FC = () => {
   return (
@@ -44,6 +46,7 @@ const Root: FC = () => {
           <Route path="/order-page" element={<OrderPage />} />
           <Route path="/payment-sucess" element={<InfoPaymentPageSucess />} />
           <Route path="/payment-fail" element={<InfoPaymentPageFail />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </div>
@@ -59,6 +62,7 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
       <BrowserRouter>
+        <ScrollToTop />
         <Root />
       </BrowserRouter>
     </PersistGate>
