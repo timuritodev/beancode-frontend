@@ -29,14 +29,14 @@ const InfoBlock = () => {
           </p>
           {width > 767 && (
             <div className="button__container">
-              <button className="button__info" onClick={handleButtonClick}>
+              {/* <button className="button__info" onClick={handleButtonClick}>
                 <span className="button__info__text">Схема контроля</span>
                 {isImageVisible ? (
                   <img className="button__info__img" src={arrow_closed} />
                 ) : (
                   <img className="button__info__img" src={arrow_opened} />
                 )}
-              </button>
+              </button> */}
               <Link
                 to="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
                 className="button__info__text"
@@ -49,14 +49,14 @@ const InfoBlock = () => {
         {/* <p className="info__sort">40+ сортов</p> */}
         {width < 767 && (
             <div className="button__container">
-              <button className="button__info" onClick={handleButtonClick}>
+              {/* <button className="button__info" onClick={handleButtonClick}>
                 <span className="button__info__text">Схема контроля</span>
                 {isImageVisible ? (
                   <img className="button__info__img" src={arrow_closed} />
                 ) : (
                   <img className="button__info__img" src={arrow_opened} />
                 )}
-              </button>
+              </button> */}
               <Link
                 to="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
                 className="button__info__text"
@@ -66,9 +66,9 @@ const InfoBlock = () => {
             </div>
           )}
       </div>
-      {isImageVisible && (
+      {/* {isImageVisible && (
         <img className="info__image" src={schema_2} alt="Control schema" />
-      )}
+      )} */}
     </div>
   );
 };

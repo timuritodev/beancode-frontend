@@ -1,5 +1,6 @@
 import "./PackageBlock.css";
 import package_photo from "../../images/package.jpg";
+import package_block from "../../images/package_block.jpeg";
 
 const PackageBlock = () => {
   return (
@@ -11,12 +12,12 @@ const PackageBlock = () => {
             <h2 className="package__title">Процесс дозировки и упаковки</h2>
           </div>
           <p className="package__text">
-            Упаковочное образование разработано и произведено российской
-            <br />
-            компанией МАКИЗ
+            Упаковочное образование разработанное и произведенное российской
+            компанией позволяет осуществлять упаковку в высоком темпе с
+            точностью до 1 гр.
           </p>
         </div>
-        <img className="package__img" src={package_photo} />
+        <img className="package__img" src={package_block} />
       </div>
     </div>
   );

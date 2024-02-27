@@ -32,8 +32,16 @@ export const InfoPaymentPageSucess = () => {
 
   const isOrderProcessed = orderStatus.OrderNumber === orderId;
 
-  const isOrderProcessed2 = orders.find((order) => order.orderNumber === orderId) !== undefined;
+  const isOrderProcessed2 =
+    orders.find((order) => order.orderNumber === orderId) !== undefined;
 
+  const currentTimestamp = Date.now();
+
+  // Создание объекта Date из метки времени
+  const currentDate = new Date(currentTimestamp);
+
+  // Форматирование даты в строку 'YYYY-MM-DD'
+  const formattedDate = currentDate.toISOString().split("T")[0];
 
   // console.log(isOrderProcessed, "isOrderProcessed");
   // console.log(isOrderProcessed2, "isOrderProcessed2");
@@ -50,7 +58,7 @@ export const InfoPaymentPageSucess = () => {
           orderId: `${orderRes.orderId}`,
         })
       )
-        .then((response) => {
+        .then(() => {
           if (orderStatus.OrderStatus === 2) {
             dispatch(
               createOrderApi({
@@ -63,6 +71,7 @@ export const InfoPaymentPageSucess = () => {
                 product_quantity: parseInt(product_quantity || "0", 10),
                 products_info: products_info || "",
                 orderNumber: orderId || "",
+                date_order: formattedDate,
               })
             );
             dispatch(
@@ -96,6 +105,7 @@ export const InfoPaymentPageSucess = () => {
     product_quantity,
     products_info,
     isOrderProcessed2,
+    formattedDate,
   ]);
 
   return (

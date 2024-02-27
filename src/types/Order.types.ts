@@ -18,6 +18,7 @@ export interface IOrderDetails {
   product_quantity: number;
   products_info: string;
   orderNumber: string;
+  date_order: string;
 }
 
 export interface IOrderDetailsState {
