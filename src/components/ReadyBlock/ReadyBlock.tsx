@@ -24,11 +24,13 @@ const ReadyBlock = () => {
                 Упаковка в пакеты с газоотводящим клапаном и Zip-lock замком
                 позволяет нашим потребителям дольше сохранить вкус зерна.
               </p>
+              <Link
+                to="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
+                className="ready__link"
+              >
+                Документация
+              </Link>
               <img className="ready__img" src={ready_block} />
-              {/* <Link to="/" className="ready__link">
-                Требования к готовой продукции
-              </Link> */}
-              {/* Todo Требования к готовой продукции */}
             </div>
           </>
         ) : (
@@ -44,10 +46,12 @@ const ReadyBlock = () => {
                 Упаковка в пакеты с газоотводящим клапаном и Zip-lock замком
                 позволяет нашим потребителям дольше сохранить вкус зерна.
               </p>
-              {/* <Link to="/" className="ready__link">
-                Требования к готовой продукции
-              </Link> */}
-              {/* Todo Требования к готовой продукции */}
+              <Link
+                to="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
+                className="ready__link"
+              >
+                Документация
+              </Link>
             </div>
           </>
         )}

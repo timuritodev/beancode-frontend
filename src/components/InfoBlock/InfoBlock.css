@@ -1,100 +1,84 @@
-.info__block {
+.info {
   padding: 80px 0 120px 0;
 }
-.info__block__container {
+.info__container {
   display: flex;
-  padding: 0 80px;
+  padding: 0 80px 0 80px;
 }
 
 .info__digit {
+  color: var(--Black_text, #0f100f);
   font-family: Spectral;
   font-size: 52px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 70px;
-  letter-spacing: 0em;
+  line-height: 70px; /* 134.615% */
   margin: 0;
 }
 
-.info__container {
-  flex: 1;
+.info__text__container {
+  display: flex;
+  flex-direction: column;
 }
 
-.info__title-digit__container {
+.info__digit-title__container {
   display: flex;
   gap: 48px;
 }
 
-.info__container__title {
+.info__title {
+  color: var(--Black_text, #0f100f);
   font-family: Spectral;
   font-size: 52px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 70px;
-  letter-spacing: 0em;
+  line-height: 70px; /* 134.615% */
   margin: 0 0 16px 0;
 }
 
-.info__container__text {
+.info__text {
   font-family: Ubuntu;
+  color: var(--grey, #797979);
   font-size: 20px;
+  font-style: normal;
   font-weight: 400;
-  line-height: 30px;
-  letter-spacing: 0em;
-  color: #797979;
-  margin: 0 0 64px 101px;
-}
-
-.info__sort {
-  font-family: Spectral;
-  font-size: 52px;
-  font-weight: 500;
-  line-height: 70px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin: 146px 0 0 0;
-}
-.button__container {
-  display: flex;
-  gap: 48px;
-  margin: 0 0 0 101px;
-}
-.button__info {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  display: flex;
-  padding: 0;
+  line-height: normal;
   margin: 0;
-  align-items: center;
 }
 
-.button__info__text {
+.info__text_special {
+  font-family: Ubuntu;
+  color: var(--grey, #797979);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+
+.info__link {
+  font-family: Ubuntu;
+  color: var(--Accent, #465244);
   font-size: 20px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 30px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #465244;
-  padding: 0 8px 0 0;
+  line-height: normal;
   text-decoration: none;
+  margin: 91px 0 0 0;
 }
-
-.button__info__img {
-  width: 20px;
-  height: 20px;
-}
-
-.info__image {
-  margin: 40px 0 0 182px;
+.info__img {
+  width: 393px;
+  height: 281px;
+  margin: 0 48px;
 }
 
 @media screen and (max-width: 767px) {
-  .info__block {
+  .info {
     padding: 40px 0 64px 0;
   }
-  .info__block__container {
-    display: flex;
-    flex-direction: column;
+  .info__container {
     padding: 0 16px;
+    flex-direction: column;
   }
 
   .info__digit {
@@ -102,78 +86,52 @@
     font-weight: 600;
     line-height: 39px;
     letter-spacing: 0em;
-    text-align: left;
   }
 
-  .info__container {
-    flex: 1;
+  .info__text__container {
+    display: flex;
+    flex-direction: column;
   }
 
-  .info__title-digit__container {
+  .info__digit-title__container {
     display: flex;
     gap: 24px;
   }
 
-  .info__container__title {
+  .info__title {
     font-size: 30px;
     font-weight: 600;
     line-height: 39px;
     letter-spacing: 0em;
-    text-align: left;
-
-    margin: 0 0 16px 0;
+    margin: 0 0 8px 0;
   }
 
-  .info__container__text {
+  .info__text {
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
     letter-spacing: 0em;
-    text-align: left;
-    margin: 0 0 8px 57px;
+    margin: 0 0 0 57px;
   }
 
-  .info__sort {
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 39px;
-    letter-spacing: 0em;
-    margin: 0;
-    text-align: right;
-  }
-
-  .button__container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 48px 0 0 58px;
-  }
-
-  .button__info {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    display: flex;
-    padding: 0;
-    margin: 0;
-    align-items: center;
-  }
-
-  .button__info__text {
+  .info__text_special {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 30px;
     letter-spacing: 0em;
+    margin: 10px 0 0 57px;
   }
 
-  .button__info__img {
-    width: 20px;
-    height: 20px;
+  .info__link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin: 15px 0 0 57px;
   }
-
-  .info__image {
-    margin: 16px 16px;
-    width: 328px;
-    height: 233px;
+  .info__img {
+    width: 100%;
+    height: 50%;
+    margin: 40px 0;
   }
 }
