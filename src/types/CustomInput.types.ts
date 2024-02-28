@@ -8,6 +8,8 @@ export enum CustomInputTypes {
     city = 'city',
     area = 'area',
     password =  'password',
+	oldPassword = 'oldPassword',
+	newPassword = 'newPassword',
 	repeatPassword = 'repeatPassword',
 	enteredEmail = 'enteredEmail',
 	text = 'text',

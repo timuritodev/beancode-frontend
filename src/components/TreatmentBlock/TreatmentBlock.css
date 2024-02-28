@@ -49,6 +49,17 @@
   margin: 0 0 0 101px;
 }
 
+.treatment__link {
+  font-family: Ubuntu;
+  color: var(--Accent, #465244);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  margin: 91px 0 0 101px;
+}
+
 @media screen and (max-width: 767px) {
   .treatment {
     padding: 40px 0 64px 0;
@@ -88,5 +99,13 @@
     line-height: 21px;
     letter-spacing: 0em;
     margin: 0 0 0 57px;
+  }
+
+  .treatment__link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin: 15px 0 0 57px;
   }
 }

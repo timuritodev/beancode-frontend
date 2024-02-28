@@ -36,3 +36,9 @@ export interface IEditProfileData {
   area: string | undefined;
   address: string | undefined;
 }
+
+export interface IChangePassword {
+  userId: number;
+  oldPassword: string;
+  newPassword: string;
+}

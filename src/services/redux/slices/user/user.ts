@@ -5,12 +5,14 @@ import {
   fetchSignIn,
   fetchGetUserInfo,
   fetchEditUserInfo,
+  fetchChangePassword,
 } from "./userApi";
 import {
   IUser,
   ISignInData,
   ISignUpData,
   IEditProfileData,
+  IChangePassword,
 } from "../../../../types/Auth.types";
 
 export interface IUserState {
@@ -78,6 +80,26 @@ export const editUserInfo = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "@@user/changePassword",
+  async (
+    arg: {
+      data: IChangePassword;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
+    try {
+      const response = await fetchChangePassword(data, token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IUserState = {
   status: "idle",
   error: null,
@@ -134,6 +156,9 @@ const userSlice = createSlice({
         state.user.address = action.payload.user.address;
         state.user.city = action.payload.user.city;
         state.user.area = action.payload.user.area;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.status = "success";
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

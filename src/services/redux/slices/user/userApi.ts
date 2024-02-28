@@ -4,6 +4,7 @@ import {
   ISignUpData,
   IUser,
   IEditProfileData,
+  IChangePassword,
 } from "../../../../../src/types/Auth.types";
 
 const checkRes = (res: Response) => {
@@ -17,7 +18,7 @@ const checkRes = (res: Response) => {
 export const fetchData = (
   url: string,
   method: string,
-  data?: ISignInData | ISignUpData | IUser | IEditProfileData,
+  data?: ISignInData | ISignUpData | IUser | IEditProfileData | IChangePassword,
   token?: string
 ) => {
   return fetch(url, {
@@ -57,6 +58,16 @@ export const fetchEditUserInfo = (
 ): Promise<Response> => {
   const tokenString = typeof token === "string" ? token : token.token;
   return fetchData(`${API_BASE_URL}/users-me`, "PATCH", data, tokenString).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchChangePassword = (
+  data: IChangePassword,
+  token: string | { token: string }
+): Promise<Response> => {
+  const tokenString = typeof token === "string" ? token : token.token;
+  return fetchData(`${API_BASE_URL}/change-password`, "PATCH", data, tokenString).then(
     (res) => checkRes(res)
   );
 };

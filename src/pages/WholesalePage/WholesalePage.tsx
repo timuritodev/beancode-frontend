@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
+import "./WholesalePage.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -24,11 +24,10 @@ import { useEffect, useState } from "react";
 import { PopupRegister } from "../../components/Popups/PopupRegister";
 import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
 
-export const SignUpPage = () => {
+export const WholesalePage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
-  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
   const {
     register,
@@ -48,7 +47,6 @@ export const SignUpPage = () => {
     password: getValues("password"),
   };
 
-  console.log(data, 222)
   const onSubmit: SubmitHandler<ISignUpData> = () => {
     dispatch(
       signUpUser({
@@ -69,7 +67,6 @@ export const SignUpPage = () => {
         setIsSavedPopupOpened(true);
       })
       .catch((err) => {
-        setIsErrorPopupOpened(true);
         console.log("dispatch signInUser err:", err);
       });
   };
@@ -81,7 +78,7 @@ export const SignUpPage = () => {
   return (
     <section className="signup">
       <div className="signup__container">
-        <h1 className="signup__title">Регистрация</h1>
+        <h1 className="signup__title">Отправка формы</h1>
         <form
           className="signup__form"
           onSubmit={handleSubmit(onSubmit)}
@@ -141,48 +138,6 @@ export const SignUpPage = () => {
             placeholder="Москва"
             error={errors?.city?.message}
           />
-          {data.city === "Челны" && (
-            <CustomInput
-              inputType={CustomInputTypes.area}
-              labelText={"Район"}
-              validation={{
-                ...register("area", AREA_VALIDATION_CONFIG),
-              }}
-              placeholder="Новый город"
-              error={errors?.area?.message}
-            />
-          )}
-          <div>
-            <CustomInput
-              inputType={CustomInputTypes.password}
-              labelText={"Пароль"}
-              showPasswordButton={true}
-              validation={{
-                ...register("password", PASSWORD_VALIDATION_CONFIG),
-              }}
-              error={errors?.password?.message}
-            />
-            {/* <span className="input__span input__span_type_password">
-              Минимум 8 символов (заглавные и строчные латинские буквы и цифры)
-            </span> */}
-          </div>
-          {/* <CustomInput
-                        inputType={CustomInputTypes.repeatPassword}
-                        labelText={'Повторите пароль'}
-                        validation={{
-                            ...register('repeatPassword', {
-                                validate: (value) =>
-                                    value === watch('password') ||
-                                    VALIDATION_SETTINGS.password.messages.noMatch,
-                            }),
-                        }}
-                        error={errors?.repeatPassword?.message}
-                    /> */}
-          {/* {authError ? (
-                                <p className="auth__form-error auth__form-error_type_login">
-                                    Почта уже зарегистрирована.
-                                </p>
-                            ) : null} */}
           <CustomButton
             buttonText={"Зарегистрироваться"}
             handleButtonClick={handleSubmit(onSubmit)}
@@ -194,10 +149,6 @@ export const SignUpPage = () => {
       <PopupRegister
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
-      />
-      <PopupErrorRegister
-        isOpened={isErrorPopupOpened}
-        setIsOpened={setIsErrorPopupOpened}
       />
     </section>
   );

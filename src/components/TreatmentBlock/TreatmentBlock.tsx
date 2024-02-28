@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./TreatmentBlock.css";
 
 const TreatmentBlock = () => {
@@ -17,6 +18,7 @@ const TreatmentBlock = () => {
             <br />
             индивидуального подбора смеси, формульного ценообразования.
           </p>
+          <Link to="/wholesale-page" className="treatment__link">Страница для оптовых покупателей</Link>
         </div>
       </div>
     </div>

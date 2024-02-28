@@ -7,6 +7,8 @@ import icon from "../../images/person_active.svg";
 import loop from "../../images/loop.svg";
 import loop_small from "../../images/loop_small.svg";
 import logo from "../../images/logo.svg";
+import { selectUser } from "../../services/redux/slices/user/user";
+import { useAppSelector } from "../../services/typeHooks";
 
 interface BurgerProps {
   isPopupOpen: boolean;
@@ -14,6 +16,8 @@ interface BurgerProps {
 }
 
 export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
+  const user = useAppSelector(selectUser);
+
   const [values, setValues] = useState("");
   const [isOpenSearch, setIsOpenSearch] = useState(false);
 
@@ -92,12 +96,16 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             <Link to="/catalog" className="burger__link" onClick={handleLinkClick}>
               Интернет-магазин
             </Link>
+            {user.token === "" && (
+            <>
             <Link to="/sign-up" className="burger__link" onClick={handleLinkClick}>
               Регистрация
             </Link>
             <Link to="/sign-in" className="burger__link" onClick={handleLinkClick}>
               Вход в учетную запись
             </Link>
+            </>
+          )}
           </div>
         </div>
       </div>
