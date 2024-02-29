@@ -6,6 +6,8 @@ import {
   fetchGetUserInfo,
   fetchEditUserInfo,
   fetchChangePassword,
+  fetchRecoverPassword,
+  fetchResetPassword,
 } from "./userApi";
 import {
   IUser,
@@ -13,6 +15,8 @@ import {
   ISignUpData,
   IEditProfileData,
   IChangePassword,
+  IRecoverPassword,
+  IResetPassword,
 } from "../../../../types/Auth.types";
 
 export interface IUserState {
@@ -100,6 +104,32 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+export const recoverPassword = createAsyncThunk(
+  "@@user/recoverPassword",
+  async (email: IRecoverPassword, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchRecoverPassword(email);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "@@user/resetPassword",
+  async (data: IResetPassword, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchResetPassword(data);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IUserState = {
   status: "idle",
   error: null,
@@ -158,6 +188,12 @@ const userSlice = createSlice({
         state.user.area = action.payload.user.area;
       })
       .addCase(changePassword.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(recoverPassword.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
         state.status = "success";
       })
       .addMatcher(

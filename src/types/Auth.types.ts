@@ -42,3 +42,12 @@ export interface IChangePassword {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface IRecoverPassword {
+  email: string;
+}
+
+export interface IResetPassword {
+  token: string;
+  newPassword: string;
+}

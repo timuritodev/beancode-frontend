@@ -27,6 +27,8 @@ import ScrollToTop from "./hooks/ScrollToTop";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { WholesalePage } from "./pages/WholesalePage/WholesalePage";
 import { ChangePasswordPage } from "./pages/AuthPage/ChangePasswordPage";
+import { RecoverPasswordPage } from "./pages/AuthPage/RecoverPasswordPage";
+import { ResetPasswordPage } from "./pages/AuthPage/ResetPasswordPage";
 
 const Root: FC = () => {
   return (
@@ -50,6 +52,8 @@ const Root: FC = () => {
           <Route path="/payment-fail" element={<InfoPaymentPageFail />} />
           <Route path="/wholesale-page" element={<WholesalePage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/recover-password" element={<RecoverPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
