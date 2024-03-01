@@ -21,6 +21,7 @@ import {
 } from "../../utils/constants";
 import { PopupChanges } from "../Popups/PopupChanges";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { Link } from "react-router-dom";
 
 export const ProfileInputs = () => {
   const dispatch = useAppDispatch();
@@ -157,6 +158,7 @@ export const ProfileInputs = () => {
             error={errors?.area?.message}
           />
         )}
+        <Link to="/change-password" className="profile__link">Сменить пароль</Link>
         <CustomButton
           buttonText={"Изменить данные"}
           handleButtonClick={handleSubmit(onSubmit)}

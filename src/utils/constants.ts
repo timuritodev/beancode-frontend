@@ -111,6 +111,37 @@ export const VALIDATION_SETTINGS = {
       tooLong: "Слишком длинное название района",
     },
   },
+  title: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
+    maxLength: 42,
+    messages: {
+      noTitle: "Необходимо ввести название организации",
+      invalid: "Только кириллица или латинские буквы",
+      tooLong: "Слишком длинной название",
+    },
+  },
+  inn: {
+    pattern: /^[0-9]+$/iu,
+    minLength: 8,
+    maxLength: 15,
+    messages: {
+      noInn: "Необходимо ввести ИНН",
+      invalid: "Только цифры",
+      tooShort: "Слишком короткий ИНН",
+      tooLong: "Слишком длинный ИНН",
+    },
+  },
+  fio: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
+    maxLength: 100,
+    messages: {
+      noFio: "Необходимо ввести ФИО",
+      invalid: "Только кириллица или латинские буквы",
+      tooLong: "Слишком длинная ФИО",
+    },
+  },
 };
 
 export const EMAIL_VALIDATION_CONFIG = {
@@ -234,5 +265,54 @@ export const AREA_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.area.maxLength,
     message: VALIDATION_SETTINGS.area.messages.tooLong,
+  },
+};
+
+export const TITLE_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.title.messages.noTitle,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.title.pattern,
+    message: VALIDATION_SETTINGS.title.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.title.maxLength,
+    message: VALIDATION_SETTINGS.title.messages.tooLong,
+  },
+};
+
+export const INN_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.inn.messages.noInn,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.inn.pattern,
+    message: VALIDATION_SETTINGS.inn.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.inn.minLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.inn.maxLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooLong,
+  },
+};
+
+export const FIO_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.fio.messages.noFio,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.fio.pattern,
+    message: VALIDATION_SETTINGS.fio.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.fio.maxLength,
+    message: VALIDATION_SETTINGS.fio.messages.tooLong,
   },
 };

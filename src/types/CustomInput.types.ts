@@ -14,6 +14,9 @@ export enum CustomInputTypes {
 	enteredEmail = 'enteredEmail',
 	text = 'text',
 	date = 'date',
+	title = 'title',
+	inn = 'inn',
+	fio = 'fio',
 }
 
 export enum CustomInputColors {

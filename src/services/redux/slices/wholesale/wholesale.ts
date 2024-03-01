@@ -29,7 +29,7 @@ const wholesaleSlice = createSlice({
     builder
       .addCase(createWholesaleApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.data = [...state.data, action.payload];
+        // state.data = [...state.data, action.payload];
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
