@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./AuthPage.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -12,12 +11,13 @@ import { PopupLogin } from "../../components/Popups/PopupLogin";
 import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
 import { IChangePassword } from "../../types/Auth.types";
 import { selectUser } from "../../services/redux/slices/user/user";
+import { PopupChangePassword } from "../../components/Popups/PopupChangePassword";
+import { PopupErrorChangePassword } from "../../components/Popups/PopupErrorChangePassword";
 
 export const ChangePasswordPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
-  const [authError, setAuthError] = useState(false);
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
@@ -25,24 +25,18 @@ export const ChangePasswordPage = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isDirty, isValid },
-    getValues,
   } = useForm<IChangePassword>({ mode: "onChange" });
 
-  const data = {
-    oldPassword: getValues("oldPassword"),
-    newPassword: getValues("newPassword"),
-  };
 
-  console.log(data,123)
-
-  const onSubmit: SubmitHandler<IChangePassword> = () => {
+  const onSubmit: SubmitHandler<IChangePassword> = (formData) => {
     dispatch(
       changePassword({
         data: {
           userId: user.id,
-          oldPassword: getValues("oldPassword"),
-          newPassword: getValues("newPassword"),
+          oldPassword: formData.oldPassword,
+          newPassword: formData.newPassword,
         },
         token: user.token,
       })
@@ -58,13 +52,13 @@ export const ChangePasswordPage = () => {
   };
 
   useEffect(() => {
-    reset();
-    setAuthError(false);
-  }, [reset]);
+    const resetForm = async () => {
+      await reset();
+      setIsSavedPopupOpened(false);
+    };
 
-  useEffect(() => {
-    setIsSavedPopupOpened(false);
-  }, []);
+    resetForm();
+  }, [reset]);
 
   return (
     <section className="signup">
@@ -77,21 +71,27 @@ export const ChangePasswordPage = () => {
         >
           <CustomInput
             inputType={CustomInputTypes.newPassword}
-            labelText="Старый пароль"
+            labelText={"Старый пароль"}
             showPasswordButton={true}
             validation={{
               ...register("oldPassword", PASSWORD_VALIDATION_CONFIG),
             }}
             error={errors?.oldPassword?.message}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue("oldPassword", e.target.value)
+            }
           />
           <CustomInput
             inputType={CustomInputTypes.oldPassword}
-            labelText="Новый пароль"
+            labelText={"Новый пароль"}
             showPasswordButton={true}
             validation={{
               ...register("newPassword", PASSWORD_VALIDATION_CONFIG),
             }}
             error={errors?.newPassword?.message}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue("newPassword", e.target.value)
+            }
           />
           <CustomButton
             buttonText={"Сменить пароль"}
@@ -101,11 +101,11 @@ export const ChangePasswordPage = () => {
           />
         </form>
       </div>
-      <PopupLogin
+      <PopupChangePassword
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
       />
-      <PopupErrorLogin
+      <PopupErrorChangePassword
         isOpened={isErrorPopupOpened}
         setIsOpened={setIsErrorPopupOpened}
       />

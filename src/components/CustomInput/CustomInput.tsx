@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { ICustomInput } from "../../types/CustomInput.types";
-import InputMask  from "react-input-mask"; // Добавлен импорт
+import InputMask  from "react-input-mask"; 
 
 import "./CustomInput.css";
 
@@ -30,10 +30,10 @@ const CustomInput: FC<ICustomInput> = ({
   const mask = inputType === "phone" ? "+7 (999) 999-99-99" : undefined;
 
   const inputTextType =
-    inputType === "password" && isPasswordHidden === false
+    inputType === "password" || inputType === "oldPassword" || inputType === "newPassword" && isPasswordHidden === false
       ? "text"
       : inputType === "repeatPassword"
-      ? "password"
+      ? "password" || "oldPassword" || "newPassword"
       : inputType;
 
   const InputComponent = inputType === "phone" ? InputMask : "input";

@@ -19,6 +19,7 @@ import {
   IResetPassword,
 } from "../../types/Auth.types";
 import { selectUser } from "../../services/redux/slices/user/user";
+import { PopupResetPassword } from "../../components/Popups/PopupResetPassword";
 
 export const ResetPasswordPage = () => {
   const dispatch = useAppDispatch();
@@ -88,12 +89,12 @@ export const ResetPasswordPage = () => {
           <CustomButton
             buttonText={"Сменить пароль"}
             handleButtonClick={handleSubmit(onSubmit)}
-            // disabled={!isDirty || !isValid}
+            disabled={!isDirty || !isValid}
             type="button"
           />
         </form>
       </div>
-      <PopupLogin
+      <PopupResetPassword
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
       />

@@ -42,12 +42,13 @@
 
 .burger-links__wrapper {
   display: flex;
-  gap: 20.5px;
+  align-items: center;
+  gap: 24px;
 }
 
 .burger__close {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   background-image: url(../../images/x-button.svg);
   background-color: transparent;
   background-size: cover;

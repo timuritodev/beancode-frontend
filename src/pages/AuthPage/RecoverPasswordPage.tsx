@@ -14,6 +14,8 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { PopupLogin } from "../../components/Popups/PopupLogin";
 import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
 import { IRecoverPassword } from "../../types/Auth.types";
+import { PopupErrorRecoverPassword } from "../../components/Popups/PopupErrorRecoverPassword";
+import { PopupRecoverPassword } from "../../components/Popups/PopupRecoverPassword";
 
 export const RecoverPasswordPage = () => {
   const dispatch = useAppDispatch();
@@ -70,16 +72,16 @@ export const RecoverPasswordPage = () => {
           <CustomButton
             buttonText={"Отправить"}
             handleButtonClick={handleSubmit(onSubmit)}
-            // disabled={!isDirty || !isValid}
+            disabled={!isDirty || !isValid}
             type="button"
           />
         </form>
       </div>
-      <PopupLogin
+      <PopupRecoverPassword
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
       />
-      <PopupErrorLogin
+      <PopupErrorRecoverPassword
         isOpened={isErrorPopupOpened}
         setIsOpened={setIsErrorPopupOpened}
       />

@@ -64,6 +64,7 @@
   margin: 20px 0 0 100px;
   gap: 15px;
 }
+
 .profile__link {
   color: var(--grey, #797979);
   font-family: Ubuntu;
@@ -74,6 +75,7 @@
   text-decoration: none;
   /* margin: 82px 0 0 193px; */
   margin: 0;
+  height: 30px;
 }
 
 @media screen and (max-width: 767px) {

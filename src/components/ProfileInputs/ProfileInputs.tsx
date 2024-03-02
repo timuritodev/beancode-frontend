@@ -158,13 +158,15 @@ export const ProfileInputs = () => {
             error={errors?.area?.message}
           />
         )}
-        <Link to="/change-password" className="profile__link">Сменить пароль</Link>
         <CustomButton
           buttonText={"Изменить данные"}
           handleButtonClick={handleSubmit(onSubmit)}
           disabled={!isDirty || !isValid}
           type="button"
         />
+        <Link to="/change-password" className="profile__link">
+          Сменить пароль
+        </Link>
       </form>
       <PopupChanges
         isOpened={isSavedPopupOpened}
