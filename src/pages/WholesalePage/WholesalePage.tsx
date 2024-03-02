@@ -12,9 +12,10 @@ import {
 } from "../../utils/constants";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
-import { PopupRegister } from "../../components/Popups/PopupRegister";
 import { IWholesale } from "../../types/Wholesale.types";
 import { createWholesaleApi } from "../../services/redux/slices/wholesale/wholesale";
+import { PopupWholesale } from "../../components/Popups/PopupWholesale";
+import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 
 export const WholesalePage = () => {
   const dispatch = useAppDispatch();
@@ -38,8 +39,15 @@ export const WholesalePage = () => {
         email: getValues("email"),
       })
     )
+    dispatch(
+      sendEmailApi({
+        from: getValues("email"),
+        subject: "Опт",
+        text: `Название организации - ${getValues("title")} \nИНН - ${getValues("inn")}  \nФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")}`,
+      })
+    )
       .unwrap()
-      .then((res) => {
+      .then(() => {
         setIsSavedPopupOpened(true);
       })
       .catch((err) => {
@@ -113,7 +121,7 @@ export const WholesalePage = () => {
           />
         </form>
       </div>
-      <PopupRegister
+      <PopupWholesale
         isOpened={isSavedPopupOpened}
         setIsOpened={setIsSavedPopupOpened}
       />

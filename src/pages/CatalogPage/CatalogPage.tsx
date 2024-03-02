@@ -4,16 +4,21 @@ import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { getProductsApi } from "../../services/redux/slices/product/product";
 import { ProductList } from "../../components/Product/ProductList";
 import { IProduct } from "../../types/Product.types";
+import { getCartApi } from "../../services/redux/slices/cart/cart";
+import { selectUser } from "../../services/redux/slices/user/user";
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  
   const products = useAppSelector((state) => state.products.products);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [sortOption, setSortOption] = useState("");
 
   useEffect(() => {
     dispatch(getProductsApi());
-  }, [dispatch]);
+    dispatch(getCartApi(user.id));
+  }, [dispatch, user.id]);
 
   useEffect(() => {
     const sortedProducts = [...products];
