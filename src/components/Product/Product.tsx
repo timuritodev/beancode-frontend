@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { useAppDispatch } from "../../services/typeHooks";
 import { MinusPlusButtons } from "../MinusPlusButtons/MinusPlusButtons";
+import { API_BASE_URL } from "../../utils/constants";
 
 export const Product = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
@@ -23,9 +24,7 @@ export const Product = ({ data }: { data: IProduct }) => {
     setSelectedWeight(weight);
   };
 
-  const backendBaseUrl = "https://bean-code.ru";
-
-  const imageUrl = backendBaseUrl + data.h_picture;
+  const imageUrl = API_BASE_URL + data.v_picture;
 
   return (
     <div className="product">

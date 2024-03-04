@@ -1,6 +1,7 @@
 import "./OrderCard.css";
 import { ICart } from "../../types/Cart.types";
 import { FC } from "react";
+import { API_BASE_URL } from "../../utils/constants";
 
 interface OrderCardProps {
   data: ICart;
@@ -8,9 +9,8 @@ interface OrderCardProps {
 }
 
 export const OrderCard: FC<OrderCardProps> = ({ data, count }) => {
-  const backendBaseUrl = "https://bean-code.ru";
 
-  const imageUrl = backendBaseUrl + data.h_picture;
+  const imageUrl = API_BASE_URL + data.v_picture;
 
   return (
     <div className="order-card">

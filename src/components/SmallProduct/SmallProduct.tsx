@@ -3,6 +3,7 @@ import "./SmallProduct.css";
 import { useAppDispatch } from "../../services/typeHooks";
 import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
+import { API_BASE_URL } from "../../utils/constants";
 
 export const SmallProduct = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
@@ -13,9 +14,7 @@ export const SmallProduct = ({ data }: { data: IProduct }) => {
     dispatch(getProductbyidApi(data.id));
   };
 
-  const backendBaseUrl = "https://bean-code.ru";
-
-  const imageUrl = backendBaseUrl + data.h_picture;
+  const imageUrl = API_BASE_URL + data.v_picture;
 
   return (
     <div className="smallproduct">

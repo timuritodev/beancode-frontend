@@ -4,6 +4,7 @@ import { IProduct } from "../../types/Product.types";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
+import { API_BASE_URL } from "../../utils/constants";
 
 export interface SearchCardProps {
   data: IProduct;
@@ -23,9 +24,7 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
     window.scrollTo(0, 0);
   };
 
-  const backendBaseUrl = "https://bean-code.ru";
-
-  const imageUrl = backendBaseUrl + data.h_picture;
+  const imageUrl = API_BASE_URL + data.v_picture;
 
   return (
     <div

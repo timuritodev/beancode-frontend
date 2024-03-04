@@ -9,18 +9,22 @@ const IntroBlock = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { width } = useResize();
+  const isAnimationEnabled = width >= 1280;
 
   useEffect(() => {
-    const handleMouseMove = (e: any) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    if (isAnimationEnabled) {
+      const handleMouseMove = (e: any) => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      };
 
-    document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mousemove", handleMouseMove);
 
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+      return () => {
+        document.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, [isAnimationEnabled]);
+
   return (
     <div className="intro__block">
       <div

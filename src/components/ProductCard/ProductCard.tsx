@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { ICart } from "../../types/Cart.types";
 import { useResize } from "../../hooks/useResize";
+import { API_BASE_URL } from "../../utils/constants";
 
 interface ProductCardProps {
   data: ICart;
@@ -47,9 +48,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
     );
   };
 
-  const backendBaseUrl = "https://bean-code.ru";
-
-  const imageUrl = backendBaseUrl + data.h_picture;
+  const imageUrl = API_BASE_URL + data.v_picture
 
   return (
     <div className="product-card">

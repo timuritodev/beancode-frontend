@@ -7,6 +7,7 @@ import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusBut
 import { Grains } from "../../components/Grains/Grains";
 import { useResize } from "../../hooks/useResize";
 import Loader from "../../components/Loader/Loader";
+import { API_BASE_URL } from "../../utils/constants";
 
 export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -31,9 +32,7 @@ export const ProductPage = () => {
     console.log("Selected Option:", e.target.value);
   };
 
-  const backendBaseUrl = "https://bean-code.ru";
-
-  const imageUrl = backendBaseUrl + product.h_picture;
+  const imageUrl = API_BASE_URL + product.v_picture;
 
   return (
     <>
