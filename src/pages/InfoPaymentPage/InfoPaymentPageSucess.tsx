@@ -50,7 +50,7 @@ export const InfoPaymentPageSucess = () => {
 
   useEffect(() => {
     dispatch(getOrdersApi(user.id));
-    if (!isOrderProcessed2) {
+    if (!isOrderProcessed) {
       dispatch(
         getStatusApi({
           userName: payApiUsername,
@@ -76,9 +76,10 @@ export const InfoPaymentPageSucess = () => {
             );
             dispatch(
               sendEmailApi({
-                from: user.email,
+                email: user.email,
                 subject: "Заказ",
-                text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+                text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(Название, вес) - ${products_info}`,
+                greetings: `Спасибо за ваш заказ.\n${products_info}`
               })
             );
           }
@@ -87,26 +88,7 @@ export const InfoPaymentPageSucess = () => {
           console.error("Error in getStatusApi call:", error);
         });
     }
-  }, [
-    dispatch,
-    orderRes.orderId,
-    payApiPassword,
-    payApiUsername,
-    user.id,
-    user.email,
-    user.phone,
-    user.address,
-    user.city,
-    orderStatus.OrderStatus,
-    user.name,
-    user.surname,
-    orderId,
-    sum,
-    product_quantity,
-    products_info,
-    isOrderProcessed2,
-    formattedDate,
-  ]);
+  }, [dispatch, orderRes.orderId, payApiPassword, payApiUsername, user.id, user.email, user.phone, user.address, user.city, orderStatus.OrderStatus, user.name, user.surname, orderId, sum, product_quantity, products_info, isOrderProcessed2, formattedDate, isOrderProcessed]);
 
   return (
     <section className="info-payment">

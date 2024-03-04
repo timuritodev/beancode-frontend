@@ -1,7 +1,8 @@
 export interface IData {
-    from: string;
+    email: string;
     subject: string;
 	text: string;
+    greetings: string;
 }
 
 export interface IEmailState {

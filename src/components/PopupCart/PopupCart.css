@@ -159,7 +159,7 @@
     font-weight: 500;
     line-height: 37px;
     letter-spacing: 0em;
-    margin: 40px 0 32px 0;
+    margin: 30px 0 32px 0;
   }
 
   .popup-cart__text {
@@ -173,7 +173,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 33px 0 0 0;
+    margin: 20px 0 0 0;
   }
 
   .popup-cart__button-delete {
@@ -192,7 +192,7 @@
 
   .popup-cart__button__container {
     flex-direction: column;
-    margin: 45px 0 0 0;
+    margin: 25px 0 0 0;
   }
 
   .popup-cart__button-continue {

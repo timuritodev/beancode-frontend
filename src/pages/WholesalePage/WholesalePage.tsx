@@ -44,6 +44,7 @@ export const WholesalePage = () => {
         from: getValues("email"),
         subject: "Опт",
         text: `Название организации - ${getValues("title")} \nИНН - ${getValues("inn")}  \nФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")}`,
+        greetings: "",
       })
     )
       .unwrap()
