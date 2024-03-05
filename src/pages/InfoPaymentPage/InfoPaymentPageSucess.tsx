@@ -30,23 +30,23 @@ export const InfoPaymentPageSucess = () => {
   const product_quantity = queryParams.get("product_quantity");
   const products_info = queryParams.get("product_info");
 
+  // const products_info2 = queryParams.get("product_info")?.split(', ').map(item => decodeURI(decodeURIComponent(item))) || [];
+
+  // const products_info3 = queryParams.get("product_info")?.split(', ').map(item => item.trim()) || [];
+
+
+  // const decodedProductsInfo = products_info2.join(", ");
+  // console.log(decodedProductsInfo, 3333);
+  // console.log(products_info3, 444);
+
   const isOrderProcessed = orderStatus.OrderNumber === orderId;
 
   const isOrderProcessed2 =
     orders.find((order) => order.orderNumber === orderId) !== undefined;
 
   const currentTimestamp = Date.now();
-
-  // Создание объекта Date из метки времени
   const currentDate = new Date(currentTimestamp);
-
-  // Форматирование даты в строку 'YYYY-MM-DD'
   const formattedDate = currentDate.toISOString().split("T")[0];
-
-  // console.log(isOrderProcessed, "isOrderProcessed");
-  // console.log(isOrderProcessed2, "isOrderProcessed2");
-  // console.log(orderStatus.OrderNumber, "orderStatus.OrderNumber");
-  // console.log(orderId, "orderId");
 
   useEffect(() => {
     dispatch(getOrdersApi(user.id));
