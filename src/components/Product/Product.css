@@ -57,6 +57,13 @@
   margin-right: auto;
 }
 
+.grains__wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 8px;
+  margin-right: auto;
+}
+
 .product__price__wrapper {
   display: flex;
   flex-direction: column;
@@ -104,27 +111,6 @@
   margin: 0;
 }
 
-.grains__container {
-  margin: 0 40px 0 0;
-}
-
-.grain {
-  display: inline-block;
-  width: 16px;
-  height: 17px;
-  /* background-image: url('path/to/combined-grain.png');  */
-  background-size: cover;
-  margin: 0 8px 0 0;
-}
-
-.filled {
-  background-image: url(../../images/bean_full.svg);
-}
-
-.empty {
-  background-image: url(../../images/bean_empy.svg);
-}
-
 @media screen and (max-width: 767px) {
   .productlist {
     max-width: 1280px;
@@ -166,6 +152,10 @@
 
   .product__wrapper {
     margin: 24px 0 0 8px;
+  }
+
+  .grains__wrapper {
+    margin: 0 0 0 8px;
   }
 
   .product__price__wrapper {

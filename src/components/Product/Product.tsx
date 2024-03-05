@@ -6,6 +6,7 @@ import { getProductbyidApi } from "../../services/redux/slices/productbyid/produ
 import { useAppDispatch } from "../../services/typeHooks";
 import { MinusPlusButtons } from "../MinusPlusButtons/MinusPlusButtons";
 import { API_BASE_URL } from "../../utils/constants";
+import { Grains } from "../Grains/Grains";
 
 export const Product = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
@@ -37,34 +38,10 @@ export const Product = ({ data }: { data: IProduct }) => {
         />
         <h2 className="product__title">{data.title}</h2>
         <p className="product__description">{data.description}</p>
-
-        <div className="product__wrapper">
-          <div className="grains__container">
-            <div className="product__grains">
-              {[...Array(5)].map((_, index) => (
-                <span
-                  key={index}
-                  className={`grain ${
-                    index < data.acidity ? "filled" : "empty"
-                  }`}
-                ></span>
-              ))}
-            </div>
-            <p className="product__info">Кислотность</p>
-          </div>
-          <div className="grains__container">
-            <div className="product__grains">
-              {[...Array(5)].map((_, index) => (
-                <span
-                  key={index}
-                  className={`grain ${
-                    index < data.density ? "filled" : "empty"
-                  }`}
-                ></span>
-              ))}
-            </div>
-            <p className="product__info">Плотность</p>
-          </div>
+        <div className="grains__wrapper">
+          {data.density !== 0 && (
+            <Grains acidity={data.acidity} density={data.density} />
+          )}
         </div>
         <div className="product__wrapper">
           <div className="product__price__wrapper">
@@ -77,15 +54,17 @@ export const Product = ({ data }: { data: IProduct }) => {
               <p className="product__price">{data.low_price} ₽/</p>
               <p className="product__weight"> {data.low_weight}</p>
             </div>
-            <div
-              className={`product__price__container ${
-                selectedPrice === data.price ? "selected" : "not-selected"
-              }`}
-              onClick={() => handleChange(data.price, data.weight)}
-            >
-              <p className="product__price">{data.price} ₽/</p>
-              <p className="product__weight"> {data.weight}</p>
-            </div>
+            {data.price !== "0" && (
+              <div
+                className={`product__price__container ${
+                  selectedPrice === data.price ? "selected" : "not-selected"
+                }`}
+                onClick={() => handleChange(data.price, data.weight)}
+              >
+                <p className="product__price">{data.price} ₽/</p>
+                <p className="product__weight"> {data.weight}</p>
+              </div>
+            )}
           </div>
           <MinusPlusButtons
             data={data}
@@ -97,3 +76,6 @@ export const Product = ({ data }: { data: IProduct }) => {
     </div>
   );
 };
+// INSERT INTO product (title, description, price, weight, h_picture, v_picture, acidity, density, big_description, low_price, low_weight) VALUES ('Набор из 2ух сортов', 'Набор включает в себя наши бразильские сорта кофе', '0', '0', '/images/two_pack.jpeg', '/images/two_pack.jpeg', 0, 0, 'Для эспрессо', '849', '500 гр');
+
+// INSERT INTO product (title, description, price, weight, h_picture, v_picture, acidity, density, big_description, low_price, low_weight) VALUES ('Набор из 3ёх сортов', 'Набор включает в себя наши лучшие сорта кофе', '0', '0', '/images/three_pack.jpeg', '/images/three_pack.jpeg', 0, 0, 'Для эспрессо', '1449', '750 гр');

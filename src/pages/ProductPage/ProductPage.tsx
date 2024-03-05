@@ -49,7 +49,12 @@ export const ProductPage = () => {
                   <p className="product__big-description">
                     {product.big_description}
                   </p>
-                  <Grains acidity={product.acidity} density={product.density} />
+                  {product.density !== 0 && (
+                    <Grains
+                      acidity={product.acidity}
+                      density={product.density}
+                    />
+                  )}
                   <select
                     id="dropdown"
                     className="products__dropdown"
@@ -60,18 +65,23 @@ export const ProductPage = () => {
                     {/* <option value="option3">Опция 3</option> */}
                   </select>
                   <div className="product__big-weight__container">
-                    <div
-                      className={`products__price__container ${
-                        selectedPrice === product.price
-                          ? "product-selected"
-                          : "product-not-selected"
-                      }`}
-                      onClick={() =>
-                        handleChange(product.price, product.weight)
-                      }
-                    >
-                      <p className="products__big-weight"> {product.weight}</p>
-                    </div>
+                    {product.price !== "0" && (
+                      <div
+                        className={`products__price__container ${
+                          selectedPrice === product.price
+                            ? "product-selected"
+                            : "product-not-selected"
+                        }`}
+                        onClick={() =>
+                          handleChange(product.price, product.weight)
+                        }
+                      >
+                        <p className="products__big-weight">
+                          {" "}
+                          {product.weight}
+                        </p>
+                      </div>
+                    )}
                     <div
                       className={`products__price__container ${
                         selectedPrice === product.low_price

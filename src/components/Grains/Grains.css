@@ -13,6 +13,10 @@
   margin: 0 8px 0 0;
 }
 
+.grains__container {
+  margin: 0 40px 0 0;
+}
+
 .filled {
   background-image: url(../../images/bean_full.svg);
 }

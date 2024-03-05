@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "./Grains.css";
 
 interface ProductCardListProps {
   acidity: number;
