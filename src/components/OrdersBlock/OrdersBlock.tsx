@@ -38,7 +38,7 @@ export const OrderBlock: FC = () => {
   });
 
   const products_info = cartproducts
-    .map((item) => `${item.title} ${item.weight}`)
+    .map((item) => `${item.id} "${item.title}" ${item.weight}`)
     .join(", ");
 
   const handleClickPayButton = async () => {
