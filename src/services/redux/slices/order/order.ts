@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCreateOrder, fetchGetOrders } from "./orderAPI";
+import { fetchCreateOrder, fetchCreateOrderBackup, fetchGetOrders } from "./orderAPI";
 import {
   IOrderDetails,
   IOrderDetailsState,
@@ -11,6 +11,19 @@ export const createOrderApi = createAsyncThunk(
   async (data: IOrderDetails, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchCreateOrder(data);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const createOrderBackupApi = createAsyncThunk(
+  "@@order/createOrderBackup",
+  async (data: IOrderDetails, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchCreateOrderBackup(data);
       const json = await response.json();
       return fulfillWithValue(json);
     } catch (error: unknown) {
@@ -49,6 +62,9 @@ const orderSlice = createSlice({
       .addCase(createOrderApi.fulfilled, (state, action) => {
         state.status = "success";
         state.info = [...state.info, action.payload];
+      })
+      .addCase(createOrderBackupApi.fulfilled, (state, action) => {
+        state.status = "success";
       })
       .addCase(getOrdersApi.fulfilled, (state, action) => {
         state.status = "success";

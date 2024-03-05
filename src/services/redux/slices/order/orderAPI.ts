@@ -40,6 +40,12 @@ export const fetchCreateOrder = (data: IOrderDetails): Promise<Response> => {
   );
 };
 
+export const fetchCreateOrderBackup = (data: IOrderDetails): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/order-backup/create`, "POST", data).then((res) =>
+    checkRes(res)
+  );
+};
+
 export const fetchGetOrders = (userId: number): Promise<IOrderDetails[]> => {
     return fetchData(`${API_BASE_URL}/order/${userId}`, "GET").then((res) =>
       checkRes2(res)

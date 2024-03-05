@@ -11,6 +11,7 @@ import { selectUser } from "../../services/redux/slices/user/user";
 // import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
 import { deleteAllApi, resetCart } from "../../services/redux/slices/cart/cart";
+import { createOrderBackupApi } from "../../services/redux/slices/order/order";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,11 @@ export const OrderBlock: FC = () => {
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
     .join(", ");
-      
+
+  const currentTimestamp = Date.now();
+  const currentDate = new Date(currentTimestamp);
+  const formattedDate = currentDate.toISOString().split("T")[0];
+
   const handleClickPayButton = async () => {
     try {
       await dispatch(
@@ -55,6 +60,20 @@ export const OrderBlock: FC = () => {
           clientId: `${user.id}`,
           email: user.email,
           phone: user.phone,
+        })
+      );
+      await dispatch(
+        createOrderBackupApi({
+          userId: user.id,
+          phone: user.phone,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+          sum: sum,
+          product_quantity: cartproducts.length,
+          products_info: products_info,
+          orderNumber: `${randomOrderNumber}`,
+          date_order: formattedDate,
         })
       );
       dispatch(deleteAllApi(user.id));
