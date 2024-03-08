@@ -82,6 +82,7 @@
 .product__price__container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   cursor: pointer;
 }
 

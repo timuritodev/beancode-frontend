@@ -1,6 +1,5 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { useNavigate } from "react-router";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -11,11 +10,9 @@ export const PopupWholesale: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
 }) => {
-  const navigate = useNavigate();
 
   const handleClickClose = () => {
     setIsOpened(false);
-    navigate("/catalog");
   };
 
   return (
