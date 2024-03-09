@@ -57,6 +57,7 @@ export const OrderBlock: FC = () => {
           returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${sum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           // returnUrl: `http://localhost:5173/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${sum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
+          description: `Информация о заказе - ${products_info}\nДата заказа - ${formattedDate}`,
           clientId: `${user.id}`,
           email: user.email,
           phone: user.phone,

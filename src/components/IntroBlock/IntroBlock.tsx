@@ -36,16 +36,14 @@ const IntroBlock = () => {
         }}
       ></div>
       <div className="intro__content">
-        <h1 className="intro__title">ВКУСНЫЙ КОФЕ В ЗЕРНАХ</h1>
-        {width < 767 ? (
-          <p className="intro__text">
-            С БЕСПЛАТНОЙ ДОСТАВКОЙ до двери
-          </p>
-        ) : (
-          <p className="intro__text">
-            С БЕСПЛАТНОЙ ДОСТАВКОЙ до двери
-          </p>
-        )}
+        <h1 className="intro__title">
+          вкусный
+          <br /> КОФЕ В ЗЕРНАХ
+        </h1>
+        <p className="intro__text">
+          С БЕСПЛАТНОЙ ДОСТАВКОЙ <br />
+          до двери
+        </p>
         <Link to="catalog" className="intro__button">
           Выбрать кофе
         </Link>
