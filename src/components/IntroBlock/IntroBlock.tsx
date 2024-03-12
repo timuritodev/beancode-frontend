@@ -39,11 +39,14 @@ const IntroBlock = () => {
         <h1 className="intro__title">
           вкусный
           <br /> КОФЕ В ЗЕРНАХ
+          <br />
+          С БЕСПЛАТНОЙ <br /> ДОСТАВКОЙ <br />
+          до двери
         </h1>
-        <p className="intro__text">
+        {/* <p className="intro__text">
           С БЕСПЛАТНОЙ ДОСТАВКОЙ <br />
           до двери
-        </p>
+        </p> */}
         <Link to="catalog" className="intro__button">
           Выбрать кофе
         </Link>

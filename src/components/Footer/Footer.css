@@ -199,7 +199,7 @@
 
   .footer-input__container {
     display: grid;
-    grid-template-columns: 254px 50px; /* Ширина первого блока - 300px, второго - 50px */
+    grid-template-columns: 70% 20%; /* Ширина первого блока - 300px, второго - 50px */
     grid-gap: 22px;
     align-items: center;
     margin: 24px 0 0 0;
