@@ -4,9 +4,9 @@
 
 // export const API_BASE_URL = window.location.origin + currentURL.substring(0, currentURL.lastIndexOf('/')) + apiSuffix;
 
-// export const API_BASE_URL = "http://localhost:3001";
+export const API_BASE_URL = "http://localhost:3001";
 
-export const API_BASE_URL = "https://bean-code.ru";
+// export const API_BASE_URL = "https://bean-code.ru";
 
 export const orders = [
   // {
@@ -140,6 +140,16 @@ export const VALIDATION_SETTINGS = {
       noFio: "Необходимо ввести ФИО",
       invalid: "Только кириллица или латинские буквы",
       tooLong: "Слишком длинная ФИО",
+    },
+  },
+  promo: {
+    pattern: /^[a-zа-яё\s\0-9]+$/iu,
+    minLength: 2,
+    maxLength: 42,
+    messages: {
+      noPromo: "Необходимо ввести промокод",
+      invalid: "Такого промокода не существует",
+      tooLong: "Слишком длинный промкод",
     },
   },
 };
@@ -314,5 +324,20 @@ export const FIO_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.fio.maxLength,
     message: VALIDATION_SETTINGS.fio.messages.tooLong,
+  },
+};
+
+export const PROMO_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.promo.messages.noPromo,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.promo.pattern,
+    message: VALIDATION_SETTINGS.promo.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.promo.maxLength,
+    message: VALIDATION_SETTINGS.promo.messages.tooLong,
   },
 };

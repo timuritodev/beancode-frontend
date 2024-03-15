@@ -12,6 +12,12 @@ import { selectUser } from "../../services/redux/slices/user/user";
 import { payApi } from "../../services/redux/slices/pay/pay";
 import { deleteAllApi, resetCart } from "../../services/redux/slices/cart/cart";
 import { createOrderBackupApi } from "../../services/redux/slices/order/order";
+import CustomInput from "../CustomInput/CustomInput";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IPromo } from "../../types/Promo.types";
+import { promoApi } from "../../services/redux/slices/promo/promo";
+import { CustomInputTypes } from "../../types/CustomInput.types";
+import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +44,39 @@ export const OrderBlock: FC = () => {
     sum += parseInt(product.price, 10);
   });
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<IPromo>({ mode: "onChange" });
+
+  const [discount, setDiscount] = useState(0);
+
+  // Внутри функции onSubmit после успешного применения промокода
+  const onSubmit: SubmitHandler<IPromo> = () => {
+    dispatch(promoApi({ promo: getValues("promo"), userId: user.id }))
+      .unwrap()
+      .then((response) => {
+        // Если промокод успешно применен, обновите скидку
+        const discountValue = parseFloat(response.discount);
+        console.log(discountValue, 123123);
+        setDiscount(discountValue);
+        // sum = sum * discountValue;
+      })
+      .catch((error) => {
+        // Обработайте ошибку при применении промокода
+        console.error("Error applying promo code:", error);
+      });
+  };
+
+  let discountedSum = sum; // Инициализируем сумму с учетом скидки как обычную сумму заказа
+
+  // Если применен промокод, рассчитываем сумму с учетом скидки
+  if (discount > 0) {
+    discountedSum = sum * (1 - discount / 100);
+  }
+
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
     .join(", ");
@@ -53,11 +92,11 @@ export const OrderBlock: FC = () => {
           userName: payApiUsername,
           password: payApiPassword,
           orderNumber: `${randomOrderNumber}`,
-          amount: `${sum * 100}`,
-          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${sum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          amount: `${discountedSum * 100}`,
+          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           // returnUrl: `http://localhost:5173/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${sum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
-          description: `Номер заказа - ${randomOrderNumber},Информация о заказе(id, название, вес) - ${products_info},Кол-во товаров - ${cartproducts.length},Город - ${user.city},Адрес - ${user.address},Email - ${user.email},Телефон - ${user.phone},ФИО - ${user.name} ${user.surname}`,
+          description: `Номер заказа - ${randomOrderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${user.city}, Адрес - ${user.address}, Email - ${user.email}, Телефон - ${user.phone}, ФИО - ${user.name} ${user.surname}`,
           clientId: `${user.id}`,
           email: user.email,
           phone: user.phone,
@@ -93,6 +132,10 @@ export const OrderBlock: FC = () => {
     }
   }, [redirecting, formUrl]);
 
+  // const onSubmit: SubmitHandler<IPromo> = () => {
+  //   dispatch(promoApi({ promo: getValues("promo"), userId: user.id })).unwrap();
+  // };
+
   return (
     <div className="order-block">
       <h3 className="order-block__title">Ваш заказ</h3>
@@ -102,7 +145,7 @@ export const OrderBlock: FC = () => {
           {cartproducts.length} товара на сумму
           {/* Todo товар или товара */}
         </p>
-        <p className="order-block__text">{sum} ₽</p>
+        <p className="order-block__text">{discountedSum} ₽</p>
       </div>
       {/* <div className="order-block__details">
         <p className="order-block__text">Курьером...</p>
@@ -113,6 +156,29 @@ export const OrderBlock: FC = () => {
         <p className="order-block__total"> ₽</p> */}
         {/* TODO добавить сюда цену за доставку */}
       </div>
+      <form
+        className="order-block__input_container"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <CustomInput
+          inputType={CustomInputTypes.promo}
+          // labelText={"Электронная почта"}
+          validation={{
+            ...register("promo", PROMO_VALIDATION_CONFIG),
+          }}
+          // placeholder="email@example.com"
+          error={errors?.promo?.message}
+        />
+        <button className="order-block__button">
+          <img
+            className="subscribe__button_img"
+            alt="subscribe__button_img"
+            src={button}
+            onClick={handleSubmit(onSubmit)}
+          />
+        </button>
+      </form>
       {/* <div className="order-block__input_container">
         <input
           className="order-block__input"

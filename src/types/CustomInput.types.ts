@@ -17,6 +17,7 @@ export enum CustomInputTypes {
 	title = 'title',
 	inn = 'inn',
 	fio = 'fio',
+	promo = 'promo',
 }
 
 export enum CustomInputColors {

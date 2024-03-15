@@ -67,8 +67,8 @@ export const DeliveryBlock = () => {
     }
   }, [dispatch, user]);
 
-  const [isDeliveryPointVisible, setIsDeliveryPointVisible] = useState(true);
-  const [isCourierVisible, setIsCourierVisible] = useState(false);
+  const [isDeliveryPointVisible, setIsDeliveryPointVisible] = useState(false);
+  const [isCourierVisible, setIsCourierVisible] = useState(true);
 
   const handleDeliveryButtonClick = () => {
     setIsDeliveryPointVisible(true);
@@ -90,7 +90,7 @@ export const DeliveryBlock = () => {
           from: "Новосибирск",
           root: "cdek-map",
           apiKey: "c71385a4-e8d4-4e71-8c0d-f0d16956e3ba",
-          servicePath: "http://localhost:3001/service.php",
+          servicePath: "https://bean-code.ru/service.php",
           defaultLocation: "Новосибирск",
         });
       };
