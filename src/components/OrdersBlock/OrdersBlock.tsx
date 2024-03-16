@@ -18,6 +18,8 @@ import { IPromo } from "../../types/Promo.types";
 import { promoApi } from "../../services/redux/slices/promo/promo";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
+import { PopupPromo } from "../Popups/PopupPromo";
+import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +35,9 @@ export const OrderBlock: FC = () => {
   const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
   const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
   const payApiPasswordWa = process.env.REACT_APP_PAY_API_PASSWORD_ST;
+
+  const [isPromoPopupOpened, setIsPromoPopupOpened] = useState<boolean>(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -62,10 +67,12 @@ export const OrderBlock: FC = () => {
         const discountValue = parseFloat(response.discount);
         console.log(discountValue, 123123);
         setDiscount(discountValue);
+        setIsPromoPopupOpened(true);
         // sum = sum * discountValue;
       })
       .catch((error) => {
         // Обработайте ошибку при применении промокода
+        setIsErrorPopupOpened(true);
         console.error("Error applying promo code:", error);
       });
   };
@@ -227,6 +234,15 @@ export const OrderBlock: FC = () => {
         </span>
         <img className="checkbox__img" src={ic_info} />
       </label>
+      <PopupPromo
+        isOpened={isPromoPopupOpened}
+        setIsOpened={setIsPromoPopupOpened}
+        discount={discount}
+      />
+      <PopupErrorPromo
+        isOpened={isErrorPopupOpened}
+        setIsOpened={setIsErrorPopupOpened}
+      />
     </div>
   );
 };

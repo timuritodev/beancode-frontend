@@ -64,7 +64,8 @@
   background: var(--Accent, #465244);
   border: none;
   padding: 0;
-  margin: 0 0 0 24px;
+  /* margin: 0 0 0 24px;*/
+  margin: 0;
 }
 
 .faq__block {

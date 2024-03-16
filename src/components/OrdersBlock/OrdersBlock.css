@@ -47,11 +47,13 @@
 }
 
 .order-block__input_container {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: 87%;
+  display: grid;
+  grid-template-columns: 360px 27px;
+  grid-gap: 24px;
+  align-items: center;
+  margin: 32px 0 0 0;
 }
+
 .order-block__input {
   color: var(--grey_light, #c8cac8);
   font-size: 16px;
@@ -202,10 +204,7 @@
   }
 
   .order-block__input_container {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    width: 87%;
+    grid-template-columns: 277px 27px;
   }
   .order-block__input {
     color: var(--grey_light, #c8cac8);
