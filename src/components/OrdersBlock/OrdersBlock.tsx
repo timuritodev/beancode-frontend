@@ -133,8 +133,8 @@ export const OrderBlock: FC = () => {
       // setTimeout(() => {
       //   localStorage.removeItem("discount");
       // }, 10 * 1000);
-      dispatch(deleteAllApi(user.id));
-      dispatch(resetCart());
+      // dispatch(deleteAllApi(user.id));
+      // dispatch(resetCart());
       setRedirecting(true);
     } catch (error) {
       console.error("Error in payApi call:", error);
@@ -146,8 +146,10 @@ export const OrderBlock: FC = () => {
     if (redirecting && formUrl) {
       window.location.href = formUrl;
       setRedirecting(false);
+      dispatch(deleteAllApi(user.id));
+      dispatch(resetCart());
     }
-  }, [redirecting, formUrl]);
+  }, [redirecting, formUrl, dispatch, user.id]);
 
   return (
     <div className="order-block">
