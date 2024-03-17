@@ -36,6 +36,17 @@
   margin: 20px 0;
 }
 
+.order-block__sale {
+  color: var(--Black_text, #0f100f);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-align: left;
+}
+
 .order-block__total {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
@@ -194,6 +205,16 @@
     font-weight: 400;
     line-height: normal;
     margin: 20px 0;
+  }
+
+  .order-block__sale {
+    color: var(--Black_text, #0f100f);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
   }
 
   .order-block__total {

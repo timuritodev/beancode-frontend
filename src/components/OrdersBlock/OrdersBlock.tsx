@@ -58,31 +58,37 @@ export const OrderBlock: FC = () => {
 
   const [discount, setDiscount] = useState(0);
 
-  // Внутри функции onSubmit после успешного применения промокода
   const onSubmit: SubmitHandler<IPromo> = () => {
     dispatch(promoApi({ promo: getValues("promo"), userId: user.id }))
       .unwrap()
       .then((response) => {
-        // Если промокод успешно применен, обновите скидку
         const discountValue = parseFloat(response.discount);
-        console.log(discountValue, 123123);
         setDiscount(discountValue);
         setIsPromoPopupOpened(true);
-        // sum = sum * discountValue;
       })
       .catch((error) => {
-        // Обработайте ошибку при применении промокода
         setIsErrorPopupOpened(true);
         console.error("Error applying promo code:", error);
       });
   };
 
-  let discountedSum = sum; // Инициализируем сумму с учетом скидки как обычную сумму заказа
+  let discountedSum = sum;
 
-  // Если применен промокод, рассчитываем сумму с учетом скидки
   if (discount > 0) {
     discountedSum = sum * (1 - discount / 100);
   }
+
+  useEffect(() => {
+    const discountFromStorage = localStorage.getItem("discount");
+    if (discountFromStorage) {
+      setDiscount(parseFloat(discountFromStorage));
+    }
+  }, []);
+
+  // Обновление localStorage при изменении значения скидки
+  useEffect(() => {
+    localStorage.setItem("discount", discount.toString());
+  }, [discount]);
 
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
@@ -123,6 +129,10 @@ export const OrderBlock: FC = () => {
           date_order: formattedDate,
         })
       );
+      localStorage.removeItem("discount");
+      // setTimeout(() => {
+      //   localStorage.removeItem("discount");
+      // }, 10 * 1000);
       dispatch(deleteAllApi(user.id));
       dispatch(resetCart());
       setRedirecting(true);
@@ -139,10 +149,6 @@ export const OrderBlock: FC = () => {
     }
   }, [redirecting, formUrl]);
 
-  // const onSubmit: SubmitHandler<IPromo> = () => {
-  //   dispatch(promoApi({ promo: getValues("promo"), userId: user.id })).unwrap();
-  // };
-
   return (
     <div className="order-block">
       <h3 className="order-block__title">Ваш заказ</h3>
@@ -154,6 +160,11 @@ export const OrderBlock: FC = () => {
         </p>
         <p className="order-block__text">{discountedSum} ₽</p>
       </div>
+      {discount !== 0 ? (
+        <p className="order-block__sale">С учетом скидки {discount} %</p>
+      ) : (
+        ""
+      )}
       {/* <div className="order-block__details">
         <p className="order-block__text">Курьером...</p>
         <p className="order-block__text">{sum} ₽</p>
@@ -186,27 +197,6 @@ export const OrderBlock: FC = () => {
           />
         </button>
       </form>
-      {/* <div className="order-block__input_container">
-        <input
-          className="order-block__input"
-          id="promo"
-          name="promo"
-          type="text"
-          placeholder="Добавьте промокод"
-          // onChange={handleChange}
-          // onBlur={setSearchClose}
-          // value={values}
-          autoComplete="off"
-        />
-        <button className="order-block__button">
-          <img
-            className="subscribe__button_img"
-            alt="subscribe__button_img"
-            src={button}
-          />
-        </button>
-      </div> */}
-      {/* TODO добавить промокоды */}
       <button
         type="submit"
         className="order-block__pay-button"
