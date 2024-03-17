@@ -147,7 +147,7 @@ export const VALIDATION_SETTINGS = {
     minLength: 2,
     maxLength: 42,
     messages: {
-      noPromo: "Необходимо ввести промокод",
+      noPromo: "Такого промокода не существует",
       invalid: "Такого промокода не существует",
       tooLong: "Слишком длинный промкод",
     },
@@ -328,10 +328,10 @@ export const FIO_VALIDATION_CONFIG = {
 };
 
 export const PROMO_VALIDATION_CONFIG = {
-  required: {
-    value: true,
-    message: VALIDATION_SETTINGS.promo.messages.noPromo,
-  },
+  // required: {
+  //   value: true,
+  //   message: VALIDATION_SETTINGS.promo.messages.noPromo,
+  // },
   pattern: {
     value: VALIDATION_SETTINGS.promo.pattern,
     message: VALIDATION_SETTINGS.promo.messages.invalid,

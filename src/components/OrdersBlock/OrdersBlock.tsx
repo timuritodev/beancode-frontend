@@ -181,7 +181,7 @@ export const OrderBlock: FC = () => {
       >
         <CustomInput
           inputType={CustomInputTypes.promo}
-          // labelText={"Электронная почта"}
+          labelText={"Поле для ввода промокода"}
           validation={{
             ...register("promo", PROMO_VALIDATION_CONFIG),
           }}
