@@ -58,8 +58,11 @@ export const OrderBlock: FC = () => {
 
   const [discount, setDiscount] = useState(0);
 
+  const trimPromoCode = (promoCode: string) => promoCode.trim();
+
   const onSubmit: SubmitHandler<IPromo> = () => {
-    dispatch(promoApi({ promo: getValues("promo"), userId: user.id }))
+    const trimmedPromoCode = trimPromoCode(getValues("promo"));
+    dispatch(promoApi({ promo: trimmedPromoCode, userId: user.id }))
       .unwrap()
       .then((response) => {
         const discountValue = parseFloat(response.discount);
