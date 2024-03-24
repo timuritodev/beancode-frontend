@@ -21,13 +21,13 @@ const InfoBlock = () => {
                 Мы соблюдаем при входном контроле Российские и международные
                 стандарты
               </p>
-              <img className="info__img" src={info_block} />
+              <img className="info__img" src={info_block} alt="image of coffee beans"/>
             </div>
           </>
         ) : (
           <>
             <p className="info__digit">01</p>
-            <img className="info__img" src={info_block} />
+            <img className="info__img" src={info_block} alt="image of coffee beans"/>
             <div className="info__text__container">
               <h2 className="info__title">
                 Поставки зеленого кофе и входной контроль

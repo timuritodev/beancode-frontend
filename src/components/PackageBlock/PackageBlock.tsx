@@ -17,7 +17,7 @@ const PackageBlock = () => {
             точностью до 1 гр.
           </p>
         </div>
-        <img className="package__img" src={package_block} />
+        <img className="package__img" src={package_block} alt="image of package"/>
       </div>
     </div>
   );

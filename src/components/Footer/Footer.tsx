@@ -56,7 +56,7 @@ const Footer: FC = () => {
               <button className="subscribe__button">
                 <img
                   className="subscribe__button_img"
-                  alt="subscribe__button_img"
+                  alt="subscribe button image"
                   src={button}
                   onClick={handleSubmit(onSubmit)}
                 />
@@ -91,7 +91,7 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className="logo__block">
-          <img className="footer__logo" src={logo} />
+          <img className="footer__logo" src={logo} alt="footer logo"/>
           {width > 767 && <h2 className="footer__email">coffee@beancode.ru</h2>}
         </div>
         <div className="copyright__block">

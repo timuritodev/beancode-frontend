@@ -92,14 +92,14 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
             className="minus-plus__button minus-plus__button_minus"
             onClick={handleClickMinus}
           >
-            <img className="minus-plus__button__img_minus" src={minus} />
+            <img className="minus-plus__button__img_minus" src={minus} alt="icon minus" />
           </button>
           <p className="minus-plus__count">{productCountInCart}</p>
           <button
             className="minus-plus__button minus-plus__button_plus"
             onClick={handleClickPlus}
           >
-            <img className="minus-plus__button__img_plus" src={plus} />
+            <img className="minus-plus__button__img_plus" src={plus} alt="icon plus"/>
           </button>
         </div>
       )}

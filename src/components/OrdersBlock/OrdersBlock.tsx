@@ -194,7 +194,7 @@ export const OrderBlock: FC = () => {
         <button className="order-block__button">
           <img
             className="subscribe__button_img"
-            alt="subscribe__button_img"
+            alt="subscribe button image"
             src={button}
             onClick={handleSubmit(onSubmit)}
           />
@@ -225,7 +225,7 @@ export const OrderBlock: FC = () => {
         <span className="span__checkbox">
           Получать новости и спецпредложения
         </span>
-        <img className="checkbox__img" src={ic_info} />
+        <img className="checkbox__img" src={ic_info} alt="checkbox"/>
       </label>
       <PopupPromo
         isOpened={isPromoPopupOpened}

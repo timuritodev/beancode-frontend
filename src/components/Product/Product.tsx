@@ -33,7 +33,7 @@ export const Product = ({ data }: { data: IProduct }) => {
         <img
           className="product__image"
           src={imageUrl}
-          alt={data.h_picture}
+          alt={data.title}
           onClick={handleClickImage}
         />
         <h2 className="product__title">{data.title}</h2>

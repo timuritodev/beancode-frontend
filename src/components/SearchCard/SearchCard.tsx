@@ -32,7 +32,7 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
       onClick={() => handleClick(data.id)}
       className="search__card"
     >
-      <img className="search__card-poster" src={imageUrl} alt="" />
+      <img className="search__card-poster" src={imageUrl} alt={data.title} />
       <article className="search__card-desc">
         <p className="search__card-name">{data.title}</p>
         <div className="search__card-info">

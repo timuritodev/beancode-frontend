@@ -14,7 +14,7 @@ export const OrderCard: FC<OrderCardProps> = ({ data, count }) => {
 
   return (
     <div className="order-card">
-      <img className="order-card__img" src={imageUrl} />
+      <img className="order-card__img" src={imageUrl} alt="image of product"/>
       <p className="order-card__title">{data.title}</p>
       <p className="order-card__number">x{count}</p>
       <p className="order-card__price">{data.price} ₽</p>

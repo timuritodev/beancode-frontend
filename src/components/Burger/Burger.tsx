@@ -54,17 +54,27 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               onClick={switchPopup}
             />
             <Link to="/">
-              <img className="header__logo" alt="logo" src={logo} onClick={switchPopup}/>
+              <img
+                className="header__logo"
+                alt="logo"
+                src={logo}
+                onClick={switchPopup}
+              />
             </Link>
             <div className="burger-links__wrapper">
               <img
                 className="header__search-button_search"
                 src={loop_small}
                 alt="Кнопка поиска"
-              onClick={switchPopup}
+                onClick={switchPopup}
               />
               <Link to="/profile">
-                <img className="header__profile-icon" alt="icon" src={icon}  onClick={switchPopup}/>
+                <img
+                  className="header__profile-icon"
+                  alt="icon"
+                  src={icon}
+                  onClick={switchPopup}
+                />
               </Link>
             </div>
           </div>
@@ -93,19 +103,36 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             />
           </form>
           <div className="burger__links-container">
-            <Link to="/catalog" className="burger__link" onClick={handleLinkClick}>
-              Интернет-магазин
-            </Link>
+            {user.token && (
+              <Link
+                to="/catalog"
+                className="burger__link"
+                onClick={handleLinkClick}
+              >
+                Интернет-магазин
+              </Link>
+            )}
             {user.token === "" && (
-            <>
-            <Link to="/sign-up" className="burger__link" onClick={handleLinkClick}>
-              Регистрация
+              <>
+                <Link
+                  to="/sign-up"
+                  className="burger__link"
+                  onClick={handleLinkClick}
+                >
+                  Регистрация
+                </Link>
+                <Link
+                  to="/sign-in"
+                  className="burger__link"
+                  onClick={handleLinkClick}
+                >
+                  Вход в учетную запись
+                </Link>
+              </>
+            )}
+            <Link to="/wholesale-page" className="header__link">
+              Кофе для бизнеса
             </Link>
-            <Link to="/sign-in" className="burger__link" onClick={handleLinkClick}>
-              Вход в учетную запись
-            </Link>
-            </>
-          )}
           </div>
         </div>
       </div>

@@ -103,7 +103,7 @@ export const ProductPage = () => {
                   <img
                     className="products__image"
                     src={imageUrl}
-                    alt={product.h_picture}
+                    alt={product.title}
                   />
                   <div className="products__wrapper_2">
                     {selectedPrice === product.price ? (
@@ -151,7 +151,7 @@ export const ProductPage = () => {
                   <img
                     className="products__image"
                     src={imageUrl}
-                    alt={product.h_picture}
+                    alt={product.title}
                   />
                   <div className="">
                     <Grains

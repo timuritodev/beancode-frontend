@@ -30,13 +30,13 @@ const ReadyBlock = () => {
               >
                 Документация
               </Link>
-              <img className="ready__img" src={ready_block} />
+              <img className="ready__img" src={ready_block} alt="image of beans"/>
             </div>
           </>
         ) : (
           <>
             <p className="ready__digit">04</p>
-            <img className="ready__img" src={ready_block} />
+            <img className="ready__img" src={ready_block} alt="image of beans"/>
             <div className="ready__text__container">
               <h2 className="ready__title">Готовая продукция</h2>
               <p className="ready__text_special">

@@ -66,11 +66,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
         <>
           <div className="product-card__count-container">
             <button className="product-card__button" onClick={handleClickMinus}>
-              <img className="product-card__button__img_minus" src={minus} />
+              <img className="product-card__button__img_minus" src={minus} alt="icon minus"/>
             </button>
             <p className="product-card__count">{count}</p>
             <button className="product-card__button" onClick={handleClickPlus}>
-              <img className="product-card__button__img_plus" src={plus} />
+              <img className="product-card__button__img_plus" src={plus} alt="icon plus"/>
             </button>
           </div>
           <p className="product-card__price">{data.price} ₽</p>
@@ -80,11 +80,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
           <p className="product-card__price">{data.price} ₽</p>
           <div className="product-card__count-container">
             <button className="product-card__button" onClick={handleClickMinus}>
-              <img className="product-card__button__img_minus" src={minus} />
+              <img className="product-card__button__img_minus" src={minus} alt="icon minus" />
             </button>
             <p className="product-card__count">{count}</p>
             <button className="product-card__button" onClick={handleClickPlus}>
-              <img className="product-card__button__img_plus" src={plus} />
+              <img className="product-card__button__img_plus" src={plus} alt="icon plus"/>
             </button>
           </div>
         </>

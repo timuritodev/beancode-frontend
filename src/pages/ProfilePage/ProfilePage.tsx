@@ -55,6 +55,7 @@ export const ProfilePage = () => {
             <img
               className="button__profile__img"
               src={isAccountVisible ? person_active : person}
+              alt="icon profile"
             />
             <span
               className={`button__profile__text ${
@@ -68,6 +69,7 @@ export const ProfilePage = () => {
             <img
               className="button__profile__img"
               src={isOrderVisible ? cart_active : cart}
+              alt="icon cart"
             />
             <span
               className={`button__profile__text ${
@@ -86,7 +88,7 @@ export const ProfilePage = () => {
                 dispatch(resetOrders());
               }}
             >
-              <img className="button__profile__img" src={exit_button} />
+              <img className="button__profile__img" src={exit_button} alt="icon exit" />
               <span className="button__profile__text">Выйти</span>
             </button>
           )}
@@ -122,7 +124,7 @@ export const ProfilePage = () => {
               dispatch(resetOrders());
             }}
           >
-            <img className="button__profile__img" src={exit_button} />
+            <img className="button__profile__img" src={exit_button} alt="icon exit" />
             <span className="button__profile__text">Выйти</span>
           </button>
         )}

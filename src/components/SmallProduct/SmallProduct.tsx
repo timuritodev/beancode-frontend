@@ -22,7 +22,7 @@ export const SmallProduct = ({ data }: { data: IProduct }) => {
         <img
           className="smallproduct__image"
           src={imageUrl}
-          alt={data.h_picture}
+          alt={data.title}
           onClick={handleClickImage}
         />
         <h2 className="smallproduct__title">{data.title}</h2>

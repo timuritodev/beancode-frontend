@@ -42,23 +42,27 @@ const Header: FC = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Burger
 
-	const switchPopup = () => { 
-		setIsPopupOpen(!isPopupOpen);
-	};
-  
+  const switchPopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
     <header
       className={`header ${location.pathname === "/" ? "header_dark" : ""}`}
     >
       <div className="header__container">
-        {width < 767 && <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup}/>}
+        {width < 767 && (
+          <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
+        )}
         <Link to="/">
           <img className="header__logo" alt="logo" src={logo} />
         </Link>
         <div className="header__links">
-          <Link to="/catalog" className="header__link">
-            Интернет-магазин
-          </Link>
+          {user.token && (
+            <Link to="/catalog" className="header__link">
+              Интернет-магазин
+            </Link>
+          )}
           {user.token === "" && (
             <>
               <Link to="/sign-up" className="header__link">
@@ -69,6 +73,9 @@ const Header: FC = () => {
               </Link>
             </>
           )}
+          <Link to="/wholesale-page" className="header__link">
+            Кофе для бизнеса
+          </Link>
         </div>
 
         <div className="header__search__container">
