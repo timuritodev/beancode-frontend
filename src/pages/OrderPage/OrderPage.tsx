@@ -1,4 +1,5 @@
 import { DeliveryBlock } from "../../components/DeliveryBlock/DeliveryBlock";
+import { Widget } from "../../components/DeliveryBlock/Widget";
 import { OrderInputs } from "../../components/OrderInputs/OrderInputs";
 import { OrderBlock } from "../../components/OrdersBlock/OrdersBlock";
 import { PaymentBlock } from "../../components/PaymentBlock/PaymentBlock";
@@ -14,10 +15,11 @@ export const OrderPage = () => {
             <div>
               <h2 className="order-page__subtitle">Личные данные</h2>
               <OrderInputs />
-            </div>
-            {/* <div>
+            </div>{/*
+             <div>
               <h2 className="order-page__subtitle">Способы доставки</h2>
-              <DeliveryBlock />
+              {/* <DeliveryBlock /> 
+              <Widget />
             </div>
             <div>
               <h2 className="order-page__subtitle">Способы оплаты</h2>

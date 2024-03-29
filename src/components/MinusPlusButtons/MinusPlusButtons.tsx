@@ -7,7 +7,9 @@ import { IProduct } from "../../types/Product.types";
 import { FC, useEffect, useState } from "react";
 import {
   addToCartApi,
+  addToSessionCartApi,
   deleteFromCartApi,
+  deleteFromSessionCartApi,
 } from "../../services/redux/slices/cart/cart";
 import { PopupChanges } from "../Popups/PopupChanges";
 import { PopupErrorAdd } from "../Popups/PopupErrorAdd";
@@ -40,16 +42,29 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
   ).length;
 
   const handleClickPlus = () => {
-    dispatch(
-      addToCartApi({ userId, productId, product_price, product_weight })
-    );
+    if (user.token) {
+      dispatch(
+        addToCartApi({ userId, productId, product_price, product_weight })
+      );
+    } else {
+      // setIsSavedPopupOpened(true);
+      dispatch(
+        addToSessionCartApi({ productId, product_price, product_weight })
+      );
+    }
   };
 
   const handleClickMinus = () => {
-    dispatch(
-      deleteFromCartApi({ userId, productId, product_price, product_weight })
-    );
-    // TODO почему то не получается удалить товар с 250гр со страницы /product-page
+    if (user.token) {
+      dispatch(
+        deleteFromCartApi({ userId, productId, product_price, product_weight })
+      );
+    } else {
+      // setIsSavedPopupOpened(true);
+      dispatch(
+        deleteFromSessionCartApi({ productId, product_price, product_weight })
+      );
+    }
   };
 
   const handleClickButton = () => {
@@ -58,7 +73,10 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
         addToCartApi({ userId, productId, product_price, product_weight })
       );
     } else {
-      setIsSavedPopupOpened(true);
+      // setIsSavedPopupOpened(true);
+      dispatch(
+        addToSessionCartApi({ productId, product_price, product_weight })
+      );
     }
   };
 

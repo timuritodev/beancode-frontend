@@ -5,6 +5,13 @@ export interface ICartData {
   product_weight?: string;
 }
 
+export interface ISessionCartData {
+  // userId: number;
+  productId: number;
+  product_price?: string;
+  product_weight?: string;
+}
+
 export interface ICartState {
   status: "idle" | "success" | "loading" | "failed";
   error: unknown;
