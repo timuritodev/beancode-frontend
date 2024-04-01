@@ -109,6 +109,7 @@ export const OrderBlock: FC = () => {
         userData = JSON.parse(storedData);
       } else {
         userData = {
+          userId: user.id,
           name: user.name,
           surname: user.surname,
           phone: user.phone,
@@ -124,10 +125,10 @@ export const OrderBlock: FC = () => {
           password: payApiPassword,
           orderNumber: `${randomOrderNumber}`,
           amount: `${discountedSum * 100}`,
-          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.id}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
           description: `Номер заказа - ${randomOrderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}`,
-          clientId: `${userData.id}`,
+          clientId: `${userData.userId}`,
           email: userData.email,
           phone: userData.phone,
         })
@@ -135,7 +136,7 @@ export const OrderBlock: FC = () => {
   
       await dispatch(
         createOrderBackupApi({
-          userId: userData.id,
+          userId: userData.userId,
           phone: userData.phone,
           email: userData.email,
           address: userData.address,
@@ -150,7 +151,7 @@ export const OrderBlock: FC = () => {
       localStorage.removeItem("discount");
       localStorage.removeItem("orderFormData");
       if (user.token) {
-        await dispatch(deleteAllApi(userData.id));
+        await dispatch(deleteAllApi(user.id));
       } else {
         await dispatch(deleteAllSessionApi());
       }

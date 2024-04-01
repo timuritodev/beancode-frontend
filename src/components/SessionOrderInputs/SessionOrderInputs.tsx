@@ -18,6 +18,7 @@ import { PopupChanges } from "../Popups/PopupChanges";
 import { CustomButton } from "../CustomButton/CustomButton";
 
 interface FormData {
+  userId: string;
   name: string;
   surname: string;
   phone: string;
@@ -58,6 +59,7 @@ export const SessionOrderInputs = () => {
       return storedData
         ? JSON.parse(storedData)
         : {
+            userId: "",
             name: "",
             surname: "",
             phone: "",
