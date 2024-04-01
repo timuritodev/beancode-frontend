@@ -148,6 +148,7 @@ export const OrderBlock: FC = () => {
         })
       );
       localStorage.removeItem("discount");
+      localStorage.removeItem("orderFormData");
       if (user.token) {
         await dispatch(deleteAllApi(userData.id));
       } else {

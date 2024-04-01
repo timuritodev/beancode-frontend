@@ -130,7 +130,11 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
                 </Link>
               </>
             )}
-            <Link to="/wholesale-page" className="header__link">
+            <Link
+              to="/wholesale-page"
+              className="header__link"
+              onClick={handleLinkClick}
+            >
               Кофе для бизнеса
             </Link>
           </div>
