@@ -24,6 +24,7 @@ import { CustomInputTypes } from "../../types/CustomInput.types";
 import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
+import { CustomButton } from "../CustomButton/CustomButton";
 
 interface UserData {
   userId: number;
@@ -185,9 +186,7 @@ export const OrderBlock: FC = () => {
     }
   }, [redirecting, formUrl, dispatch, user.id]);
 
-  const isUserDataEmpty =
-    !userData ||
-    Object.values(userData).some((value) => value === "" || value === null);
+  const isUserDataEmpty = !!userData.email;
 
   return (
     <div className="order-block">
@@ -237,14 +236,21 @@ export const OrderBlock: FC = () => {
           />
         </button>
       </form>
-      <button
+      <CustomButton
+          buttonText={"Оплатить заказ"}
+          handleButtonClick={handleClickPayButton}
+          disabled={!isUserDataEmpty}
+          type="submit"
+          className="order-block__pay-button"
+        />
+      {/* <button
         type="submit"
         className="order-block__pay-button"
         onClick={handleClickPayButton}
-        disabled={isUserDataEmpty}
+        disabled={!isUserDataEmpty}
       >
         Оплатить заказ
-      </button>
+      </button> */}
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в

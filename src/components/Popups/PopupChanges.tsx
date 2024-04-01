@@ -11,13 +11,17 @@ export const PopupChanges: FC<IChangesSavedPopup> = ({
 	setIsOpened,
 }) => {
 
+	const handleClickClose = () => {
+		window.location.reload();
+		setIsOpened(false)
+	}
 	return (
 		<Popup isOpened={isOpened} setIsOpened={setIsOpened}>
 			<div className="popup__container">
 				<button
 					type="button"
 					className="popup__x-btn"
-					onClick={() => setIsOpened(false)}
+					onClick={handleClickClose}
 				></button>
 				<h4 className="popup__title profile__title_type_saved-changes">
 					Сохранить изменения
@@ -27,7 +31,7 @@ export const PopupChanges: FC<IChangesSavedPopup> = ({
 				</p>
 				<button
 					className="popup__close popup__close_type_saved-changes"
-					onClick={() => setIsOpened(false)}
+					onClick={handleClickClose}
 				>
 					Закрыть
 				</button>

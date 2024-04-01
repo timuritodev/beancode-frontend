@@ -39,6 +39,7 @@ export const SessionOrderInputs = () => {
 
   const onSubmit: SubmitHandler<any> = (data) => {
     localStorage.setItem("orderFormData", JSON.stringify(data));
+    setIsSavedPopupOpened(true);
   };
 
   useEffect(() => {
