@@ -10,7 +10,11 @@ import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 // import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
-import { deleteAllApi, deleteAllSessionApi, resetCart } from "../../services/redux/slices/cart/cart";
+import {
+  deleteAllApi,
+  deleteAllSessionApi,
+  resetCart,
+} from "../../services/redux/slices/cart/cart";
 import { createOrderBackupApi } from "../../services/redux/slices/order/order";
 import CustomInput from "../CustomInput/CustomInput";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -20,6 +24,16 @@ import { CustomInputTypes } from "../../types/CustomInput.types";
 import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
+
+interface UserData {
+  userId: number;
+  name: string;
+  surname: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+}
 
 export const OrderBlock: FC = () => {
   const dispatch = useAppDispatch();
@@ -101,24 +115,25 @@ export const OrderBlock: FC = () => {
   const currentDate = new Date(currentTimestamp);
   const formattedDate = currentDate.toISOString().split("T")[0];
 
+  let userData: UserData;
+
+  const storedData = localStorage.getItem("orderFormData");
+  if (storedData) {
+    userData = JSON.parse(storedData);
+  } else {
+    userData = {
+      userId: user.id,
+      name: user.name,
+      surname: user.surname,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+    };
+  }
+
   const handleClickPayButton = async () => {
     try {
-      let userData;
-      const storedData = localStorage.getItem("orderFormData");
-      if (storedData) {
-        userData = JSON.parse(storedData);
-      } else {
-        userData = {
-          userId: user.id,
-          name: user.name,
-          surname: user.surname,
-          phone: user.phone,
-          email: user.email,
-          address: user.address,
-          city: user.city,
-        };
-      }
-  
       await dispatch(
         payApi({
           userName: payApiUsername,
@@ -133,7 +148,7 @@ export const OrderBlock: FC = () => {
           phone: userData.phone,
         })
       );
-  
+
       await dispatch(
         createOrderBackupApi({
           userId: userData.userId,
@@ -162,7 +177,6 @@ export const OrderBlock: FC = () => {
       return;
     }
   };
-  
 
   useEffect(() => {
     if (redirecting && formUrl) {
@@ -170,6 +184,10 @@ export const OrderBlock: FC = () => {
       setRedirecting(false);
     }
   }, [redirecting, formUrl, dispatch, user.id]);
+
+  const isUserDataEmpty =
+    !userData ||
+    Object.values(userData).some((value) => value === "" || value === null);
 
   return (
     <div className="order-block">
@@ -223,6 +241,7 @@ export const OrderBlock: FC = () => {
         type="submit"
         className="order-block__pay-button"
         onClick={handleClickPayButton}
+        disabled={isUserDataEmpty}
       >
         Оплатить заказ
       </button>
@@ -244,7 +263,7 @@ export const OrderBlock: FC = () => {
         <span className="span__checkbox">
           Получать новости и спецпредложения
         </span>
-        <img className="checkbox__img" src={ic_info} alt="checkbox"/>
+        <img className="checkbox__img" src={ic_info} alt="checkbox" />
       </label>
       <PopupPromo
         isOpened={isPromoPopupOpened}
