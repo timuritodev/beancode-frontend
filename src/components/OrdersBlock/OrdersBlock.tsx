@@ -103,28 +103,43 @@ export const OrderBlock: FC = () => {
 
   const handleClickPayButton = async () => {
     try {
+      let userData;
+      const storedData = localStorage.getItem("orderFormData");
+      if (storedData) {
+        userData = JSON.parse(storedData);
+      } else {
+        userData = {
+          name: user.name,
+          surname: user.surname,
+          phone: user.phone,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+        };
+      }
+  
       await dispatch(
         payApi({
           userName: payApiUsername,
           password: payApiPassword,
           orderNumber: `${randomOrderNumber}`,
           amount: `${discountedSum * 100}`,
-          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
-          // returnUrl: `http://localhost:5173/payment-sucess?orderId=${randomOrderNumber}&userId=${user.id}&email=${user.email}&phone=${user.phone}&sum=${sum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.id}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
-          description: `Номер заказа - ${randomOrderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${user.city}, Адрес - ${user.address}, Email - ${user.email}, Телефон - ${user.phone}, ФИО - ${user.name} ${user.surname}`,
-          clientId: `${user.id}`,
-          email: user.email,
-          phone: user.phone,
+          description: `Номер заказа - ${randomOrderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}`,
+          clientId: `${userData.id}`,
+          email: userData.email,
+          phone: userData.phone,
         })
       );
+  
       await dispatch(
         createOrderBackupApi({
-          userId: user.id,
-          phone: user.phone,
-          email: user.email,
-          address: user.address,
-          city: user.city,
+          userId: userData.id,
+          phone: userData.phone,
+          email: userData.email,
+          address: userData.address,
+          city: userData.city,
           sum: sum,
           product_quantity: cartproducts.length,
           products_info: products_info,
@@ -132,11 +147,9 @@ export const OrderBlock: FC = () => {
           date_order: formattedDate,
         })
       );
+  
       localStorage.removeItem("discount");
-      // setTimeout(() => {
-      //   localStorage.removeItem("discount");
-      // }, 10 * 1000);
-      await dispatch(deleteAllApi(user.id));
+      await dispatch(deleteAllApi(userData.id));
       dispatch(resetCart());
       setRedirecting(true);
     } catch (error) {
@@ -144,6 +157,7 @@ export const OrderBlock: FC = () => {
       return;
     }
   };
+  
 
   useEffect(() => {
     if (redirecting && formUrl) {

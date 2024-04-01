@@ -34,7 +34,7 @@ export const fetchData = (
       "Content-Type": "application/json",
       ...(!!token && { Authorization: `Bearer ${token}` }),
     },
-    // credentials: 'include', 
+    credentials: 'include', 
     ...(!!data && { body: JSON.stringify(data) }),
   }).then((res) => checkRes(res));
 };
