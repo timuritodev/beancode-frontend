@@ -4,7 +4,9 @@ import "./ProductCard.css";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import {
   addToCartApi,
+  addToSessionCartApi,
   deleteFromCartApi,
+  deleteFromSessionCartApi,
 } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
 import minus from "../../images/minus.svg";
@@ -37,15 +39,29 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
   const product_weight = data.weight;
 
   const handleClickPlus = () => {
-    dispatch(
-      addToCartApi({ userId, productId, product_price, product_weight })
-    );
+    if (user.token) {
+      dispatch(
+        addToCartApi({ userId, productId, product_price, product_weight })
+      );
+    } else {
+      // setIsSavedPopupOpened(true);
+      dispatch(
+        addToSessionCartApi({ productId, product_price, product_weight })
+      );
+    }
   };
 
   const handleClickMinus = () => {
-    dispatch(
-      deleteFromCartApi({ userId, productId, product_price, product_weight })
-    );
+    if (user.token) {
+      dispatch(
+        deleteFromCartApi({ userId, productId, product_price, product_weight })
+      );
+    } else {
+      // setIsSavedPopupOpened(true);
+      dispatch(
+        deleteFromSessionCartApi({ productId, product_price, product_weight })
+      );
+    }
   };
 
   const imageUrl = API_BASE_URL + data.v_picture

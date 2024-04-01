@@ -73,6 +73,12 @@ export const fetchDeleteAll = (data: number): Promise<Response> => {
   );
 };
 
+export const fetchDeleteSessionAll = (): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/session-cart/clear/`, "DELETE").then((res) =>
+    checkRes(res)
+  );
+};
+
 export const fetchGetCart = (userId: number): Promise<Array<ICart>> => {
   return fetchData(`${API_BASE_URL}/cart/${userId}`, "GET").then((res) =>
     checkRes2(res)

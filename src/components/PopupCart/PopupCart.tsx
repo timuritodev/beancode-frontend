@@ -2,7 +2,7 @@ import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { FC, useEffect } from "react";
 import "./PopupCart.css";
 import { ProductCardList } from "../ProductCard/ProductCardList";
-import { deleteAllApi } from "../../services/redux/slices/cart/cart";
+import { deleteAllApi, deleteAllSessionApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useNavigate } from "react-router";
 
@@ -61,7 +61,7 @@ export const PopupCart: FC<PopupCartProps> = ({
             className="popup-cart__button-delete"
             type="button"
             onClick={() => {
-              dispatch(deleteAllApi(user.id));
+              user.token ? dispatch(deleteAllApi(user.id)) : dispatch(deleteAllSessionApi());
               switchPopupTrailer();
             }}
           >

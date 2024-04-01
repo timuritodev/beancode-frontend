@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 // import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
-import { deleteAllApi, resetCart } from "../../services/redux/slices/cart/cart";
+import { deleteAllApi, deleteAllSessionApi, resetCart } from "../../services/redux/slices/cart/cart";
 import { createOrderBackupApi } from "../../services/redux/slices/order/order";
 import CustomInput from "../CustomInput/CustomInput";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -147,9 +147,12 @@ export const OrderBlock: FC = () => {
           date_order: formattedDate,
         })
       );
-  
       localStorage.removeItem("discount");
-      await dispatch(deleteAllApi(userData.id));
+      if (user.token) {
+        await dispatch(deleteAllApi(userData.id));
+      } else {
+        await dispatch(deleteAllSessionApi());
+      }
       dispatch(resetCart());
       setRedirecting(true);
     } catch (error) {

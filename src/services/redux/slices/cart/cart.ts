@@ -6,6 +6,7 @@ import {
   fetchDeleteAll,
   fetchDeleteFromCart,
   fetchDeleteFromSessionCart,
+  fetchDeleteSessionAll,
   fetchGetCart,
   fetchGetSessionCart,
 } from "./cartAPI";
@@ -68,6 +69,19 @@ export const deleteAllApi = createAsyncThunk(
   async (userId: number, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchDeleteAll(userId);
+      const json = await response;
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteAllSessionApi = createAsyncThunk(
+  "@@cart/deleteAllSession",
+  async (_, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchDeleteSessionAll();
       const json = await response;
       return fulfillWithValue(json);
     } catch (error: unknown) {
@@ -168,6 +182,10 @@ const cartSlice = createSlice({
         }
       })
       .addCase(deleteAllApi.fulfilled, (state) => {
+        state.status = "success";
+        state.cart = [];
+      })
+      .addCase(deleteAllSessionApi.fulfilled, (state) => {
         state.status = "success";
         state.cart = [];
       })
