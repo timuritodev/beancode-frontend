@@ -6,7 +6,7 @@
 
 // export const API_BASE_URL = "http://localhost:3001";
 
-export const API_BASE_URL = "https://bean-code.ru";
+export const API_BASE_URL = "https://beancode.ru/api";
 
 export const orders = [
   // {
