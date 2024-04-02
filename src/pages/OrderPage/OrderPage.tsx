@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { DeliveryBlock } from "../../components/DeliveryBlock/DeliveryBlock";
 import { Widget } from "../../components/DeliveryBlock/Widget";
 import { OrderInputs } from "../../components/OrderInputs/OrderInputs";
@@ -10,6 +11,22 @@ import "./OrderPage.css";
 
 export const OrderPage = () => {
   const user = useAppSelector(selectUser);
+
+  const [dataSaved, setDataSaved] = useState(false);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem('dataSaved');
+    if (savedData === 'true' || user.token) {
+      setDataSaved(true);
+    }
+  }, [user.token]);
+
+  const handleDataSaved = () => {
+    setDataSaved(true);
+    localStorage.setItem('dataSaved', 'true');
+    handleDataSaved(); // Вызываем переданную функцию
+  };
+
   return (
     <section className="order-page">
       <div className="order-page__container">
@@ -18,7 +35,11 @@ export const OrderPage = () => {
           <div className="order-page__sec-wrapper">
             <div>
               <h2 className="order-page__subtitle">Личные данные</h2>
-              {user.token ? <OrderInputs /> : <SessionOrderInputs />}
+              {user.token ? (
+                <OrderInputs />
+              ) : (
+                <SessionOrderInputs handleDataSaved={handleDataSaved} />
+              )}
             </div>
             {/*
              <div>
@@ -31,7 +52,7 @@ export const OrderPage = () => {
               <PaymentBlock /> 
             </div> */}
           </div>
-          <OrderBlock />
+          <OrderBlock dataSaved={dataSaved} />
         </div>
       </div>
     </section>

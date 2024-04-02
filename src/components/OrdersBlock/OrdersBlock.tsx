@@ -36,7 +36,11 @@ interface UserData {
   city: string;
 }
 
-export const OrderBlock: FC = () => {
+interface OrderBlockProps {
+  dataSaved: boolean;
+}
+
+export const OrderBlock: FC<OrderBlockProps> = ({dataSaved}) => {
   const dispatch = useAppDispatch();
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const user = useAppSelector(selectUser);
@@ -239,7 +243,7 @@ export const OrderBlock: FC = () => {
       <CustomButton
           buttonText={"Оплатить заказ"}
           handleButtonClick={handleClickPayButton}
-          disabled={!isUserDataEmpty}
+          disabled={!dataSaved}
           type="submit"
           className="order-block__pay-button"
         />

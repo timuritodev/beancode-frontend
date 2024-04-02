@@ -11,7 +11,7 @@ interface IPopup {
 const Popup: FC<IPopup> = ({ children, isOpened, setIsOpened }) => {
 	const handleOverlayClick: React.MouseEventHandler<HTMLDivElement> = (evt) => {
 		if (evt.target === evt.currentTarget) {
-			// setIsOpened(false);
+			setIsOpened(false);
 		}
 	};
 

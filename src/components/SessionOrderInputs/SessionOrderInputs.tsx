@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "../OrderInputs/OrderInputs.css";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignUpData } from "../../types/Auth.types";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -28,7 +28,13 @@ interface FormData {
   area: string;
 }
 
-export const SessionOrderInputs = () => {
+interface SessionOrderInputsProps {
+  handleDataSaved: () => void;
+}
+
+export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
+  handleDataSaved,
+}) => {
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
 
   const {
@@ -40,6 +46,7 @@ export const SessionOrderInputs = () => {
   const onSubmit: SubmitHandler<any> = (data) => {
     localStorage.setItem("orderFormData", JSON.stringify(data));
     setIsSavedPopupOpened(true);
+    handleDataSaved();
   };
 
   useEffect(() => {
