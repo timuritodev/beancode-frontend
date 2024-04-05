@@ -58,11 +58,11 @@ const Header: FC = () => {
           <img className="header__logo" alt="logo" src={logo} />
         </Link>
         <div className="header__links">
-          {user.token && (
+          {/* {user.token && (
             <Link to="/catalog" className="header__link">
               Интернет-магазин
             </Link>
-          )}
+          )} */}
           {user.token === "" && (
             <>
               <Link to="/sign-up" className="header__link">
@@ -73,6 +73,9 @@ const Header: FC = () => {
               </Link>
             </>
           )}
+          <Link to="/catalog" className="header__link">
+            Товары
+          </Link>
           <Link to="/wholesale-page" className="header__link">
             Кофе для бизнеса
           </Link>

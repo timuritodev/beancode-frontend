@@ -103,7 +103,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             />
           </form>
           <div className="burger__links-container">
-            {user.token && (
+            {/* {user.token && (
               <Link
                 to="/catalog"
                 className="burger__link"
@@ -111,7 +111,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               >
                 Интернет-магазин
               </Link>
-            )}
+            )} */}
             {user.token === "" && (
               <>
                 <Link
@@ -130,6 +130,9 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
                 </Link>
               </>
             )}
+            <Link to="/catalog" className="header__link">
+              Товары
+            </Link>
             <Link
               to="/wholesale-page"
               className="header__link"

@@ -24,7 +24,7 @@ export const OrderPage = () => {
   const handleDataSaved = () => {
     setDataSaved(true);
     localStorage.setItem('dataSaved', 'true');
-    handleDataSaved(); // Вызываем переданную функцию
+    // handleDataSaved(); // Вызываем переданную функцию
   };
 
   return (

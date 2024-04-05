@@ -36,8 +36,8 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
       <article className="search__card-desc">
         <p className="search__card-name">{data.title}</p>
         <div className="search__card-info">
-          <p className="search__card-year">{data.price} ₽</p>
-          <p className="search__card-year">{data.weight}</p>
+          <p className="search__card-year">{data.low_price} ₽</p>
+          <p className="search__card-year">{data.low_weight}</p>
         </div>
       </article>
     </div>

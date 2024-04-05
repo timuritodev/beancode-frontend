@@ -40,7 +40,7 @@ interface OrderBlockProps {
   dataSaved: boolean;
 }
 
-export const OrderBlock: FC<OrderBlockProps> = ({dataSaved}) => {
+export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const dispatch = useAppDispatch();
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const user = useAppSelector(selectUser);
@@ -169,7 +169,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({dataSaved}) => {
         })
       );
       localStorage.removeItem("discount");
-      localStorage.removeItem("orderFormData");
+      // localStorage.removeItem("orderFormData");
       if (user.token) {
         await dispatch(deleteAllApi(user.id));
       } else {
@@ -240,13 +240,15 @@ export const OrderBlock: FC<OrderBlockProps> = ({dataSaved}) => {
           />
         </button>
       </form>
-      <CustomButton
+      <div className="button_wrapper">
+        <CustomButton
           buttonText={"Оплатить заказ"}
           handleButtonClick={handleClickPayButton}
           disabled={!dataSaved}
           type="submit"
           className="order-block__pay-button"
         />
+      </div>
       {/* <button
         type="submit"
         className="order-block__pay-button"
