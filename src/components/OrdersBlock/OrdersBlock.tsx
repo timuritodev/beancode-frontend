@@ -122,32 +122,24 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   let userData: UserData;
 
-  const storedData = localStorage.getItem("orderFormData");
-  if (user.token) {
-    userData = {
-      userId: user.id,
-      name: user.name,
-      surname: user.surname,
-      phone: user.phone,
-      email: user.email,
-      address: user.address,
-      city: user.city,
-    };
-  } else if (storedData) {
-    userData = JSON.parse(storedData);
-  } else {
-    userData = {
-      userId: user.id,
-      name: user.name,
-      surname: user.surname,
-      phone: user.phone,
-      email: user.email,
-      address: user.address,
-      city: user.city,
-    };
-  }
-
   const handleClickPayButton = async () => {
+    const storedData = localStorage.getItem("orderFormData");
+
+    console.log(storedData, "storedData");
+    if (user.token) {
+      userData = {
+        userId: user.id,
+        name: user.name,
+        surname: user.surname,
+        phone: user.phone,
+        email: user.email,
+        address: user.address,
+        city: user.city,
+      };
+    } else if (storedData) {
+      userData = JSON.parse(storedData);
+    }
+
     try {
       await dispatch(
         payApi({
@@ -199,8 +191,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       setRedirecting(false);
     }
   }, [redirecting, formUrl, dispatch, user.id]);
-
-  const isUserDataEmpty = !!userData.email;
 
   return (
     <div className="order-block">

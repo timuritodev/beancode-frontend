@@ -7,7 +7,6 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import {
   ADDRESS_VALIDATION_CONFIG,
-  AREA_VALIDATION_CONFIG,
   CITY_VALIDATION_CONFIG,
   EMAIL_VALIDATION_CONFIG,
   NAME_VALIDATION_CONFIG,
@@ -36,6 +35,23 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
   handleDataSaved,
 }) => {
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
+  const [dataFromLocalStorage, setDataFromLocalStorage] = useState<FormData>(
+    () => {
+      const storedData = localStorage.getItem("orderFormData");
+      return storedData
+        ? JSON.parse(storedData)
+        : {
+            userId: "",
+            name: "",
+            surname: "",
+            phone: "",
+            email: "",
+            address: "",
+            city: "",
+            area: "",
+          };
+    }
+  );
 
   const {
     register,
@@ -60,24 +76,6 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
       setDataFromLocalStorage(formData);
     }
   }, []);
-
-  const [dataFromLocalStorage, setDataFromLocalStorage] = useState<FormData>(
-    () => {
-      const storedData = localStorage.getItem("orderFormData");
-      return storedData
-        ? JSON.parse(storedData)
-        : {
-            userId: "",
-            name: "",
-            surname: "",
-            phone: "",
-            email: "",
-            address: "",
-            city: "",
-            area: "",
-          };
-    }
-  );
 
   return (
     <div className="account__container">
