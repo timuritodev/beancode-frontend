@@ -73,7 +73,7 @@
   .order-page__wrapper {
     display: flex;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
   }
 

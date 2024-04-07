@@ -15,15 +15,15 @@ export const OrderPage = () => {
   const [dataSaved, setDataSaved] = useState(false);
 
   useEffect(() => {
-    const savedData = localStorage.getItem('dataSaved');
-    if (savedData === 'true' || user.token) {
+    const savedData = localStorage.getItem("dataSaved");
+    if (savedData === "true" || user.token) {
       setDataSaved(true);
     }
   }, [user.token]);
 
   const handleDataSaved = () => {
     setDataSaved(true);
-    localStorage.setItem('dataSaved', 'true');
+    localStorage.setItem("dataSaved", "true");
     // handleDataSaved(); // Вызываем переданную функцию
   };
 
@@ -41,12 +41,13 @@ export const OrderPage = () => {
                 <SessionOrderInputs handleDataSaved={handleDataSaved} />
               )}
             </div>
-            {/*
-             <div>
+{/* 
+            <div>
               <h2 className="order-page__subtitle">Способы доставки</h2>
-              {/* <DeliveryBlock /> 
+              <DeliveryBlock />  
               <Widget />
-            </div>
+            </div>*/}
+            {/*
             <div>
               <h2 className="order-page__subtitle">Способы оплаты</h2>
               <PaymentBlock /> 

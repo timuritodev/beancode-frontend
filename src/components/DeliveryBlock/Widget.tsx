@@ -1,83 +1,87 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 export const Widget = () => {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://cdn.jsdelivr.net/npm/@cdek-it/widget@3';
-    script.charset = 'utf-8';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@cdek-it/widget@3";
     script.async = true;
-    document.head.appendChild(script);
+    script.onload = () => {
+      setScriptLoaded(true);
+    };
+    document.body.appendChild(script);
 
     return () => {
-      document.head.removeChild(script);
+      document.body.removeChild(script);
     };
   }, []);
 
   useEffect(() => {
+    if (scriptLoaded) {
+      initWidget();
+    }
+  }, [scriptLoaded]);
+
+  const initWidget = () => {
     if (window.CDEKWidget) {
       new window.CDEKWidget({
-        from: 'Новосибирск',
-        root: 'cdek-map',
-        apiKey: 'c71385a4-e8d4-4e71-8c0d-f0d16956e3ba',
-        servicePath: 'https://bean-code.ru/service.php', 
-        // servicePath: 'https://widget.cdek.ru/widget/scripts/service.php', 
-        defaultLocation: 'Новосибирск'
+        from: "Москва",
+        root: "cdek-map",
+        apiKey: "c71385a4-e8d4-4e71-8c0d-f0d16956e3ba",
+        servicePath: "https://beancode.ru/service.php",
+        defaultLocation: "Москва",
+        hideDeliveryOptions: {
+          office: false,
+          door: true,
+        },
       });
     }
-  }, []);
+  };
 
   return (
     <div>
       <Helmet>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"></script>
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+        ></script>
       </Helmet>
-      <div id="cdek-map" style={{ width: '800px', height: '600px' }}></div>
+      <div id="cdek-map" style={{ width: "756px", height: "600px" }}></div>
     </div>
   );
 };
 
+// import React, { useEffect } from "react";
+// import { Helmet } from "react-helmet";
 
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// import React, { useEffect } from 'react';
-
-// declare global {
-//     interface Window {
-//       CDEKWidget?: any;
-//     }
-//   }
-
-  
 // export const Widget = () => {
-//   useEffect(() => {
-//     const script = document.createElement('script');
-//     script.type = 'text/javascript';
-//     script.src = 'https://cdn.jsdelivr.net/npm/@cdek-it/widget@3';
-//     script.charset = 'utf-8';
-//     script.async = true;
-//     document.body.appendChild(script);
-
-//     return () => {
-//       document.body.removeChild(script);
-//     };
-//   }, []);
-
-//   useEffect(() => {
+//   const initWidget = () => {
 //     if (window.CDEKWidget) {
 //       new window.CDEKWidget({
-//         from: 'Новосибирск',
-//         root: 'cdek-map',
-//         apiKey: 'c71385a4-e8d4-4e71-8c0d-f0d16956e3ba', // Вставьте ваш ключ Яндекс.Карт
-//         servicePath: 'https://bean-code.ru/service.php', // Замените на ваш путь к service.php
-//         defaultLocation: 'Новосибирск'
+//         from: "Новосибирск",
+//         root: "cdek-map",
+//         apiKey: "c71385a4-e8d4-4e71-8c0d-f0d16956e3ba",
+//         servicePath: "https://beancode.ru/service.php",
+//         defaultLocation: "Новосибирск",
 //       });
 //     }
+//   };
+
+//   useEffect(() => {
+//     initWidget(); // Вызываем инициализацию виджета при первом отображении компонента
 //   }, []);
 
 //   return (
 //     <div>
-//       <div id="cdek-map" style={{ width: '800px', height: '600px' }}></div>
+//       <Helmet>
+//         <script
+//           type="text/javascript"
+//           src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
+//         ></script>
+//       </Helmet>
+//       <div id="cdek-map" style={{ width: "800px", height: "600px" }}></div>
 //     </div>
 //   );
 // };

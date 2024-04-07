@@ -123,7 +123,17 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   let userData: UserData;
 
   const storedData = localStorage.getItem("orderFormData");
-  if (storedData) {
+  if (user.token) {
+    userData = {
+      userId: user.id,
+      name: user.name,
+      surname: user.surname,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+    };
+  } else if (storedData) {
     userData = JSON.parse(storedData);
   } else {
     userData = {
@@ -240,23 +250,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           />
         </button>
       </form>
-      <div className="button_wrapper">
-        <CustomButton
-          buttonText={"Оплатить заказ"}
-          handleButtonClick={handleClickPayButton}
-          disabled={!dataSaved}
-          type="submit"
-          className="order-block__pay-button"
-        />
-      </div>
-      {/* <button
+      <CustomButton
+        buttonText={"Оплатить заказ"}
+        handleButtonClick={handleClickPayButton}
+        disabled={!dataSaved}
         type="submit"
         className="order-block__pay-button"
-        onClick={handleClickPayButton}
-        disabled={!isUserDataEmpty}
-      >
-        Оплатить заказ
-      </button> */}
+      />
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
