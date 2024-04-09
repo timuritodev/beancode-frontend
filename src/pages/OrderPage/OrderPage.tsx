@@ -41,12 +41,11 @@ export const OrderPage = () => {
                 <SessionOrderInputs handleDataSaved={handleDataSaved} />
               )}
             </div>
-{/* 
-            <div>
+            {/* <div>
               <h2 className="order-page__subtitle">Способы доставки</h2>
               <DeliveryBlock />  
               <Widget />
-            </div>*/}
+            </div> */}
             {/*
             <div>
               <h2 className="order-page__subtitle">Способы оплаты</h2>

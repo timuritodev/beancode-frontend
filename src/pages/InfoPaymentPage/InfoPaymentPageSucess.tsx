@@ -34,61 +34,69 @@ export const InfoPaymentPageSucess = () => {
 
   // const products_info3 = queryParams.get("product_info")?.split(', ').map(item => item.trim()) || [];
 
-
   // const decodedProductsInfo = products_info2.join(", ");
   // console.log(decodedProductsInfo, 3333);
   // console.log(products_info3, 444);
 
-  const isOrderProcessed = orderStatus.OrderNumber === orderId;
+  // const isOrderProcessed = orderStatus.OrderNumber === orderId;
 
-  const isOrderProcessed2 =
-    orders.find((order) => order.orderNumber === orderId) !== undefined;
+  const isOrderProcessed = orders.some(
+    (order) => order.orderNumber === orderId
+  );
+
+  useEffect(() => {
+    dispatch(getOrdersApi(user.id));
+  }, [dispatch, user.id]);
 
   const currentTimestamp = Date.now();
   const currentDate = new Date(currentTimestamp);
   const formattedDate = currentDate.toISOString().split("T")[0];
 
   useEffect(() => {
-    dispatch(getOrdersApi(user.id));
     if (!isOrderProcessed) {
       dispatch(
-        getStatusApi({
-          userName: payApiUsername,
-          password: payApiPassword,
-          orderId: `${orderRes.orderId}`,
+        createOrderApi({
+          userId: user.id,
+          phone: user.phone,
+          email: user.email,
+          address: user.address,
+          city: user.city,
+          sum: parseInt(sum || "0", 10),
+          product_quantity: parseInt(product_quantity || "0", 10),
+          products_info: products_info || "",
+          orderNumber: orderId || "",
+          date_order: formattedDate,
         })
-      )
-        .then(() => {
-          if (orderStatus.OrderStatus === 2) {
-            dispatch(
-              createOrderApi({
-                userId: user.id,
-                phone: user.phone,
-                email: user.email,
-                address: user.address,
-                city: user.city,
-                sum: parseInt(sum || "0", 10),
-                product_quantity: parseInt(product_quantity || "0", 10),
-                products_info: products_info || "",
-                orderNumber: orderId || "",
-                date_order: formattedDate,
-              })
-            );
-            dispatch(
-              sendEmailApi({
-                email: user.email,
-                subject: "Заказ",
-                text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
-                greetings: `Спасибо за ваш заказ.\n${products_info}`
-              })
-            );
-          }
+      );
+      dispatch(
+        sendEmailApi({
+          email: user.email,
+          subject: "Заказ",
+          text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+          greetings: `Спасибо за ваш заказ.\n${products_info}`,
         })
-        .catch((error) => {
-          console.error("Error in getStatusApi call:", error);
-        });
+      );
     }
-  }, [dispatch, orderRes.orderId, payApiPassword, payApiUsername, user.id, user.email, user.phone, user.address, user.city, orderStatus.OrderStatus, user.name, user.surname, orderId, sum, product_quantity, products_info, isOrderProcessed2, formattedDate, isOrderProcessed]);
+  }, [
+    dispatch,
+    orderRes.orderId,
+    payApiPassword,
+    payApiUsername,
+    user.id,
+    user.email,
+    user.phone,
+    user.address,
+    user.city,
+    orderStatus.OrderStatus,
+    user.name,
+    user.surname,
+    orderId,
+    sum,
+    product_quantity,
+    products_info,
+    formattedDate,
+    isOrderProcessed,
+  ]);
 
   return (
     <section className="info-payment">
