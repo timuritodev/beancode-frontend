@@ -125,7 +125,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const handleClickPayButton = async () => {
     const storedData = localStorage.getItem("orderFormData");
 
-    console.log(storedData, "storedData");
+    // console.log(storedData, "storedData");
     if (user.token) {
       userData = {
         userId: user.id,
