@@ -32,6 +32,56 @@ interface OfficeAddress {
 export const Widget = () => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
+  // const createOrder = async (address: OfficeAddress) => {
+  //   try {
+  //     const response = await fetch('https://api.cdek.ru/v2/orders', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer YOUR_CDEK_API_TOKEN' // Обязательное поле: токен авторизации
+  //       },
+  //       body: JSON.stringify({
+  //         "number": "123456", // Обязательное поле: уникальный номер заказа
+  //         "recipientName": "Иванов Иван Иванович", // Обязательное поле: имя получателя
+  //         "recipientPhone": "+79123456789", // Обязательное поле: телефон получателя
+  //         "recipientEmail": "ivanov@example.com", // Необязательное поле: email получателя
+  //         "comment": "Тестовый заказ", // Необязательное поле: комментарий к заказу
+  //         // "tariffId": address.tariff.tariff_code, // Обязательное поле: код тарифа доставки
+  //         "items": [ // Обязательное поле: массив товаров в заказе
+  //           {
+  //             "name": "Товар 1", // Обязательное поле: название товара
+  //             "weight": 1.5, // Обязательное поле: вес товара в кг
+  //             "quantity": 2, // Обязательное поле: количество товара
+  //             "price": 1000, // Обязательное поле: цена товара за единицу
+  //             "payment": 2000 // Обязательное поле: сумма оплаты за товар
+  //           }
+  //         ],
+  //         "sender": {
+  //           "address": "Адрес отправителя", // Необязательное поле: адрес отправителя
+  //           "cityId": 44, // Необязательное поле: код города отправителя
+  //           "name": "Иванов Петр Петрович", // Необязательное поле: имя отправителя
+  //           "phone": "+79012345678" // Необязательное поле: телефон отправителя
+  //         },
+  //         "recipient": {
+  //           "address": address.address, // Обязательное поле: адрес получателя (из ПВЗ)
+  //           "cityId": address.city_code, // Обязательное поле: код города получателя
+  //           "name": "Иванов Иван Иванович", // Обязательное поле: имя получателя
+  //           "phone": "+79123456789" // Обязательное поле: телефон получателя
+  //         }
+  //       })
+  //     });
+  
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log('Заказ успешно создан:', data);
+  //     } else {
+  //       console.error('Ошибка при создании заказа:', response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error('Ошибка при отправке запроса:', error);
+  //   }
+  // };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@cdek-it/widget@3";
@@ -69,8 +119,8 @@ export const Widget = () => {
         onChoose: (deliveryMode: DeliveryMode, tariff: Tariff, address: OfficeAddress) => {
           console.log(`Выбранный режим доставки: ${deliveryMode}`);
           console.log('Выбранный тариф:', tariff);
-          console.log('Адрес ПВЗ:', address);
-          // Теперь мы напрямую работаем с объектом OfficeAddress
+          console.log('Адрес:', address);
+          localStorage.setItem("Данные доставки", tariff.delivery_mode.toString());
         }
       });
     }

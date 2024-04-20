@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { ProductCard } from "./ProductCard";
 import { ICart } from "../../types/Cart.types";
+import { hashString } from "../../utils/constants";
 
 interface ProductCardListProps {
   data: ICart[];
@@ -23,7 +24,7 @@ export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
   ).map((key) => {
     const [id, price] = key.split("_");
     const product = data.find(
-      (item) => String(item.id) === id && item.price === (price)
+      (item) => String(item.id) === id && item.price === price
     );
     return {
       ...product,
@@ -35,7 +36,11 @@ export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
     <div className="product-card-list">
       {uniqueData.length !== 0 &&
         uniqueData.map((item) => (
-          <ProductCard key={item.key} data={item as ICart} count={item.count} />
+          <ProductCard
+            key={`${item.title ? hashString(item.title) : ""}`}
+            data={item as ICart}
+            count={item.count}
+          />
         ))}
     </div>
   );

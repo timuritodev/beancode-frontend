@@ -108,11 +108,7 @@ export const getCartApi = createAsyncThunk(
   async (userId: number, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchGetCart(userId);
-      const cartWithKeys = response.map((item) => ({
-        ...item,
-        key: generateUniqueKey(item.title, item.weight, item.id),
-      }));
-      return fulfillWithValue(cartWithKeys);
+      return fulfillWithValue(response);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -124,20 +120,12 @@ export const getSessionCartApi = createAsyncThunk(
   async (_, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchGetSessionCart();
-      const cartWithKeys = response.map((item) => ({
-        ...item,
-        key: generateUniqueKey(item.title, item.weight, item.id),
-      }));
-      return fulfillWithValue(cartWithKeys);
+      return fulfillWithValue(response);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
   }
 );
-
-const generateUniqueKey = (title: string, weight: string, id: number) => {
-  return `${title}_${weight}_${id}`;
-};
 
 const initialState: ICartState = {
   status: "idle",

@@ -4,9 +4,18 @@
 
 // export const API_BASE_URL = window.location.origin + currentURL.substring(0, currentURL.lastIndexOf('/')) + apiSuffix;
 
-// export const API_BASE_URL = "http://localhost:3001/api";
+export const API_BASE_URL = "http://localhost:3001/api";
 
-export const API_BASE_URL = "https://beancode.ru/api";
+// export const API_BASE_URL = "https://beancode.ru/api";
+
+export const hashString = (s: string): number => {
+  let h = 0;
+  let i = 0;
+  const l = s.length;
+
+  if (l > 0) while (i < l) h = ((h << 5) - h + s.charCodeAt(i++)) | 0;
+  return h;
+};
 
 export const orders = [
   // {

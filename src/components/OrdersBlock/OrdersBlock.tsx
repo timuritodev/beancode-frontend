@@ -25,6 +25,7 @@ import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { deliverApi } from "../../services/redux/slices/delivery/delivery";
 
 interface UserData {
   userId: number;
@@ -156,7 +157,29 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           phone: userData.phone,
         })
       );
-
+      // await dispatch(
+      //   deliverApi({
+      //     type: 1,
+      //     tariff_code: 1,
+      //     recipient: {
+      //       name: userData.name,
+      //       email: userData.email,
+      //       phones: {
+      //         number: userData.phone,
+      //       },
+      //     },
+      //     packages: {
+      //       number: string;
+      //       weight: number;
+      //       length?: number;
+      //       width?: number;
+      //       height?: number;
+      //       comment?: string;
+      //       items: {
+      //         name: products_info,
+      //     },
+      //   }),
+      // );
       await dispatch(
         createOrderBackupApi({
           userId: userData.userId,

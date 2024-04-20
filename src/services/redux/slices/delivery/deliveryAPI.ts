@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IDeliveryData } from "../../../../types/Deliver.types";
+import { OrderRegistrationRequest } from "../../../../types/Deliver.types";
 import { API_BASE_URL } from "../../../../utils/constants";
 
 const checkRes = (res: Response) => {
@@ -18,7 +18,7 @@ const objectToFormData = (obj: Record<string, any>) => {
   return formData;
 };
 
-export const fetchDeliver = (data: IDeliveryData): Promise<Response> => {
+export const fetchDeliver = (data: OrderRegistrationRequest): Promise<Response> => {
   const formData = objectToFormData(data);
 
   return fetch(`${API_BASE_URL}/order-deliver`, {

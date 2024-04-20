@@ -3,11 +3,12 @@ import { fetchDeliver } from "./deliveryAPI";
 import {
   IDeliverDataRes,
   IDeliveryData,
+  OrderRegistrationRequest
 } from "../../../../types/Deliver.types";
 
 export const deliverApi = createAsyncThunk(
   "@@deliver/register",
-  async (data: IDeliveryData, { fulfillWithValue, rejectWithValue }) => {
+  async (data: OrderRegistrationRequest, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchDeliver(data);
 

@@ -1,3 +1,95 @@
+export interface OrderRegistrationRequest {
+  type?: number; // Optional, default is 1 for "internet-store"
+  additional_order_types?: number[];
+  order_number?: string; // Max 40 ASCII characters
+  tariff_code: number;
+  comment?: string; // Max 255 characters
+  developer_key?: string;
+  shipment_point?: string; // Required if the tariff is "from warehouse"
+  delivery_point?: string; // Required if the tariff is "to warehouse" or "to parcel terminal"
+  date_invoice?: string; // Required for international orders
+  shipper_name?: string; // Required for international orders
+  shipper_address?: string; // Required for international orders
+  delivery_recipient_cost?: {
+    value: number;
+    vat_sum?: number;
+    vat_rate?: number;
+  };
+  delivery_recipient_cost_adv?: {
+    threshold: number;
+    sum: number;
+    vat_sum?: number;
+    vat_rate?: number;
+  }[];
+  sender?: {
+    company?: string;
+    name?: string;
+    email?: string;
+    passport_series?: string;
+    passport_number?: string;
+    passport_date_of_issue?: string;
+    passport_organization?: string;
+    tin?: string;
+    passport_date_of_birth?: string;
+    phones?: {
+      number: string; // International format
+      additional?: string;
+    }[];
+    contragent_type?: string;
+  };
+  seller?: {
+    name?: string; // Required if inn is filled
+    inn?: string;
+    phone?: string; // Required if inn is filled
+    ownership_form?: number; // Required if inn is filled
+    address?: string; // Required for international orders
+  };
+  recipient: {
+    company?: string;
+    name: string;
+    email?: string;
+    phones: {
+      number: string; // International format
+      additional?: string;
+    };
+  };
+  from_location?: {
+    address: string;
+  };
+  to_location?: {
+    address: string;
+  };
+  services?: {
+    code: string;
+    parameter?: string;
+  }[];
+  packages: {
+    number: string;
+    weight: number;
+    length?: number;
+    width?: number;
+    height?: number;
+    comment?: string;
+    items: {
+      name: string;
+      ware_key?: string;
+      cost?: number;
+      weight?: number;
+      amount?: number;
+      payment?: {
+        value: number;
+        vat_sum?: number;
+        vat_rate?: number;
+      };
+      delivery?: {
+        value: number;
+        vat_sum?: number;
+        vat_rate?: number;
+      };
+    }[];
+  }[];
+}
+
 export interface IDeliveryData {
   number: string;
   comment: string;
