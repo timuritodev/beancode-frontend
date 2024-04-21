@@ -87,12 +87,12 @@ export const CatalogPage = () => {
             <option value="density">Плотности</option>
           </select>
         </form>
-        <h1 className="">Кофе для эспрессо</h1>
-        <h2 className="">Вся Бразилия</h2>
+        <h1 className="catalog__subtitle">Кофе для эспрессо</h1>
+        <h2 className="catalog__description">Бразилия</h2>
         <ProductList data={filterProductsByCountry("Бразилия")} />
-        <h2 className="">Вся Америка</h2>
+        <h2 className="catalog__description">Америка</h2>
         <ProductList data={filterProductsByCountry("Америка")} />
-        <h2 className="">Вся Африка</h2>
+        <h2 className="catalog__description">Африка</h2>
         <ProductList data={filterProductsByCountry("Африка")} />
         {/*  <h2 className="">Наборы</h2>
         <ProductList data={filterProductsByCountry("Америка")} />

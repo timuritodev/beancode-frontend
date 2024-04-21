@@ -4,6 +4,7 @@ export interface IWholesale {
     fio: string;
     phone: string;
     email: string;
+    consumption: string;
   }
   
   export interface IWholesaleState {

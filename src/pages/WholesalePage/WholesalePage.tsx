@@ -9,6 +9,7 @@ import {
   FIO_VALIDATION_CONFIG,
   EMAIL_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
+  CONSUMPION_VALIDATION_CONFIG,
 } from "../../utils/constants";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
@@ -37,13 +38,14 @@ export const WholesalePage = () => {
         fio: getValues("fio"),
         phone: getValues("phone"),
         email: getValues("email"),
+        consumption: getValues("consumption"),
       })
     )
     dispatch(
       sendEmailApi({
         email: getValues("email"),
         subject: "Опт",
-        text: `Название организации - ${getValues("title")} \nИНН - ${getValues("inn")}  \nФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")}`,
+        text: `Название организации - ${getValues("title")} \nИНН - ${getValues("inn")}  \nФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")} \nОриентировочное потребление - ${getValues("consumption")}`,
         greetings: "",
       })
     )
@@ -113,6 +115,15 @@ export const WholesalePage = () => {
             }}
             placeholder="email@example.com"
             error={errors?.email?.message}
+          />
+          <CustomInput
+            inputType={CustomInputTypes.consumption}
+            labelText={"Ориентировочная потребность в месяц в кг"}
+            validation={{
+              ...register("consumption", CONSUMPION_VALIDATION_CONFIG),
+            }}
+            placeholder="от 10 кг"
+            error={errors?.consumption?.message}
           />
           <CustomButton
             buttonText={"Отправить данные"}

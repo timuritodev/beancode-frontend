@@ -161,6 +161,17 @@ export const VALIDATION_SETTINGS = {
       tooLong: "Слишком длинный промкод",
     },
   },
+  consumption: {
+    pattern: /^[a-zа-яё\s\0-9]+$/iu,
+    minLength: 1,
+    maxLength: 42,
+    messages: {
+      noConsumption: "Необходимо заполнить поле",
+      invalid: "Только цифры",
+      tooShort: "Слишком коротое поле",
+      tooLong: "Слишком длинное поле",
+    },
+  },
 };
 
 export const EMAIL_VALIDATION_CONFIG = {
@@ -348,5 +359,20 @@ export const PROMO_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.promo.maxLength,
     message: VALIDATION_SETTINGS.promo.messages.tooLong,
+  },
+};
+
+export const CONSUMPION_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.consumption.messages.noConsumption,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.consumption.pattern,
+    message: VALIDATION_SETTINGS.consumption.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.consumption.maxLength,
+    message: VALIDATION_SETTINGS.consumption.messages.tooLong,
   },
 };
