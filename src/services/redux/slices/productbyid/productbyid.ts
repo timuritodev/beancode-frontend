@@ -31,6 +31,7 @@ const initialState: IProductbyIdState = {
     big_description: "",
     low_price: "",
     low_weight: "",
+    country: "",
   },
 };
 

@@ -25,7 +25,7 @@ import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 import { CustomButton } from "../CustomButton/CustomButton";
-import { deliverApi } from "../../services/redux/slices/delivery/delivery";
+// import { deliverApi } from "../../services/redux/slices/delivery/delivery";
 
 interface UserData {
   userId: number;

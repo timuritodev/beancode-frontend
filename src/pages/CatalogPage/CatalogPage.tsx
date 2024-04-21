@@ -61,6 +61,12 @@ export const CatalogPage = () => {
     setSortOption(e.target.value);
   };
 
+  const filterProductsByCountry = (country: string) => {
+    return filteredProducts.filter((product) =>
+      product.country.includes(country)
+    );
+  };
+
   return (
     <section className="catalog">
       <div className="catalog__container">
@@ -81,7 +87,17 @@ export const CatalogPage = () => {
             <option value="density">Плотности</option>
           </select>
         </form>
-        <ProductList data={filteredProducts} />
+        <h1 className="">Кофе для эспрессо</h1>
+        <h2 className="">Вся Бразилия</h2>
+        <ProductList data={filterProductsByCountry("Бразилия")} />
+        <h2 className="">Вся Америка</h2>
+        <ProductList data={filterProductsByCountry("Америка")} />
+        <h2 className="">Вся Африка</h2>
+        <ProductList data={filterProductsByCountry("Африка")} />
+        {/*  <h2 className="">Наборы</h2>
+        <ProductList data={filterProductsByCountry("Америка")} />
+        <h1 className="">Кофе для фильтра</h1>
+        <ProductList data={filterProductsByCountry("Америка")} /> */}
       </div>
     </section>
   );
