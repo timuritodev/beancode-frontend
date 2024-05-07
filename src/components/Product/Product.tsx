@@ -76,6 +76,20 @@ export const Product = ({ data }: { data: IProduct }) => {
     </div>
   );
 };
-// INSERT INTO product (title, description, price, weight, h_picture, v_picture, acidity, density, big_description, low_price, low_weight) VALUES ('Набор из 2ух сортов', 'Набор включает в себя наши бразильские сорта кофе', '0', '0', '/images/two_pack.jpeg', '/images/two_pack.jpeg', 0, 0, 'Для эспрессо', '849', '500 гр');
+
+// INSERT INTO product (title, description, price, weight, h_picture, v_picture,
+//  acidity, density, big_description, low_price, low_weight, country) VALUES 
+// ('Вся Бразилия', 'Серрадо, Можиана, Суль-де-Минас', '0', '0', 
+// '/images/brazil_pack.jpeg', '/images/brazil_pack.jpeg', 0, 0, 'Для эспрессо', '1350', '3 х 250 гр', 'Набор');
+
+// INSERT INTO product (title, description, price, weight, h_picture, v_picture,
+//  acidity, density, big_description, low_price, low_weight, country) VALUES 
+// ('Интересная Америка', 'Коста-Рико Ла Пастора, Гондурас Маджестик Лемпира, Колумбия Супремо', '0', '0', 
+// '/images/america_pack.jpeg', '/images/america_pack.jpeg', 0, 0, 'Для эспрессо', '1850', '3 х 250 гр', 'Набор');
+
+// INSERT INTO product (title, description, price, weight, h_picture, v_picture,
+//  acidity, density, big_description, low_price, low_weight, country) VALUES 
+// ('Вся Эфиопия', 'Гуджи мытая обработка, Гуджи анаэробная обработка', '0', '0', 
+// '/images/brazil_pack.jpeg', '/images/brazil_pack.jpeg', 0, 0, 'Для эспрессо', '1350', '2 х 250 гр', 'Набор');
 
 // INSERT INTO product (title, description, price, weight, h_picture, v_picture, acidity, density, big_description, low_price, low_weight) VALUES ('Набор из 3ёх сортов', 'Набор включает в себя наши лучшие сорта кофе', '0', '0', '/images/three_pack.jpeg', '/images/three_pack.jpeg', 0, 0, 'Для эспрессо', '1449', '750 гр');

@@ -1,7 +1,7 @@
 export interface OrderRegistrationRequest {
   type?: number; // Optional, default is 1 for "internet-store"
   additional_order_types?: number[];
-  order_number?: string; // Max 40 ASCII characters
+  number?: string; // Max 40 ASCII characters
   tariff_code: number;
   comment?: string; // Max 255 characters
   developer_key?: string;
@@ -51,14 +51,14 @@ export interface OrderRegistrationRequest {
     phones: {
       number: string; // International format
       additional?: string;
-    };
+    }; // []
   };
-  from_location?: {
-    address: string;
-  };
-  to_location?: {
-    address: string;
-  };
+  // from_location?: {
+  //   address: string;
+  // };
+  // to_location?: {
+  //   address: string;
+  // };
   services?: {
     code: string;
     parameter?: string;
@@ -72,22 +72,27 @@ export interface OrderRegistrationRequest {
     comment?: string;
     items: {
       name: string;
-      ware_key?: string;
-      cost?: number;
-      weight?: number;
-      amount?: number;
+      ware_key: string;
+      marking?: string;
       payment?: {
         value: number;
         vat_sum?: number;
         vat_rate?: number;
       };
-      delivery?: {
-        value: number;
-        vat_sum?: number;
-        vat_rate?: number;
-      };
+      cost?: number;
+      weight?: number;
+      weight_gross?: number;
+      amount?: number;
+      name_i18n?: string;
+      brand_i18n?: string;
+      country_code?: string;
+      material?: string;
+      wifi_gsm?: boolean;
+      url?: string;
     }[];
   }[];
+  print?: string;
+  is_client_return?: boolean;
 }
 
 export interface IDeliveryData {
@@ -173,7 +178,7 @@ export interface IDeliveryData {
 export interface IDeliverDataRes {
   entity: {
     uuid: string;
-  },
+  };
   requests: {
     request_uuid: string;
     type: string;

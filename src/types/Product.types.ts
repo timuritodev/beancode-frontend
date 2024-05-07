@@ -12,6 +12,7 @@ export interface IProduct {
   low_price: string;
   low_weight: string;
   country: string;
+  additional_pictures?: string[];
 }
 
 export interface IProductState {

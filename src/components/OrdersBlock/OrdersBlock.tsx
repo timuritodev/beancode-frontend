@@ -25,7 +25,7 @@ import { PROMO_VALIDATION_CONFIG } from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 import { CustomButton } from "../CustomButton/CustomButton";
-// import { deliverApi } from "../../services/redux/slices/delivery/delivery";
+import { deliverApi } from "../../services/redux/slices/delivery/delivery";
 
 interface UserData {
   userId: number;
@@ -159,8 +159,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       );
       // await dispatch(
       //   deliverApi({
-      //     type: 1,
       //     tariff_code: 1,
+      //     shipment_point: '10',
+      //     delivery_point: '10',
       //     recipient: {
       //       name: userData.name,
       //       email: userData.email,
@@ -169,16 +170,14 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       //       },
       //     },
       //     packages: {
-      //       number: string;
-      //       weight: number;
-      //       length?: number;
-      //       width?: number;
-      //       height?: number;
-      //       comment?: string;
+      //       number: randomOrderNumber.toString(),
+      //       weight: 100,
       //       items: {
       //         name: products_info,
+      //         ware_key: products_info,
+      //       },
       //     },
-      //   }),
+      //   })
       // );
       await dispatch(
         createOrderBackupApi({
@@ -208,6 +207,37 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       return;
     }
   };
+
+  // const handleClickDeliverButton = async () => {
+  //   await dispatch(
+  //     deliverApi({
+  //       type: 1,
+  //       tariff_code: 136,
+  //       shipment_point: "NCHL46",
+  //       delivery_point: "KZN34",
+  //       recipient: {
+  //         name: user.name,
+  //         email: user.email,
+  //         phones: {
+  //           number: user.phone,
+  //         },
+  //       },
+  //       packages: [
+  //         {
+  //           number: randomOrderNumber.toString(),
+  //           weight: 100,
+  //           items: [
+  //             {
+  //               name: products_info,
+  //               ware_key: products_info,
+  //               // Add other required fields if necessary, like marking, payment, etc.
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     })
+  //   );
+  // };
 
   useEffect(() => {
     if (redirecting && formUrl) {
@@ -271,6 +301,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         type="submit"
         className="order-block__pay-button"
       />
+      {/* <CustomButton
+        buttonText={"Доставка"}
+        handleButtonClick={handleClickDeliverButton}
+        disabled={!dataSaved}
+        type="submit"
+        className="order-block__pay-button"
+      /> */}
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в

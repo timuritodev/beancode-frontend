@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  z-index: 10;
+  z-index: 25;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s, opacity ease 0.3s;

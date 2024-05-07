@@ -9,12 +9,16 @@ import {
   getSessionCartApi,
 } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
+// import { PopupWeight } from "../../components/Popups/PopupWeight";
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   const products = useAppSelector((state) => state.products.products);
+  // const cartproducts = useAppSelector((state) => state.cart.cart);
+
+  // const [isPopupOpened, setIsPopupOpened] = useState<boolean>(false);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [sortOption, setSortOption] = useState("");
 
@@ -67,6 +71,19 @@ export const CatalogPage = () => {
     );
   };
 
+  // const totalWeight = cartproducts
+  //   .map((item) => {
+  //     const weight = item.weight.replace(" гр", "").trim();
+  //     return parseFloat(weight);
+  //   })
+  //   .reduce((total, weight) => total + weight, 0);
+
+  // useEffect(() => {
+  //   if (totalWeight === 5000) {
+  //     setIsPopupOpened(true);
+  //   }
+  // }, [totalWeight]);
+
   return (
     <section className="catalog">
       <div className="catalog__container">
@@ -94,11 +111,16 @@ export const CatalogPage = () => {
         <ProductList data={filterProductsByCountry("Америка")} />
         <h2 className="catalog__description">Африка</h2>
         <ProductList data={filterProductsByCountry("Африка")} />
-        {/*  <h2 className="">Наборы</h2>
-        <ProductList data={filterProductsByCountry("Америка")} />
-        <h1 className="">Кофе для фильтра</h1>
+        <h2 className="catalog__description">Наборы</h2>
+        <ProductList data={filterProductsByCountry("Набор")} />
+        {/* <h1 className="">Кофе для фильтра</h1>
         <ProductList data={filterProductsByCountry("Америка")} /> */}
       </div>
+      {/* <PopupWeight
+        isOpened={isPopupOpened}
+        setIsOpened={setIsPopupOpened}
+        weight={totalWeight}
+      /> */}
     </section>
   );
 };

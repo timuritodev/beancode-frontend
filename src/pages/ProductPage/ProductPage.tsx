@@ -8,6 +8,7 @@ import { Grains } from "../../components/Grains/Grains";
 import { useResize } from "../../hooks/useResize";
 import Loader from "../../components/Loader/Loader";
 import { API_BASE_URL } from "../../utils/constants";
+import { ProductImagesSlider } from "../../components/ProductImagesSlider/ProductImagesSlider";
 
 export const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -105,6 +106,7 @@ export const ProductPage = () => {
                     src={imageUrl}
                     alt={product.title}
                   />
+                  {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                   <div className="products__wrapper_2">
                     {selectedPrice === product.price ? (
                       <div className="products__price__container">
@@ -153,6 +155,7 @@ export const ProductPage = () => {
                     src={imageUrl}
                     alt={product.title}
                   />
+                  {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                   <div className="">
                     <Grains
                       acidity={product.acidity}

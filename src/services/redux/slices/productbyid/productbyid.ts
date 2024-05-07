@@ -32,6 +32,7 @@ const initialState: IProductbyIdState = {
     low_price: "",
     low_weight: "",
     country: "",
+    additional_pictures: [],
   },
 };
 
