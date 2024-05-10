@@ -405,7 +405,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         type="submit"
         className="order-block__pay-button"
       />
-      <CustomButton
+      {/* <CustomButton
         buttonText={"Доставка"}
         handleButtonClick={handleClickDeliverButton}
         disabled={!dataSaved}
@@ -418,7 +418,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         disabled={!dataSaved}
         type="submit"
         className="order-block__pay-button"
-      />
+      /> */}
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
