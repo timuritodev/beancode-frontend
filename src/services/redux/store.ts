@@ -21,6 +21,7 @@ import { payReducer } from './slices/pay/pay';
 import { orderStatusReducer } from './slices/orderStatus/orderStatus';
 import { wholesaleReducer } from './slices/wholesale/wholesale';
 import { promoReducer } from './slices/promo/promo';
+import { deliverReducer } from './slices/delivery/delivery';
 
 const rootReducer = combineReducers({
 	user: userReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
 	orderStatus: orderStatusReducer,
 	wholesale: wholesaleReducer,
 	promo: promoReducer,
+	deliver: deliverReducer,
 });
 
 const persistConfig = {

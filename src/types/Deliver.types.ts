@@ -51,14 +51,34 @@ export interface OrderRegistrationRequest {
     phones: {
       number: string; // International format
       additional?: string;
-    }; // []
+    }[];
   };
-  // from_location?: {
-  //   address: string;
-  // };
-  // to_location?: {
-  //   address: string;
-  // };
+  from_location: {
+    code: string;
+    fias_guid: string;
+    postal_code: string;
+    longitude: string;
+    latitude: string;
+    country_code: string;
+    region: string;
+    sub_region: string;
+    city: string;
+    kladr_code: string;
+    address: string;
+  };
+  to_location: {
+    code: string;
+    fias_guid: string;
+    postal_code: string;
+    longitude: string;
+    latitude: string;
+    country_code: string;
+    region: string;
+    sub_region: string;
+    city: string;
+    kladr_code: string;
+    address: string;
+  };
   services?: {
     code: string;
     parameter?: string;
@@ -95,87 +115,88 @@ export interface OrderRegistrationRequest {
   is_client_return?: boolean;
 }
 
-export interface IDeliveryData {
-  number: string;
-  comment: string;
-  delivery_recipient_cost: {
-    value: number;
-  };
-  delivery_recipient_cost_adv: [
-    {
-      sum: number; //??
-      threshold: number;
-    }
-  ];
-  from_location: {
-    code: number;
-    fias_guid?: number; //
-    postal_code?: string; //
-    longitude?: number; //
-    latitude?: number; //
-    country_code?: string; //
-    region?: number; //
-    sub_region?: string; //
-    city: string;
-    kladr_code?: string; //
-    address: string;
-  };
-  to_location: {
-    code: number;
-    fias_guid: number; //
-    postal_code: string; //
-    longitude: number; //
-    latitude: number; //
-    country_code: string; //
-    region: number; //
-    sub_region: string; //
-    city: string;
-    kladr_code: string; //
-    address: string;
-  };
-  packages: [
-    {
-      number: string;
-      comment: string;
-      height: number;
-      items: [
-        {
-          ware_key: number;
-          payment: {
-            value: number;
-          };
-          name: string;
-          cost: number;
-          amount: number;
-          weight: number;
-          url: string;
-        }
-      ];
-      length: number;
-      weight: number;
-      width: number;
-    }
-  ];
-  recipient: {
-    name: string;
-    phones: [
-      {
-        number: string;
-      }
-    ];
-  };
-  sender: {
-    name: string;
-  };
-  services: [
-    {
-      code: string;
-    }
-  ];
-  tariff_code: number;
-}
+// export interface IDeliveryData {
+//   number: string;
+//   comment: string;
+//   delivery_recipient_cost: {
+//     value: number;
+//   };
+//   delivery_recipient_cost_adv: [
+//     {
+//       sum: number; //??
+//       threshold: number;
+//     }
+//   ];
+//   from_location: {
+//     code: number;
+//     fias_guid?: number; //
+//     postal_code?: string; //
+//     longitude?: number; //
+//     latitude?: number; //
+//     country_code?: string; //
+//     region?: number; //
+//     sub_region?: string; //
+//     city: string;
+//     kladr_code?: string; //
+//     address: string;
+//   };
+//   to_location: {
+//     code: number;
+//     fias_guid: number; //
+//     postal_code: string; //
+//     longitude: number; //
+//     latitude: number; //
+//     country_code: string; //
+//     region: number; //
+//     sub_region: string; //
+//     city: string;
+//     kladr_code: string; //
+//     address: string;
+//   };
+//   packages: [
+//     {
+//       number: string;
+//       comment: string;
+//       height: number;
+//       items: [
+//         {
+//           ware_key: number;
+//           payment: {
+//             value: number;
+//           };
+//           name: string;
+//           cost: number;
+//           amount: number;
+//           weight: number;
+//           url: string;
+//         }
+//       ];
+//       length: number;
+//       weight: number;
+//       width: number;
+//     }
+//   ];
+//   recipient: {
+//     name: string;
+//     phones: [
+//       {
+//         number: string;
+//       }
+//     ];
+//   };
+//   sender: {
+//     name: string;
+//   };
+//   services: [
+//     {
+//       code: string;
+//     }
+//   ];
+//   tariff_code: number;
+// }
 
 export interface IDeliverDataRes {
+  token: string;
   entity: {
     uuid: string;
   };
@@ -187,6 +208,12 @@ export interface IDeliverDataRes {
     errors: [];
     warnings: [];
   }[];
+}
+
+export interface IAuthDelivery {
+  grant_type: string;
+  client_id: string;
+  client_secret: string;
 }
 
 // export interface IDeliverData {

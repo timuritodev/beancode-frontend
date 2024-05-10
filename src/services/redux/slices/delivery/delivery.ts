@@ -1,34 +1,40 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchDeliver } from "./deliveryAPI";
+import { fetchAuthDelivery, fetchDeliver2 } from "./deliveryAPI";
 import {
+  IAuthDelivery,
   IDeliverDataRes,
-  IDeliveryData,
-  OrderRegistrationRequest
+  OrderRegistrationRequest,
 } from "../../../../types/Deliver.types";
 
 export const deliverApi = createAsyncThunk(
   "@@deliver/register",
-  async (data: OrderRegistrationRequest, { fulfillWithValue, rejectWithValue }) => {
+  async (
+    arg: {
+      data: OrderRegistrationRequest;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
     try {
-      const response = await fetchDeliver(data);
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-
-      const text = await response.text();
-
-      console.log("Server response:", text);
-
-      const json = JSON.parse(text);
-
+      const response = await fetchDeliver2(data, token);
+      const json = await response.json();
       return fulfillWithValue(json);
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      } else {
-        return rejectWithValue("An error occurred");
-      }
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const authDeliverApi = createAsyncThunk(
+  "@@deliver/auth",
+  async (data: IAuthDelivery, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchAuthDelivery(data);
+      const json = await response;
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
     }
   }
 );
@@ -43,6 +49,7 @@ const initialState: IDeliveryState = {
   status: "idle",
   error: null,
   data: {
+    token: "",
     entity: {
       uuid: "",
     },
@@ -68,6 +75,10 @@ const deliverSlice = createSlice({
       .addCase(deliverApi.fulfilled, (state, action) => {
         state.status = "success";
         state.data = action.payload;
+      })
+      .addCase(authDeliverApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.data.token = action.payload.access_token;
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { API_BASE_URL } from "../../../../utils/constants";
-import { OrderRegistrationRequest } from "../../../../types/Deliver.types";
+import {
+  IAuthDelivery,
+  OrderRegistrationRequest,
+} from "../../../../types/Deliver.types";
 
 const checkRes = (res: any) => {
   if (res.ok) {
@@ -27,10 +30,34 @@ export const fetchData = (
   }).then((res) => checkRes(res));
 };
 
-export const fetchDeliver = (
-  data: OrderRegistrationRequest
+const objectToFormData = (obj: Record<string, any>) => {
+  const formData = new URLSearchParams();
+  for (const key in obj) {
+    formData.append(key, obj[key]);
+  }
+  return formData;
+};
+
+export const fetchAuthDelivery = (data: IAuthDelivery): Promise<any> => {
+  const formData = objectToFormData(data);
+  return fetch(`${API_BASE_URL}/api-auth`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: formData,
+  }).then((res) => checkRes(res).json());
+};
+
+export const fetchDeliver2 = (
+  data: OrderRegistrationRequest,
+  token: string | { token: string }
 ): Promise<Response> => {
-  return fetchData(`${API_BASE_URL}/api-deliver`, "POST", data).then((res) =>
-    checkRes(res)
-  );
+  const tokenString = typeof token === "string" ? token : token.token;
+  return fetchData(
+    `${API_BASE_URL}/api-deliver`,
+    "POST",
+    data,
+    tokenString
+  ).then((res) => checkRes(res));
 };
