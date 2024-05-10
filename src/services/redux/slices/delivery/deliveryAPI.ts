@@ -13,6 +13,23 @@ const checkRes = (res: any) => {
   }
 };
 
+// export const fetchData = (
+//   url: string,
+//   method: string,
+//   data?: OrderRegistrationRequest,
+//   token?: string
+// ) => {
+//   return fetch(url, {
+//     method,
+//     headers: {
+//       "Content-Type": "application/json",
+//       ...(!!token && { Authorization: `Bearer ${token}` }),
+//     },
+//     // credentials: "include",
+//     ...(!!data && { body: JSON.stringify(data) }),
+//   }).then((res) => checkRes(res));
+// };
+
 export const fetchData = (
   url: string,
   method: string,
@@ -23,9 +40,8 @@ export const fetchData = (
     method,
     headers: {
       "Content-Type": "application/json",
-      ...(!!token && { Authorization: `Bearer ${token}` }),
+      ...(!!token && { Authorization: `Token ${token}` }),
     },
-    // credentials: "include",
     ...(!!data && { body: JSON.stringify(data) }),
   }).then((res) => checkRes(res));
 };
@@ -49,15 +65,33 @@ export const fetchAuthDelivery = (data: IAuthDelivery): Promise<any> => {
   }).then((res) => checkRes(res).json());
 };
 
+// export const fetchDeliver2 = (
+//   data: OrderRegistrationRequest,
+//   token: string | { token: string }
+// ): Promise<Response> => {
+//   const tokenString = typeof token === "string" ? token : token.token;
+//   return fetchData(
+//     `${API_BASE_URL}/api-deliver`,
+//     "POST",
+//     data,
+//     tokenString
+//   ).then((res) => checkRes(res));
+// };
+
 export const fetchDeliver2 = (
   data: OrderRegistrationRequest,
-  token: string | { token: string }
+  token: string
 ): Promise<Response> => {
-  const tokenString = typeof token === "string" ? token : token.token;
-  return fetchData(
-    `${API_BASE_URL}/api-deliver`,
-    "POST",
-    data,
-    tokenString
-  ).then((res) => checkRes(res));
+  return fetchData(`${API_BASE_URL}/api-deliver`, "POST", data, token).then(
+    (res) => checkRes(res)
+  );
 };
+
+// export const fetchEditUserInfo = (
+// 	data: IEditProfileData,
+// 	token: string
+// ): Promise<Response> => {
+// 	return fetchData(API_USERS_ME_URL, 'PUT', data, token).then((res) =>
+// 		checkRes(res)
+// 	);
+// };

@@ -338,8 +338,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         grant_type: "client_credentials",
         client_id: "EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI",
         client_secret: "PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG",
-        // client_id: "feedQ34gghIQJBPpDAEBKkmJ6BCIuWxZ",
-        // client_secret: "nL8I0JZSwECyehnN3KJoeclHOUI4Rxlc",
 
       })
     );

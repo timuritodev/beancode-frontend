@@ -53,7 +53,7 @@ export interface OrderRegistrationRequest {
       additional?: string;
     }[];
   };
-  from_location: {
+  from_location?: {
     code: string;
     fias_guid: string;
     postal_code: string;
@@ -66,7 +66,7 @@ export interface OrderRegistrationRequest {
     kladr_code: string;
     address: string;
   };
-  to_location: {
+  to_location?: {
     code: string;
     fias_guid: string;
     postal_code: string;
