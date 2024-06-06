@@ -63,6 +63,8 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const [isPromoPopupOpened, setIsPromoPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
+  const isPayButtonDisabled = !dataSaved || cartproducts.length === 0;
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -439,7 +441,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       <CustomButton
         buttonText={"Оплатить заказ"}
         handleButtonClick={handleClickPayButton}
-        disabled={!dataSaved}
+        disabled={isPayButtonDisabled}
         type="submit"
         className="order-block__pay-button"
       />
