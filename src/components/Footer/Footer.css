@@ -269,7 +269,7 @@
   }
 
   .logo__block {
-    display: block;
+    display: flex;
     margin: 64px 0 0 0;
     padding: 0 0 24px 0;
     border-bottom: 1px solid var(--grey_light, #c8cac8);
@@ -278,7 +278,7 @@
   .footer__logo {
     width: 208px;
     height: 30px;
-    margin: 0 64px;
+    margin: auto;
   }
 
   .footer__email {

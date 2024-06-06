@@ -4,9 +4,9 @@
 
 // export const API_BASE_URL = window.location.origin + currentURL.substring(0, currentURL.lastIndexOf('/')) + apiSuffix;
 
-// export const API_BASE_URL = "http://localhost:3001/api";
+export const API_BASE_URL = "http://localhost:3001/api";
 
-export const API_BASE_URL = "https://beancode.ru/api";
+// export const API_BASE_URL = "https://beancode.ru/api";
 
 export const hashString = (s: string): number => {
   let h = 0;
@@ -15,6 +15,20 @@ export const hashString = (s: string): number => {
 
   if (l > 0) while (i < l) h = ((h << 5) - h + s.charCodeAt(i++)) | 0;
   return h;
+};
+
+export const getProductCountLabel = (count: number) => {
+  if (count % 10 === 1 && count % 100 !== 11) {
+    return "товар";
+  } else if (
+    count % 10 >= 2 &&
+    count % 10 <= 4 &&
+    (count % 100 < 10 || count % 100 >= 20)
+  ) {
+    return "товара";
+  } else {
+    return "товаров";
+  }
 };
 
 export const orders = [
