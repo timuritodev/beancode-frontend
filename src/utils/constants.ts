@@ -17,6 +17,8 @@ export const hashString = (s: string): number => {
   return h;
 };
 
+// 
+
 export const getProductCountLabel = (count: number) => {
   if (count % 10 === 1 && count % 100 !== 11) {
     return "товар";
