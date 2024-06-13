@@ -21,7 +21,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { IPromo } from "../../types/Promo.types";
 import { promoApi } from "../../services/redux/slices/promo/promo";
 import { CustomInputTypes } from "../../types/CustomInput.types";
-import { PROMO_VALIDATION_CONFIG, getProductCountLabel } from "../../utils/constants";
+import {
+  PROMO_VALIDATION_CONFIG,
+  getProductCountLabel,
+} from "../../utils/constants";
 import { PopupPromo } from "../Popups/PopupPromo";
 import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 import { CustomButton } from "../CustomButton/CustomButton";
@@ -136,24 +139,24 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   let userData: UserData;
 
+  const storedData = localStorage.getItem("orderFormData");
+
+  // console.log(storedData, "storedData");
+  if (user.token) {
+    userData = {
+      userId: user.id,
+      name: user.name,
+      surname: user.surname,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+    };
+  } else if (storedData) {
+    userData = JSON.parse(storedData);
+  }
+
   const handleClickPayButton = async () => {
-    const storedData = localStorage.getItem("orderFormData");
-
-    // console.log(storedData, "storedData");
-    if (user.token) {
-      userData = {
-        userId: user.id,
-        name: user.name,
-        surname: user.surname,
-        phone: user.phone,
-        email: user.email,
-        address: user.address,
-        city: user.city,
-      };
-    } else if (storedData) {
-      userData = JSON.parse(storedData);
-    }
-
     try {
       await dispatch(
         payApi({
@@ -170,28 +173,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           phone: userData.phone,
         })
       );
-      // await dispatch(
-      //   deliverApi({
-      //     tariff_code: 1,
-      //     shipment_point: '10',
-      //     delivery_point: '10',
-      //     recipient: {
-      //       name: userData.name,
-      //       email: userData.email,
-      //       phones: {
-      //         number: userData.phone,
-      //       },
-      //     },
-      //     packages: {
-      //       number: randomOrderNumber.toString(),
-      //       weight: 100,
-      //       items: {
-      //         name: products_info,
-      //         ware_key: products_info,
-      //       },
-      //     },
-      //   })
-      // );
       await dispatch(
         createOrderBackupApi({
           userId: userData.userId,
@@ -221,86 +202,86 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     }
   };
 
-  // const handleDeliverOrder = async () => {
-  //   try {
-  //     // Сначала получаем токен
-  //     const authResponse = await dispatch(
-  //       authDeliverApi({
-  //         grant_type: "client_credentials",
-  //         client_id: "1",
-  //         client_secret: "2",
-  //       })
-  //     ).unwrap();
+  const handleDeliverOrder = async () => {
+    try {
+      const authResponse = await dispatch(
+        authDeliverApi({
+          grant_type: "client_credentials",
+          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+        })
+      ).unwrap();
 
-  //     const token = authResponse.access_token;
+      const token = authResponse.access_token;
 
-  //     // Затем отправляем данные для регистрации заказа, используя полученный токен
-  //     await dispatch(
-  //       deliverApi({
-  //         data: {
-  //           number: "ddOererre7450813980068",
-  //           comment: "Новый заказ",
-  //           delivery_recipient_cost: {
-  //             value: 50,
-  //           },
-  //           delivery_recipient_cost_adv: [
-  //             {
-  //               sum: 3000,
-  //               threshold: 200,
-  //             },
-  //           ],
-  //           shipment_point: "NCHL46",
-  //           delivery_point: "KZN34",
-  //           packages: [
-  //             {
-  //               number: "bar-001",
-  //               comment: "Упаковка",
-  //               height: 10,
-  //               items: [
-  //                 {
-  //                   ware_key: "00055",
-  //                   payment: {
-  //                     value: 3000,
-  //                   },
-  //                   name: "Товар",
-  //                   cost: 300,
-  //                   amount: 2,
-  //                   weight: 700,
-  //                   url: "www.item.ru",
-  //                 },
-  //               ],
-  //               length: 10,
-  //               weight: 4000,
-  //               width: 10,
-  //             },
-  //           ],
-  //           recipient: {
-  //             name: "Иванов Иван",
-  //             phones: [
-  //               {
-  //                 number: "+79134637228",
-  //               },
-  //             ],
-  //           },
-  //           sender: {
-  //             name: "Петров Петр",
-  //           },
-  //           services: [
-  //             {
-  //               code: "SECURE_PACKAGE_A2",
-  //             },
-  //           ],
-  //           tariff_code: 139,
-  //         },
-  //         token: token, // Используем полученный токен
-  //       })
-  //     );
-
-  //     console.log('Order successfully registered');
-  //   } catch (error) {
-  //     console.error('Error during order registration:', error);
-  //   }
-  // };
+      await dispatch(
+        deliverApi({
+          data: {
+            number: randomOrderNumber.toString(),
+            comment: products_info,
+            delivery_recipient_cost: {
+              value: 50,
+            },
+            delivery_recipient_cost_adv: [
+              {
+                sum: 3000,
+                threshold: 200,
+              },
+            ],
+            shipment_point: "NCHL46",
+            delivery_point: "KZN34",
+            packages: cartproducts.map((product, index) => ({
+              number: `bar-00${index + 1}`,
+              comment: "Упаковка",
+              height: 10,
+              items: [
+                {
+                  ware_key: product.id.toString(),
+                  payment: {
+                    value: parseInt(product.price, 10), // вроде бы тут должен быть 0
+                  },
+                  name: product.title,
+                  cost: parseInt(product.price, 10),
+                  amount: 1,
+                  weight: parseFloat(product.weight) || 0,
+                  url: "https://beancode.ru/catalog", // ну это надо будет переделать на id в пути и тд
+                },
+              ],
+              length: 10,
+              weight: parseFloat(product.weight) || 0,
+              width: 10,
+            })),
+            recipient: {
+              name: `${userData.name} ${userData.surname}`,
+              phones: [
+                {
+                  number: userData.phone,
+                },
+              ],
+              email: userData.email,
+            },
+            sender: {
+              name: "Петров Петр",
+              phones: [
+                {
+                  number: "+79134637228", // Телефон отправителя
+                },
+              ],
+            },
+            services: [
+              {
+                code: "SECURE_PACKAGE_A2",
+              },
+            ],
+            tariff_code: 139,
+          },
+          token: token,
+        })
+      );
+    } catch (error) {
+      console.error("Error during order registration:", error);
+    }
+  };
 
   // const handleClickDeliverButton = async () => {
   //   await dispatch(
@@ -388,7 +369,8 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       <OrderCardList data={cartproducts} />
       <div className="order-block__details">
         <p className="order-block__text">
-          {cartproducts.length} {getProductCountLabel(cartproducts.length)} на сумму
+          {cartproducts.length} {getProductCountLabel(cartproducts.length)} на
+          сумму
           {/* Todo товар или товара */}
         </p>
         <p className="order-block__text">{sum} ₽</p>
@@ -413,7 +395,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           Итого - <span className="order-block__total">{discountedSum} ₽</span>
         </p>
       )}
-      <p className="order-block__text">При заказе от 1кг доставка бесплатная по набережным челнам</p>
+      <p className="order-block__text">
+        При заказе от 1кг доставка бесплатная по набережным челнам
+      </p>
       {/* </div> */}
       <form
         className="order-block__input_container"
@@ -445,13 +429,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         type="submit"
         className="order-block__pay-button"
       />
-      {/* <CustomButton
+      <CustomButton
         buttonText={"Доставка"}
         handleButtonClick={handleDeliverOrder}
         disabled={!dataSaved}
         type="submit"
         className="order-block__pay-button"
-      /> */}
+      />
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
