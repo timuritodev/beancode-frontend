@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./ProfileInputs.css";
 import {
   editUserInfo,
@@ -7,7 +5,7 @@ import {
   selectUser,
 } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignUpData } from "../../types/Auth.types";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -21,18 +19,21 @@ import {
   PHONE_VALIDATION_CONFIG,
   SURNAME_VALIDATION_CONFIG,
 } from "../../utils/constants";
+import { PopupChanges } from "../Popups/PopupChanges";
+import { CustomButton } from "../CustomButton/CustomButton";
+import { Link } from "react-router-dom";
 
 export const ProfileInputs = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
+  const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
+
   const token = user.token;
   const {
     register,
     handleSubmit,
-    reset,
-    watch,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid, isDirty },
     getValues,
   } = useForm<ISignUpData>({ mode: "onChange" });
 
@@ -61,36 +62,16 @@ export const ProfileInputs = () => {
         },
         token: token,
       })
-      )
+    )
       .unwrap()
+      .then(() => {
+        setIsSavedPopupOpened(true);
+      });
   };
 
-  // const onSubmit: SubmitHandler<ISignUpData> = () => {
-  //   dispatch(editUserInfo({ data: data, token: token }));
-  // };
-
-  // const onSubmit: SubmitHandler<IEditProfileFields> = (
-  // 	values: IEditProfileFields
-  // ) => {
-  // 	dispatch(
-  // 		editUserInfo({
-  // 			data: {
-  // 				username: getValues('nickname'),
-  // 				date_of_birth: getValues('dateOfBirth')
-  // 					? getValues('dateOfBirth')
-  // 					: user.dateOfBirth,
-  // 				sex: getValues('sex') || null,
-  // 			},
-  // 			token: user.token,
-  // 		})
-  // 	)
-  // 		.unwrap()
-  // 		.then(() => {
-  // 			setIsSavedPopupOpened(true);
-  // 			reset(values);
-  // 		})
-  // 		.catch((err: unknown) => console.log('editUserInfo err', err));
-  // };
+  useEffect(() => {
+    setIsSavedPopupOpened(false);
+  }, []);
 
   useEffect(() => {
     if (user.token) {
@@ -177,14 +158,20 @@ export const ProfileInputs = () => {
             error={errors?.area?.message}
           />
         )}
-        <button
-          type="submit"
-          className="signup__button"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          Изменить данные
-        </button>
+        <CustomButton
+          buttonText={"Изменить данные"}
+          handleButtonClick={handleSubmit(onSubmit)}
+          disabled={!isDirty || !isValid}
+          type="button"
+        />
+        <Link to="/change-password" className="profile__link">
+          Сменить пароль
+        </Link>
       </form>
+      <PopupChanges
+        isOpened={isSavedPopupOpened}
+        setIsOpened={setIsSavedPopupOpened}
+      />
     </div>
   );
 };

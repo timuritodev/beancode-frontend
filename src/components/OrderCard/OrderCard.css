@@ -1,5 +1,4 @@
 .order-cardlist {
-    max-width: 417px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -10,43 +9,95 @@
   
   .order-card {
     display: flex;
+    width: 402px;
     align-items: center;
+    justify-content: space-between;
   }
   
   .order-card__img {
     width: 85px;
     height: 80px;
-    margin: 0 16px 0 0;
   }
 
   .order-card__title {
     color: var(--Black_text, #0F100F);
-    font-family: Poppins;
+    font-family: Ubuntu;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    width: 120px;
     margin: 0;
   }
 
   .order-card__number {
     color: var(--Black_text, #0F100F);
-    font-family: Poppins;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0 59.5px;
-  }
-
-  .order-card__price {
-    color: var(--Black_text, #0F100F);
-    text-align: center;
-    font-family: Poppins;
+    font-family: Ubuntu;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     margin: 0;
   }
+
+  .order-card__price {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+@media screen and (max-width: 767px) {
+  .order-cardlist {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 0 32px 0;
+    border-bottom: 1px solid var(--grey_light, #C8CAC8);
+  }
+  
+  .order-card {
+    display: flex;
+    width: 328px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .order-card__img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .order-card__title {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .order-card__number {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .order-card__price {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+}

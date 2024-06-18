@@ -4,6 +4,9 @@ import {
   ISignUpData,
   IUser,
   IEditProfileData,
+  IChangePassword,
+  IRecoverPassword,
+  IResetPassword,
 } from "../../../../../src/types/Auth.types";
 
 const checkRes = (res: Response) => {
@@ -17,7 +20,7 @@ const checkRes = (res: Response) => {
 export const fetchData = (
   url: string,
   method: string,
-  data?: ISignInData | ISignUpData | IUser | IEditProfileData,
+  data?: ISignInData | ISignUpData | IUser | IEditProfileData | IChangePassword | IRecoverPassword | IResetPassword,
   token?: string
 ) => {
   return fetch(url, {
@@ -46,8 +49,6 @@ export const fetchGetUserInfo = (
   token: string | { token: string }
 ): Promise<Response> => {
   const tokenString = typeof token === "string" ? token : token.token;
-  console.log("Authorization Token:", tokenString);
-
   return fetchData(`${API_BASE_URL}/user`, "GET", undefined, tokenString).then(
     (res) => checkRes(res)
   );
@@ -59,6 +60,32 @@ export const fetchEditUserInfo = (
 ): Promise<Response> => {
   const tokenString = typeof token === "string" ? token : token.token;
   return fetchData(`${API_BASE_URL}/users-me`, "PATCH", data, tokenString).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchChangePassword = (
+  data: IChangePassword,
+  token: string | { token: string }
+): Promise<Response> => {
+  const tokenString = typeof token === "string" ? token : token.token;
+  return fetchData(`${API_BASE_URL}/change-password`, "PATCH", data, tokenString).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchRecoverPassword = (
+  data: IRecoverPassword,
+): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/forgot-password`, "POST", data).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchResetPassword = (
+  data: IResetPassword,
+): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/reset-password`, "POST", data).then(
     (res) => checkRes(res)
   );
 };

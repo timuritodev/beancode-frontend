@@ -5,12 +5,18 @@ import {
   fetchSignIn,
   fetchGetUserInfo,
   fetchEditUserInfo,
+  fetchChangePassword,
+  fetchRecoverPassword,
+  fetchResetPassword,
 } from "./userApi";
 import {
   IUser,
   ISignInData,
   ISignUpData,
   IEditProfileData,
+  IChangePassword,
+  IRecoverPassword,
+  IResetPassword,
 } from "../../../../types/Auth.types";
 
 export interface IUserState {
@@ -25,8 +31,6 @@ export const signInUser = createAsyncThunk(
     try {
       const response = await fetchSignIn(data);
       const json = await response.json();
-      // console.log(fulfillWithValue(json))
-      // console.log(fulfillWithValue(json.acess))
       return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -39,8 +43,8 @@ export const signUpUser = createAsyncThunk(
   async (data: ISignUpData, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchSignUp(data);
-      const responseData = { status: response.status, ok: response.ok };
-      return fulfillWithValue(responseData);
+      const json = await response.json();
+      return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
     }
@@ -53,7 +57,6 @@ export const getUserInfo = createAsyncThunk(
     try {
       const response = await fetchGetUserInfo(token);
       const json = await response.json();
-      console.log(json);
       return fulfillWithValue(json);
     } catch (error: unknown) {
       return rejectWithValue(error);
@@ -81,6 +84,52 @@ export const editUserInfo = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "@@user/changePassword",
+  async (
+    arg: {
+      data: IChangePassword;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
+    try {
+      const response = await fetchChangePassword(data, token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const recoverPassword = createAsyncThunk(
+  "@@user/recoverPassword",
+  async (email: IRecoverPassword, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchRecoverPassword(email);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "@@user/resetPassword",
+  async (data: IResetPassword, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchResetPassword(data);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: IUserState = {
   status: "idle",
   error: null,
@@ -92,8 +141,8 @@ const initialState: IUserState = {
     email: "",
     address: "",
     password: "",
-	city: "",
-	area: "",
+    city: "",
+    area: "",
     token: "",
   },
 };
@@ -113,8 +162,9 @@ const userSlice = createSlice({
         state.status = "success";
         state.user.token = action.payload;
       })
-      .addCase(signUpUser.fulfilled, (state) => {
+      .addCase(signUpUser.fulfilled, (state, action: PayloadAction<string>) => {
         state.status = "success";
+        state.user.token = action.payload;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = "success";
@@ -136,6 +186,15 @@ const userSlice = createSlice({
         state.user.address = action.payload.user.address;
         state.user.city = action.payload.user.city;
         state.user.area = action.payload.user.area;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(recoverPassword.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.status = "success";
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

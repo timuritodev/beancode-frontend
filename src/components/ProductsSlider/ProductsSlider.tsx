@@ -6,15 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 import { FC } from "react";
 import { IProductsProp } from "../../types/Product.types";
 import { SmallProduct } from "../SmallProduct/SmallProduct";
+import { useResize } from "../../hooks/useResize";
 
 export const ProductsSlider: FC<IProductsProp> = ({ data }) => {
+  const { width } = useResize();
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    arrows: true,
+    arrows: width > 767 ? true : false,
     responsive: [
       {
         breakpoint: 1320,
@@ -26,10 +29,12 @@ export const ProductsSlider: FC<IProductsProp> = ({ data }) => {
         },
       },
       {
-        breakpoint: 460,
+        breakpoint: 767,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "35px",
         },
       },
     ],

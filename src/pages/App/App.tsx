@@ -3,9 +3,9 @@ import "./App.css";
 
 export const App: FC = () => {
   return (
-    <section className="main">
-      <div className="main__container">
-        <h1 className="main__text">
+    <section className="app">
+      <div className="app__container">
+        <h1 className="app__text">
           Скоро открытие интернет магазина вкусного кофе свежей обжарки 
         </h1>
       </div>

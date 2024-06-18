@@ -11,6 +11,8 @@ export interface IProduct {
   big_description: string;
   low_price: string;
   low_weight: string;
+  country: string;
+  additional_pictures?: string[];
 }
 
 export interface IProductState {

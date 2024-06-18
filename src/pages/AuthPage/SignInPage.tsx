@@ -1,90 +1,118 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import { useAppDispatch } from "../../../src/services/typeHooks";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import "./AuthPage.css";
+import CustomInput from "../../components/CustomInput/CustomInput";
+import { CustomInputTypes } from "../../types/CustomInput.types";
+import { useAppDispatch } from "../../services/typeHooks";
+import { ISignInData } from "../../types/Auth.types";
+import {
+  EMAIL_VALIDATION_CONFIG,
+  PASSWORD_VALIDATION_CONFIG,
+} from "../../utils/constants";
 import {
   signInUser,
   setUser,
   getUserInfo,
 } from "../../services/redux/slices/user/user";
-import "./AuthPage.css";
-import { Link } from "react-router-dom";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
+import { PopupLogin } from "../../components/Popups/PopupLogin";
+import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
 
-const SignInPage = () => {
+export const SignInPage = () => {
   const dispatch = useAppDispatch();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [authError, setAuthError] = useState(false);
+  const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    // dispatch(signInUser(formData));
-    // dispatch(setUser(formData));
-    dispatch(signInUser(formData))
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty, isValid },
+    getValues,
+  } = useForm<ISignInData>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<ISignInData> = () => {
+    const formValues = getValues();
+
+    dispatch(signInUser(formValues as ISignInData))
       .unwrap()
       .then((res) => {
-        console.log(res, 111);
-        dispatch(setUser({ email: formData.email, token: res }));
-        console.log(res)
+        dispatch(setUser({ email: formValues.email, token: res }));
         return res;
       })
-      .then((res) => dispatch(getUserInfo(res)))
+      .then((res) => {
+        dispatch(getUserInfo(res));
+        setIsSavedPopupOpened(true);
+      })
       .catch((err) => {
+        setIsErrorPopupOpened(true);
         console.log("dispatch signInUser err:", err);
       });
   };
+
+  useEffect(() => {
+    reset();
+    setAuthError(false);
+  }, [reset]);
+
+  useEffect(() => {
+    setIsSavedPopupOpened(false);
+  }, []);
 
   return (
     <section className="signup">
       <div className="signup__container">
         <h1 className="signup__title">Вход в личный кабинет</h1>
-        <form className="signup__form" onSubmit={handleSubmit}>
-          <label className="signup__label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="signup__input"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="adress@gmail.com"
-            required
+        <form
+          className="signup__form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <CustomInput
+            inputType={CustomInputTypes.email}
+            labelText="Электронная почта"
+            validation={{
+              ...register("email", EMAIL_VALIDATION_CONFIG),
+            }}
+            error={errors?.email?.message}
+            // maxLength={VALIDATION_SETTINGS.email.maxLength}
           />
-          <label className="signup__label">Пароль</label>
-          <input
-            type="password"
-            name="password"
-            className="signup__input"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="не менее 6 символов"
-            required
+          <CustomInput
+            inputType={CustomInputTypes.password}
+            labelText="Пароль"
+            showPasswordButton={true}
+            validation={{ ...register("password", PASSWORD_VALIDATION_CONFIG) }}
+            error={errors?.password?.message}
           />
-          <Link to="/" className="signin__link">
-            Напомнить пароль
-          </Link>
-
-          <button
-            type="submit"
-            className="signup__button"
-            onClick={handleSubmit}
+          <Link
+            to="/recover-password"
+            className="auth__link auth__recover-link"
           >
-            Войти
-          </button>
-          <Link to="/sign-up" className="signin__link signin__link_add">
+            Забыли пароль?
+          </Link>
+          {/* TODO recover button */}
+          <CustomButton
+            buttonText={"Войти"}
+            handleButtonClick={handleSubmit(onSubmit)}
+            disabled={!isDirty || !isValid}
+            type="button"
+          />
+          <Link to="/sign-up" className="signup__link">
             Зарегистрироваться
           </Link>
         </form>
       </div>
+      <PopupLogin
+        isOpened={isSavedPopupOpened}
+        setIsOpened={setIsSavedPopupOpened}
+      />
+      <PopupErrorLogin
+        isOpened={isErrorPopupOpened}
+        setIsOpened={setIsErrorPopupOpened}
+      />
     </section>
   );
 };
-
-export default SignInPage;

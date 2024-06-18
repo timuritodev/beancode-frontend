@@ -1,33 +1,33 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useState } from "react";
+import { FC } from "react";
 import "./Footer.css";
 import button from "../../images/paper-airplane.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useAppDispatch } from "../../services/typeHooks";
 import { subcribeApi } from "../../services/redux/slices/subscription/subscription";
+import { SubmitHandler, useForm } from "react-hook-form";
+import CustomInput from "../CustomInput/CustomInput";
+import { CustomInputTypes } from "../../types/CustomInput.types";
+import { EMAIL_VALIDATION_CONFIG } from "../../utils/constants";
+import { ISubcription } from "../../types/Subcription.types";
+import { useResize } from "../../hooks/useResize";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
-  const [email, setEmail] = useState("");
+  const { width } = useResize();
 
-  const handleChange = (e: any) => {
-    setEmail(e.target.value);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<ISubcription>({ mode: "onChange" });
+
+  const onSubmit: SubmitHandler<ISubcription> = () => {
+    dispatch(subcribeApi({ email: getValues("email") })).unwrap();
   };
-
-  const isValidEmail = (email: string) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
-
-  const handleSubribeButtonClick = () => {
-    if (isValidEmail(email)) {
-      dispatch(subcribeApi(email));
-    } else {
-      console.error("Некорректный email");
-    }
-  };
-
   return (
     <footer
       className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}
@@ -39,23 +39,29 @@ const Footer: FC = () => {
             <p className="subscribe__text">
               Чтобы узнавать о новинках и скидках
             </p>
-            <input
-              className="subscribe__input"
-              id="email"
-              name="email"
-              type="text"
-              placeholder="example@gmail.com"
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <button className="subscribe__button">
-              <img
-                className="subscribe__button_img"
-                alt="subscribe__button_img"
-                src={button}
-                onClick={handleSubribeButtonClick}
+            <form
+              className="footer-input__container"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+            >
+              <CustomInput
+                inputType={CustomInputTypes.email}
+                // labelText={"Электронная почта"}
+                validation={{
+                  ...register("email", EMAIL_VALIDATION_CONFIG),
+                }}
+                placeholder="email@example.com"
+                error={errors?.email?.message}
               />
-            </button>
+              <button className="subscribe__button">
+                <img
+                  className="subscribe__button_img"
+                  alt="subscribe button image"
+                  src={button}
+                  onClick={handleSubmit(onSubmit)}
+                />
+              </button>
+            </form>
           </div>
           <div className="faq__block">
             <h2 className="faq__title">FAQ</h2>
@@ -65,25 +71,32 @@ const Footer: FC = () => {
             <Link to="/payment-page" className="faq__link">
               Об оплате
             </Link>
-            <Link to="/bonus-page" className="faq__link">
+            {/* <Link to="/bonus-page" className="faq__link">
               Бонусная программа
+            </Link> */}
+            <Link to="/about-page" className="faq__link">
+              О компании
             </Link>
           </div>
           <div className="contacts__block">
             <h2 className="contacts__title">Контакты</h2>
-            <p className="contacts__text">По общим вопросам:</p>
-            <p className="contacts__number">+7911 910-33-29</p>
+            <p className="contacts__text">По всем вопросам:</p>
+            {/*<p className="contacts__number">+7911 910-33-29</p>
             <p className="contacts__text">Интернет-магазин</p>
-            <p className="contacts__number">+921 912-00-95</p>
+            <p className="contacts__number">+921 912-00-95</p> */}
+            <p className="contacts__number">+7 960 061-33-30</p>
+            {width < 767 && (
+              <h2 className="footer__email">coffee@beancode.ru</h2>
+            )}
           </div>
         </div>
         <div className="logo__block">
-          <img className="footer__logo" src={logo} />
-          <h2 className="footer__email">mugermanrb@beancode.ru</h2>
+          <img className="footer__logo" src={logo} alt="footer logo"/>
+          {width > 767 && <h2 className="footer__email">coffee@beancode.ru</h2>}
         </div>
         <div className="copyright__block">
           <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
-          <p className="copyright__text">Дизайн - Гюзель Саберова</p>
+          {/* <p className="copyright__text">Дизайн - Гюзель Саберова</p> */}
         </div>
       </div>
     </footer>
