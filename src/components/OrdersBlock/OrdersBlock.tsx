@@ -283,79 +283,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     }
   };
 
-  // const handleClickDeliverButton = async () => {
-  //   await dispatch(
-  //     deliverApi({
-  //       data: {
-  //         number: "ddOererre7450813980068",
-  //         comment: "Новый заказ",
-  //         delivery_recipient_cost: {
-  //           value: 50,
-  //         },
-  //         delivery_recipient_cost_adv: [
-  //           {
-  //             sum: 3000,
-  //             threshold: 200,
-  //           },
-  //         ],
-  //         shipment_point: "NCHL46",
-  //         delivery_point: "KZN34",
-  //         packages: [
-  //           {
-  //             number: "bar-001",
-  //             comment: "Упаковка",
-  //             height: 10,
-  //             items: [
-  //               {
-  //                 ware_key: "00055",
-  //                 payment: {
-  //                   value: 3000,
-  //                 },
-  //                 name: "Товар",
-  //                 cost: 300,
-  //                 amount: 2,
-  //                 weight: 700,
-  //                 url: "www.item.ru",
-  //               },
-  //             ],
-  //             length: 10,
-  //             weight: 4000,
-  //             width: 10,
-  //           },
-  //         ],
-  //         recipient: {
-  //           name: "Иванов Иван",
-  //           phones: [
-  //             {
-  //               number: "+79134637228",
-  //             },
-  //           ],
-  //         },
-  //         sender: {
-  //           name: "Петров Петр",
-  //         },
-  //         services: [
-  //           {
-  //             code: "SECURE_PACKAGE_A2",
-  //           },
-  //         ],
-  //         tariff_code: 139,
-  //       },
-  //       token: deliver.token,
-  //     })
-  //   );
-  // };
-
-  // const handleClickAuthButton = async () => {
-  //   await dispatch(
-  //     authDeliverApi({
-  //       grant_type: "client_credentials",
-  //       client_id: "1",
-  //       client_secret: "1",
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     if (redirecting && formUrl) {
       window.location.href = formUrl;
@@ -429,13 +356,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         type="submit"
         className="order-block__pay-button"
       />
-      <CustomButton
+      {/* <CustomButton
         buttonText={"Доставка"}
         handleButtonClick={handleDeliverOrder}
         disabled={!dataSaved}
         type="submit"
         className="order-block__pay-button"
-      />
+      /> */}
       <p className="order-block__disclaimer">
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
