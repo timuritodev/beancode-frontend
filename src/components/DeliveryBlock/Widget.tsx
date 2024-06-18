@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { useResize } from "../../hooks/useResize";
+import "./DeliveryBlock.css";
 
 interface Tariff {
   tariff_code: number;
@@ -31,6 +33,11 @@ interface OfficeAddress {
 
 export const Widget = () => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
+
+  const { width } = useResize();
+  
+  const widthValue = width > 1279 ? 756 : width;
+  const heightValue = width > 1279 ? 600 : 400;
 
   // const createOrder = async (address: OfficeAddress) => {
   //   try {
@@ -134,7 +141,7 @@ export const Widget = () => {
           src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
         ></script>
       </Helmet>
-      <div id="cdek-map" style={{ width: "756px", height: "600px" }}></div>
+      <div id="cdek-map" style={{ width: widthValue, height: heightValue }}></div>
     </div>
   );
 };

@@ -43,11 +43,11 @@ const IntroBlock = () => {
           С БЕСПЛАТНОЙ <br /> ДОСТАВКОЙ <br />
           до двери
         </h1>
-        <p className="intro__text">
+        {/* <p className="intro__text">
           *бесплатная доставка по набережным челнам при заказе от 1 кг,
           <br />
           в другие города до ТК в Набережных Челнах бесплатно
-        </p>
+        </p> */}
         <Link to="catalog" className="intro__button">
           Выбрать кофе
         </Link>
