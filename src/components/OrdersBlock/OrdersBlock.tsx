@@ -73,12 +73,12 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   let sum = 0;
-  let totalWeight = 0;
-  const deliveryCost = 250;
+  // let totalWeight = 0;
+  // const deliveryCost = 250;
 
   cartproducts.forEach((product) => {
     sum += parseInt(product.price, 10);
-    totalWeight += parseFloat(product.weight) || 0;
+    // totalWeight += parseFloat(product.weight) || 0;
   });
 
   const {
@@ -113,9 +113,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     discountedSum = sum * (1 - discount / 100);
   }
 
-  if (totalWeight < 1000) {
-    discountedSum += deliveryCost;
-  }
+  // if (totalWeight < 1000) {
+  //   discountedSum += deliveryCost;
+  // }
 
   useEffect(() => {
     const discountFromStorage = localStorage.getItem("discount");
@@ -298,12 +298,11 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <p className="order-block__text">
           {cartproducts.length} {getProductCountLabel(cartproducts.length)} на
           сумму
-          {/* Todo товар или товара */}
         </p>
         <p className="order-block__text">{sum} ₽</p>
       </div>
       {discount !== 0 ? (
-        <p className="order-block__sale">С учетом скидки {discount} %</p>
+        <p className="order-block__sale">{discountedSum} ₽ с учетом скидки {discount} %</p>
       ) : (
         ""
       )}
@@ -312,7 +311,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <p className="order-block__text">{sum} ₽</p>
       </div> */}
       {/* <div className="order-block__details"> */}
-      {totalWeight < 1000 ? (
+      {/* {totalWeight < 1000 ? (
         <p className="order-block__text">
           Итого - <span className="order-block__total">{discountedSum} ₽</span>,
           включая стоимость доставки 250 ₽
@@ -324,7 +323,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       )}
       <p className="order-block__text">
         При заказе от 1кг доставка бесплатная по набережным челнам
-      </p>
+      </p> */}
       {/* </div> */}
       <form
         className="order-block__input_container"
