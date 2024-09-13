@@ -217,17 +217,16 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       await dispatch(
         deliverApi({
           data: {
-            number: randomOrderNumber.toString(),
-            comment: products_info,
-            delivery_recipient_cost: {
-              value: 50,
+            type: 1, // Тип доставки (1 - "дверь-дверь", как пример)
+            tariff_code: 1, // Код тарифа (обязательно нужно указать)
+            recipient: {
+              name: 'Иван Иванов', // Имя получателя
+              phones: [
+                {
+                  number: '79991234567', // Телефон получателя
+                },
+              ],
             },
-            delivery_recipient_cost_adv: [
-              {
-                sum: 3000,
-                threshold: 200,
-              },
-            ],
             shipment_point: "NCHL46",
             delivery_point: "KZN34",
             packages: cartproducts.map((product, index) => ({
@@ -238,42 +237,77 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
                 {
                   ware_key: product.id.toString(),
                   payment: {
-                    value: parseInt(product.price, 10), // вроде бы тут должен быть 0
+                    value: 0, // Тут должен быть 0, если нет оплаты за товар
                   },
                   name: product.title,
                   cost: parseInt(product.price, 10),
                   amount: 1,
                   weight: parseFloat(product.weight) || 0,
-                  url: "https://beancode.ru/catalog", // ну это надо будет переделать на id в пути и тд
+                  url: `https://beancode.ru/catalog/${product.id}`,
                 },
               ],
               length: 10,
               weight: parseFloat(product.weight) || 0,
               width: 10,
             })),
-            recipient: {
-              name: `${userData.name} ${userData.surname}`,
-              phones: [
-                {
-                  number: userData.phone,
-                },
-              ],
-              email: userData.email,
-            },
-            sender: {
-              name: "Петров Петр",
-              phones: [
-                {
-                  number: "+79134637228", // Телефон отправителя
-                },
-              ],
-            },
-            services: [
-              {
-                code: "SECURE_PACKAGE_A2",
-              },
-            ],
-            tariff_code: 139,
+            // number: randomOrderNumber.toString(),
+            // comment: products_info,
+            // delivery_recipient_cost: {
+            //   value: 50,
+            // },
+            // delivery_recipient_cost_adv: [
+            //   {
+            //     sum: 3000,
+            //     threshold: 200,
+            //   },
+            // ],
+            // shipment_point: "NCHL46",
+            // delivery_point: "KZN34",
+            // packages: cartproducts.map((product, index) => ({
+            //   number: `bar-00${index + 1}`,
+            //   comment: "Упаковка",
+            //   height: 10,
+            //   items: [
+            //     {
+            //       ware_key: product.id.toString(),
+            //       payment: {
+            //         value: 0, // Тут должен быть 0, если нет оплаты за товар
+            //       },
+            //       name: product.title,
+            //       cost: parseInt(product.price, 10),
+            //       amount: 1,
+            //       weight: parseFloat(product.weight) || 0,
+            //       url: `https://beancode.ru/catalog/${product.id}`,
+            //     },
+            //   ],
+            //   length: 10,
+            //   weight: parseFloat(product.weight) || 0,
+            //   width: 10,
+            // })),
+            // recipient: {
+            //   name: `${userData.name} ${userData.surname}`,
+            //   phones: [
+            //     {
+            //       number: userData.phone,
+            //     },
+            //   ],
+            //   email: userData.email,
+            // },
+            // sender: {
+            //   name: "Петров Петр",
+            //   phones: [
+            //     {
+            //       number: "+79134637228", // Телефон отправителя
+            //     },
+            //   ],
+            // },
+            // // services: [
+            // //   {
+            // //     code: "CARTON_BOX_1KG", // Замените на актуальный код услуги
+            // //     // parameter: '2', // Пример количественного параметра для услуги
+            // //   },
+            // // ],
+            // tariff_code: 139,
           },
           token: token,
         })
